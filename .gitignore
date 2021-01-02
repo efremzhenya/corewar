@@ -1,0 +1,7 @@
+vm_champs/*
+.DS_Store
+corewar
+libft/libft.a
+.gitignore
+bin/*
+libft/objects/*
