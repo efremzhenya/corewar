@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 15:26:45 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/02 15:59:22 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct			s_carrage
 	unsigned int		carry;
 	unsigned int		op_code;
 	size_t				cycle;
+	unsigned char		registers[REG_NUMBER];
 	struct s_carrage	*next;
 }						t_carrage;
 
