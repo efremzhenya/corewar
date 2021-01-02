@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 15:59:22 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/02 16:07:02 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct			s_carrage
 	unsigned int		carry;
 	unsigned int		op_code;
 	size_t				cycle;
+	int					pc;
+	unsigned int		address;
 	unsigned char		registers[REG_NUMBER];
 	struct s_carrage	*next;
 }						t_carrage;
@@ -39,6 +41,7 @@ typedef struct			s_carrage
 typedef struct			s_corewar
 {
 	unsigned char		*arena[MEM_SIZE];
+	size_t				block_owner[MEM_SIZE];
 	size_t				cycles; 				//количество прошедших с начала игры циклов
 	size_t				potential_winner;		//игрок, о котором в последний раз сказали, что он жив
 	size_t				curr_live;				//количество выполненных операций live за последний период, длинной в cycles_to_die
