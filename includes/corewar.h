@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 17:36:12 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/02 19:48:15 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct			s_player
 	size_t				id;
 	char				*name;
 	char				*comment;
-	unsigned char		*code;
-	size_t				size;
+	unsigned char		**code;
+	int					size;
 	struct s_player		*next;
 }						t_player;
 
@@ -42,10 +42,12 @@ typedef struct			s_corewar
 	unsigned char		*arena[MEM_SIZE];
 	size_t				*block_owner[MEM_SIZE];
 	size_t				cycles; 				//количество прошедших с начала игры циклов
-	size_t				winner;					//игрок, о котором в последний раз сказали, что он жив
-	size_t				curr_live;				//количество выполненных операций live за последний период, длинной в cycles_to_die
+	size_t				winner_id;					//игрок, о котором в последний раз сказали, что он жив
+	size_t				lives;					//количество выполненных операций live за последний период, длинной в cycles_to_die
 	size_t				cycles_to_die;			//длительность периода до проверки
-	size_t				checks_imp;				//количество проведенных проверок
+	size_t				checks;					//количество проведенных проверок
+	int					players_count;
+	int					carrage_count;
 	struct s_player		*players;
 	struct s_carrage	*carrages;
 	struct s_op			*operations[17];
@@ -94,6 +96,6 @@ void					free_vm(t_corewar **corewar);
 /*
 ** Carrage
 */
-t_carrage				*new_carrage(size_t id, char *name, char *comment);
+t_carrage				*new_carrage(size_t id);
 
 #endif
