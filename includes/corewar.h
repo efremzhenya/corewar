@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 16:07:02 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/02 17:36:12 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,35 @@ typedef struct			s_player
 typedef struct			s_carrage
 {
 	size_t				id;
-	unsigned int		carry;
-	unsigned int		op_code;
+	int					carry;					//0 || 1
+	unsigned int		op_code;				//код текущей операции
 	size_t				cycle;
-	int					pc;
-	unsigned int		address;
-	unsigned char		registers[REG_NUMBER];
+	unsigned int		pc;						//адрес следующей операции для выполнения
+	int					registers[REG_NUMBER];
 	struct s_carrage	*next;
 }						t_carrage;
 
 typedef struct			s_corewar
 {
 	unsigned char		*arena[MEM_SIZE];
-	size_t				block_owner[MEM_SIZE];
+	size_t				*block_owner[MEM_SIZE];
 	size_t				cycles; 				//количество прошедших с начала игры циклов
-	size_t				potential_winner;		//игрок, о котором в последний раз сказали, что он жив
+	size_t				winner;					//игрок, о котором в последний раз сказали, что он жив
 	size_t				curr_live;				//количество выполненных операций live за последний период, длинной в cycles_to_die
 	size_t				cycles_to_die;			//длительность периода до проверки
 	size_t				checks_imp;				//количество проведенных проверок
 	struct s_player		*players;
 	struct s_carrage	*carrages;
+	struct s_op			*operations[17];
 }						t_corewar;
 
-typedef struct			s_operation
+typedef struct			s_op
 {
 	char				*name;
 	int					n_arg;
 	int					args[3];
 	int					number;
-	int					cicles;
+	int					cycles;
 	char				*description;
 	int					codage;
 	int					carry;
@@ -90,5 +90,10 @@ int						parse_args(int argc, char **argv, t_corewar **corewar);
 */
 
 void					free_vm(t_corewar **corewar);
+
+/*
+** Carrage
+*/
+t_carrage				*new_carrage(size_t id, char *name, char *comment);
 
 #endif

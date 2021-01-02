@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.c                                          :+:      :+:    :+:   */
+/*   carrage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/30 21:05:57 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 17:25:27 by lseema           ###   ########.fr       */
+/*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
+/*   Updated: 2021/01/02 17:33:41 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		kill(char *msg)
+t_carrage		*new_carrage(size_t id, char *name, char *comment)
 {
-	ft_putstr_fd(msg, 2);
-	return (0);
+	t_carrage	*carrage;
+	int			i;
+
+	if (!(carrage = (t_carrage *)malloc(sizeof(t_carrage))))
+		return (NULL);
+	carrage->id = id;
+	carrage->cycle = 0;
+	carrage->op_code = 0;
+	carrage->pc = 0;
+	carrage->next = NULL;
+	i = 0;
+	while(i < REG_NUMBER)
+		carrage->registers[i++] = 0;
+	return (carrage);
 }
 
-int		main(int argc, char **argv)
-{
-	t_corewar	*corewar;
-
-	corewar = NULL;
-	if (argc > 1)
-	{
-		if (init_corewar(&corewar) && parse_args(argc, argv, &corewar))
-		{
-			exec_vm(&corewar);
-		}
-		free(&corewar);
-	}
-	else
-	{
-		kill("Arguments not set");
-	}
-
-	return (0);
-}
