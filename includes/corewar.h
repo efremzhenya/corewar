@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 19:48:15 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/04 19:29:44 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,13 @@ typedef struct			s_carrage
 	size_t				id;
 	int					carry;					//0 || 1
 	unsigned int		op_code;				//код текущей операции
-	size_t				cycle;
 	unsigned int		pc;						//адрес следующей операции для выполнения
 	int					registers[REG_NUMBER];
+	size_t				wait_cycles;			//кол-во циклов ожидания до выполнения
+	size_t				last_live_cycle;		//цикл, в котором выполнялся последний live
+	t_player			*player;
 	struct s_carrage	*next;
 }						t_carrage;
-
-typedef struct			s_corewar
-{
-	unsigned char		*arena[MEM_SIZE];
-	size_t				*block_owner[MEM_SIZE];
-	size_t				cycles; 				//количество прошедших с начала игры циклов
-	size_t				winner_id;					//игрок, о котором в последний раз сказали, что он жив
-	size_t				lives;					//количество выполненных операций live за последний период, длинной в cycles_to_die
-	size_t				cycles_to_die;			//длительность периода до проверки
-	size_t				checks;					//количество проведенных проверок
-	int					players_count;
-	int					carrage_count;
-	struct s_player		*players;
-	struct s_carrage	*carrages;
-	struct s_op			*operations[17];
-}						t_corewar;
 
 typedef struct			s_op
 {
@@ -61,9 +47,25 @@ typedef struct			s_op
 	int					number;
 	int					cycles;
 	char				*description;
-	int					codage;
-	int					carry;
+	int					is_arg_code;			//имеет код типов аргумента?
+	int					is_half_size_dir;		//половинный размер t_dir(4 байта)?
 }						t_op;
+
+typedef struct			s_corewar
+{
+	unsigned char		*arena[MEM_SIZE];
+	size_t				*block_owner[MEM_SIZE];
+	size_t				cycles; 				//количество прошедших с начала игры циклов
+	size_t				winner_id;				//игрок, о котором в последний раз сказали, что он жив
+	size_t				lives;					//количество выполненных операций live за последний период, длинной в cycles_to_die
+	size_t				cycles_to_die;			//длительность периода до проверки
+	size_t				checks;					//количество проведенных проверок
+	int					players_count;
+	int					carrage_count;
+	t_player			*players;
+	t_carrage			*carrages;
+	t_op				operations[17];
+}						t_corewar;
 
 int						kill(char *msg);
 
@@ -96,6 +98,22 @@ void					free_vm(t_corewar **corewar);
 /*
 ** Carrage
 */
-t_carrage				*new_carrage(size_t id);
+
+t_carrage				*new_carrage(size_t id, unsigned int pc, t_player *player);
+void					add_carrage(t_carrage **carrages, t_carrage *carrage);
+void					init_carrages(t_corewar **corewar);
+
+
+/*
+** Arena
+*/
+
+void					init_arena(t_corewar **corewar);
+
+/*
+** Operations
+*/
+
+void					set_operations(t_op	*op);
 
 #endif
