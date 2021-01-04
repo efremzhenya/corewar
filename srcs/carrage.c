@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/04 17:58:49 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 00:32:48 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,32 @@ void		add_carrage(t_carrage **carrages, t_carrage *carrage)
 	}
 }
 
+void		del_carrage(t_carrage **carrages, size_t id)
+{
+	t_carrage *tail;
+	t_carrage *prev;
+
+	if (carrages && *carrages)
+	{
+		tail = *carrages;
+		prev = NULL;
+		while (tail != NULL)
+		{
+			if (tail->id == id)
+			{
+				if (prev)
+					prev->next = tail->next;
+				else
+					*carrages = tail->next;
+				free(tail);
+				return ;
+			}
+			prev = tail;
+			tail = tail->next;
+		}
+	}
+}
+
 void		init_carrages(t_corewar **corewar)
 {
 	t_player		*player;
@@ -64,5 +90,5 @@ void		init_carrages(t_corewar **corewar)
 		player = player->next;
 		i++;
 	}
-	(*corewar)->carrage_count = (*corewar)->players_count;
+	(*corewar)->carrages_count = (*corewar)->players_count;
 }

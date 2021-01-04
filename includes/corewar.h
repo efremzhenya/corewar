@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/04 19:29:44 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 00:56:06 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ typedef struct			s_corewar
 	unsigned char		*arena[MEM_SIZE];
 	size_t				*block_owner[MEM_SIZE];
 	size_t				cycles; 				//количество прошедших с начала игры циклов
-	size_t				winner_id;				//игрок, о котором в последний раз сказали, что он жив
+	size_t				champion_id;			//игрок, о котором в последний раз сказали, что он жив
 	size_t				lives;					//количество выполненных операций live за последний период, длинной в cycles_to_die
 	size_t				cycles_to_die;			//длительность периода до проверки
 	size_t				checks;					//количество проведенных проверок
 	int					players_count;
-	int					carrage_count;
+	int					carrages_count;
 	t_player			*players;
 	t_carrage			*carrages;
 	t_op				operations[17];
@@ -81,7 +81,9 @@ int						add_player(t_player **players, t_player *player);
 */
 
 int						init_corewar(t_corewar **corewar);
-void					exec_vm(t_corewar **corewar);
+void					start_vm(t_corewar **corewar);
+void					intro_players(t_player **players);
+void					do_cycle(t_corewar **corewar);
 
 /*
 ** Parse
@@ -102,6 +104,7 @@ void					free_vm(t_corewar **corewar);
 t_carrage				*new_carrage(size_t id, unsigned int pc, t_player *player);
 void					add_carrage(t_carrage **carrages, t_carrage *carrage);
 void					init_carrages(t_corewar **corewar);
+void					del_carrage(t_carrage **carrages, size_t id);
 
 
 /*

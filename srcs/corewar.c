@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:05:57 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 17:25:27 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 00:49:41 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main(int argc, char **argv)
 	{
 		if (init_corewar(&corewar) && parse_args(argc, argv, &corewar))
 		{
-			exec_vm(&corewar);
+			start_vm(&corewar);
 		}
 		free(&corewar);
 	}
