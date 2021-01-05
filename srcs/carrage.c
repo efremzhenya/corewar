@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 00:32:48 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 19:56:29 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,24 @@ t_carrage		*new_carrage(size_t id, unsigned int pc, t_player *player)
 
 void		add_carrage(t_carrage **carrages, t_carrage *carrage)
 {
-	if (!carrages || !carrage)
+	if (carrages && carrage)
 	{
 		carrage->next = *carrages;
 		*carrages = carrage;
 	}
 }
 
-void		del_carrage(t_carrage **carrages, size_t id)
+void		free_carrages(t_carrage **carrages)
 {
-	t_carrage *tail;
-	t_carrage *prev;
+	t_carrage	*carrage;
+	t_carrage	*tmp;
 
-	if (carrages && *carrages)
+	carrage = *carrages;
+	while (carrage)
 	{
-		tail = *carrages;
-		prev = NULL;
-		while (tail != NULL)
-		{
-			if (tail->id == id)
-			{
-				if (prev)
-					prev->next = tail->next;
-				else
-					*carrages = tail->next;
-				free(tail);
-				return ;
-			}
-			prev = tail;
-			tail = tail->next;
-		}
+		tmp = carrage;
+		carrage = carrage->next;
+		free(tmp);
 	}
 }
 

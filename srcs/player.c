@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 14:37:16 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 18:29:13 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,18 @@ int				add_player(t_player **players, t_player *player)
 		tail = tail->next;
 	tail->next = player;
 	return (1);
+}
+
+void			free_players(t_player **players)
+{
+	t_player	*player;
+	t_player	*temp;
+
+	player = *players;
+	while (player)
+	{
+		temp = player;
+		player = player->next;
+		free(temp);
+	}
 }
