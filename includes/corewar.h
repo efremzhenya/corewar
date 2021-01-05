@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 20:11:57 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 21:08:22 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct			s_carrage
 	unsigned int		op_code;				//код текущей операции
 	unsigned int		pc;						//адрес следующей операции для выполнения
 	int					registers[REG_NUMBER];
-	size_t				wait_cycles;			//кол-во циклов ожидания до выполнения
+	unsigned int		wait_cycles;			//кол-во циклов ожидания до выполнения
 	size_t				last_live_cycle;		//цикл, в котором выполнялся последний live
 	t_player			*player;
 	struct s_carrage	*next;
@@ -45,8 +45,8 @@ typedef struct			s_op
 	int					n_arg;
 	int					args[3];
 	int					number;
-	int					cycles;
-	char				*description;
+	unsigned int		cycles;
+	char				*desc;
 	int					is_arg_code;			//имеет код типов аргумента?
 	int					is_half_size_dir;		//половинный размер t_dir(4 байта)?
 }						t_op;

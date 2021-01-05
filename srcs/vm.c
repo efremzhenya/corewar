@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 20:00:58 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 21:40:44 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void		check(t_corewar **corewar)
 {
 	(*corewar)->checks++;
 	die_carrages(corewar, (*corewar)->carrages, NULL, NULL);
+	if ((*corewar)->lives >= NBR_LIVE || (*corewar)->checks == MAX_CHECKS)
+	{
+		(*corewar)->cycles_to_die -= CYCLE_DELTA;
+		(*corewar)->checks = 0;
+	}
+	(*corewar)->lives = 0;
 }
 
 void		die_carrages(t_corewar **corewar, t_carrage *current,
@@ -74,23 +80,32 @@ void		start_vm(t_corewar **corewar)
 		if ((*corewar)->cycles_to_die <= 0 ||
 			((*corewar)->cycles % (*corewar)->cycles_to_die) == 0)
 			check(corewar);
-
 	}
 
 }
 
 void		do_cycle(t_corewar **corewar)
 {
-	t_carrage	*carrage;
+	t_carrage		*carrage;
 
 	(*corewar)->cycles++;
 	carrage = (*corewar)->carrages;
 	while (carrage)
 	{
-		//do operation
+		if (!carrage->wait_cycles)
+		{
+			carrage->op_code = (*corewar)->arena[carrage->pc];
+			if (carrage->op_code >= 1 && carrage->op_code <= 16)
+				carrage->wait_cycles = (*corewar)->operations[carrage->op_code - 1].cycles;
+		}
+		if (carrage->wait_cycles)
+			carrage->wait_cycles--;
+		if (!carrage->wait_cycles)
+		{
+			//exec op
+		}
 		carrage = carrage->next;
 	}
-
 }
 
 void		intro_players(t_player **players)
