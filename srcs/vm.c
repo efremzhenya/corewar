@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 22:59:53 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 23:47:20 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,45 +27,6 @@ int			init_corewar(t_corewar **corewar)
 	return (1);
 }
 
-void		check(t_corewar **corewar)
-{
-	(*corewar)->checks++;
-	die_carrages(corewar, (*corewar)->carrages, NULL, NULL);
-	if ((*corewar)->lives >= NBR_LIVE || (*corewar)->checks == MAX_CHECKS)
-	{
-		(*corewar)->cycles_to_die -= CYCLE_DELTA;
-		(*corewar)->checks = 0;
-	}
-	(*corewar)->lives = 0;
-}
-
-void		die_carrages(t_corewar **corewar, t_carrage *current,
-	t_carrage *del, t_carrage *temp)
-{
-	while (current != NULL)
-	{
-		if ((*corewar)->cycles_to_die <= 0
-			|| ((*corewar)->cycles - current->last_live_cycle) >= (*corewar)->cycles_to_die)
-		{
-			del = current;
-			current = current->next;
-			if ((*corewar)->carrages == del)
-				(*corewar)->carrages = current;
-			else
-			{
-				temp = (*corewar)->carrages;
-				while (temp->next != del)
-					temp = temp->next;
-				temp->next = temp->next->next;
-			}
-			free(del);
-			(*corewar)->carrages_count--;
-		}
-		else
-			current = current->next;
-	}
-}
-
 void		start_vm(t_corewar **corewar)
 {
 	t_op	operations[17];
@@ -83,7 +44,7 @@ void		start_vm(t_corewar **corewar)
 			((*corewar)->cycles % (*corewar)->cycles_to_die) == 0)
 			check(corewar);
 	}
-
+	//...
 }
 
 void		do_cycle(t_corewar **corewar, t_op *operations)
@@ -105,32 +66,8 @@ void		do_cycle(t_corewar **corewar, t_op *operations)
 		if (!carrage->wait_cycles)
 		{
 			//exec_op();
-			//exec op
 		}
 		carrage = carrage->next;
-	}
-}
-
-void		intro_players(t_player **players)
-{
-	t_player *player;
-
-	if (!players)
-		return;
-	ft_putendl("Introducing contestants...");
-	player = (*players);
-	while (player != NULL)
-	{
-		ft_putstr("* Player ");
-		ft_putnbr(player->id);
-		ft_putstr(", weighing ");
-		ft_putnbr(player->size);
-		ft_putstr(" bytes, \"");
-		ft_putstr(player->name);
-		ft_putstr("\" (\"");
-		ft_putstr(player->comment);
-		ft_putstr("\") !\n");
-		player = player->next;
 	}
 }
 

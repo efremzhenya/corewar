@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/05 23:36:32 by lseema           ###   ########.fr        #
+#    Updated: 2021/01/05 23:45:45 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRCS		 := corewar.c\
 				carrage.c\
 				arena.c\
 				op.c\
+				check.c\
+				messages.c\
 				operations1.c\
 				operations2.c\
 				operations3.c\

@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.c                                          :+:      :+:    :+:   */
+/*   messages.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/30 21:05:57 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 23:45:54 by lseema           ###   ########.fr       */
+/*   Created: 2021/01/05 23:41:47 by lseema            #+#    #+#             */
+/*   Updated: 2021/01/05 23:46:06 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		kill(char *msg)
+void		intro_players(t_player **players)
 {
-	ft_putstr_fd(msg, 2);
-	return (0);
-}
+	t_player *player;
 
-int		main(int argc, char **argv)
-{
-	t_corewar	*corewar;
-
-	corewar = NULL;
-	if (argc > 1)
+	if (!players)
+		return;
+	ft_putendl("Introducing contestants...");
+	player = (*players);
+	while (player != NULL)
 	{
-		if (init_corewar(&corewar) && parse_args(argc, argv, &corewar))
-		{
-			start_vm(&corewar);
-		}
-		free_vm(&corewar);
+		ft_putstr("* Player ");
+		ft_putnbr(player->id);
+		ft_putstr(", weighing ");
+		ft_putnbr(player->size);
+		ft_putstr(" bytes, \"");
+		ft_putstr(player->name);
+		ft_putstr("\" (\"");
+		ft_putstr(player->comment);
+		ft_putstr("\") !\n");
+		player = player->next;
 	}
-	else
-		kill("Usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...");
-	return (0);
 }

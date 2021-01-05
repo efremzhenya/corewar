@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 23:34:01 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 23:46:51 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void					start_vm(t_corewar **corewar);
 void					intro_players(t_player **players);
 void					do_cycle(t_corewar **corewar, t_op *operations);
 void					mock_generator(t_corewar **corewar);
+void					check(t_corewar **corewar);
 
 /*
 ** Parse
