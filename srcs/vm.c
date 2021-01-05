@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 21:40:44 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 22:59:53 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int			init_corewar(t_corewar **corewar)
 	(*corewar)->checks = 0;
 	(*corewar)->players_count = 0;
 	(*corewar)->carrages_count = 0;
-	set_operations((*corewar)->operations);
 	return (1);
 }
 
@@ -69,14 +68,17 @@ void		die_carrages(t_corewar **corewar, t_carrage *current,
 
 void		start_vm(t_corewar **corewar)
 {
+	t_op	operations[17];
+
 	mock_generator(corewar);
 	init_arena(corewar);
 	init_carrages(corewar);
+	set_operations(operations);
 	(*corewar)->champion_id = (*corewar)->carrages->player->id;
 	intro_players(&(*corewar)->players);
 	while ((*corewar)->carrages_count)
 	{
-		do_cycle(corewar);
+		do_cycle(corewar, operations);
 		if ((*corewar)->cycles_to_die <= 0 ||
 			((*corewar)->cycles % (*corewar)->cycles_to_die) == 0)
 			check(corewar);
@@ -84,7 +86,7 @@ void		start_vm(t_corewar **corewar)
 
 }
 
-void		do_cycle(t_corewar **corewar)
+void		do_cycle(t_corewar **corewar, t_op *operations)
 {
 	t_carrage		*carrage;
 
@@ -96,12 +98,13 @@ void		do_cycle(t_corewar **corewar)
 		{
 			carrage->op_code = (*corewar)->arena[carrage->pc];
 			if (carrage->op_code >= 1 && carrage->op_code <= 16)
-				carrage->wait_cycles = (*corewar)->operations[carrage->op_code - 1].cycles;
+				carrage->wait_cycles = operations[carrage->op_code - 1].cycles;
 		}
 		if (carrage->wait_cycles)
 			carrage->wait_cycles--;
 		if (!carrage->wait_cycles)
 		{
+			//exec_op();
 			//exec op
 		}
 		carrage = carrage->next;

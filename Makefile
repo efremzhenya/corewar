@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/04 19:08:23 by lseema           ###   ########.fr        #
+#    Updated: 2021/01/05 23:36:32 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,11 @@ SRCS		 := corewar.c\
 				vm.c\
 				carrage.c\
 				arena.c\
-				operations.c\
+				op.c\
+				operations1.c\
+				operations2.c\
+				operations3.c\
+				operations4.c\
 				free.c
 
 OBJ			 := $(SRCS:.c=.o)

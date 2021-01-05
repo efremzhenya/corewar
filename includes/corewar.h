@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 21:08:22 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 23:34:01 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,6 @@ typedef struct			s_carrage
 	struct s_carrage	*next;
 }						t_carrage;
 
-typedef struct			s_op
-{
-	char				*name;
-	int					n_arg;
-	int					args[3];
-	int					number;
-	unsigned int		cycles;
-	char				*desc;
-	int					is_arg_code;			//имеет код типов аргумента?
-	int					is_half_size_dir;		//половинный размер t_dir(4 байта)?
-}						t_op;
-
 typedef struct			s_corewar
 {
 	unsigned char		arena[MEM_SIZE];
@@ -64,8 +52,20 @@ typedef struct			s_corewar
 	int					carrages_count;
 	t_player			*players;
 	t_carrage			*carrages;
-	t_op				operations[17];
 }						t_corewar;
+
+typedef struct			s_op
+{
+	char				*name;
+	int					n_arg;
+	int					args[3];
+	int					number;
+	unsigned int		cycles;
+	char				*desc;
+	int					is_arg_code;			//имеет код типов аргумента?
+	int					is_half_size_dir;		//половинный размер t_dir(4 байта)?
+	void				(*f)(t_corewar **, t_carrage *);
+}						t_op;
 
 int						kill(char *msg);
 
@@ -84,7 +84,7 @@ void					free_players(t_player **players);
 int						init_corewar(t_corewar **corewar);
 void					start_vm(t_corewar **corewar);
 void					intro_players(t_player **players);
-void					do_cycle(t_corewar **corewar);
+void					do_cycle(t_corewar **corewar, t_op *operations);
 void					mock_generator(t_corewar **corewar);
 
 /*
@@ -120,5 +120,22 @@ void					init_arena(t_corewar **corewar);
 */
 
 void					set_operations(t_op	*op);
+void					op_live(t_corewar **corewar, t_carrage *carrage);
+void					op_ld(t_corewar **corewar, t_carrage *carrage);
+void					op_st(t_corewar **corewar, t_carrage *carrage);
+void					op_add(t_corewar **corewar, t_carrage *carrage);
+void					op_sub(t_corewar **corewar, t_carrage *carrage);
+void					op_and(t_corewar **corewar, t_carrage *carrage);
+void					op_or(t_corewar **corewar, t_carrage *carrage);
+void					op_xor(t_corewar **corewar, t_carrage *carrage);
+void					op_zjmp(t_corewar **corewar, t_carrage *carrage);
+void					op_ldi(t_corewar **corewar, t_carrage *carrage);
+void					op_sti(t_corewar **corewar, t_carrage *carrage);
+void					op_fork(t_corewar **corewar, t_carrage *carrage);
+void					op_lld(t_corewar **corewar, t_carrage *carrage);
+void					op_lldi(t_corewar **corewar, t_carrage *carrage);
+void					op_lfork(t_corewar **corewar, t_carrage *carrage);
+void					op_aff(t_corewar **corewar, t_carrage *carrage);
+void					op_nop(t_corewar **corewar, t_carrage *carrage);
 
 #endif
