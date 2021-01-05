@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 19:06:11 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 18:04:33 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 21:44:00 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		init_arena(t_corewar **corewar)
 	player = (*corewar)->players;
 	while (player != NULL)
 	{
-		start_pos = player_block_size * i++;
+		start_pos = player_block_size * i - (!!i);
 		offset = 0;
 		while (offset < player->size)
 		{
@@ -33,5 +33,6 @@ void		init_arena(t_corewar **corewar)
 			offset++;
 		}
 		player = player->next;
+		i++;
 	}
 }
