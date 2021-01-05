@@ -5,3 +5,4 @@ libft/libft.a
 .gitignore
 bin/*
 libft/objects/*
+corewar.dSYM/Contents/Info.plist

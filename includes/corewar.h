@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 00:56:06 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/05 20:11:57 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct			s_player
 	size_t				id;
 	char				*name;
 	char				*comment;
-	unsigned char		**code;
+	unsigned char		*code;
 	int					size;
 	struct s_player		*next;
 }						t_player;
@@ -53,8 +53,8 @@ typedef struct			s_op
 
 typedef struct			s_corewar
 {
-	unsigned char		*arena[MEM_SIZE];
-	size_t				*block_owner[MEM_SIZE];
+	unsigned char		arena[MEM_SIZE];
+	size_t				block_owner[MEM_SIZE];
 	size_t				cycles; 				//количество прошедших с начала игры циклов
 	size_t				champion_id;			//игрок, о котором в последний раз сказали, что он жив
 	size_t				lives;					//количество выполненных операций live за последний период, длинной в cycles_to_die
@@ -75,6 +75,7 @@ int						kill(char *msg);
 
 t_player				*new_player(size_t id, char *name, char *comment);
 int						add_player(t_player **players, t_player *player);
+void					free_players(t_player **players);
 
 /*
 ** VM
@@ -84,6 +85,7 @@ int						init_corewar(t_corewar **corewar);
 void					start_vm(t_corewar **corewar);
 void					intro_players(t_player **players);
 void					do_cycle(t_corewar **corewar);
+void					mock_generator(t_corewar **corewar);
 
 /*
 ** Parse
@@ -104,8 +106,8 @@ void					free_vm(t_corewar **corewar);
 t_carrage				*new_carrage(size_t id, unsigned int pc, t_player *player);
 void					add_carrage(t_carrage **carrages, t_carrage *carrage);
 void					init_carrages(t_corewar **corewar);
-void					del_carrage(t_carrage **carrages, size_t id);
-
+void					free_carrages(t_carrage **carrages);
+void					die_carrages(t_corewar **corewar, t_carrage *current, t_carrage *del, t_carrage *temp);
 
 /*
 ** Arena
