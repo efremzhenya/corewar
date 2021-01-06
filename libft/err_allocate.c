@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.c                                          :+:      :+:    :+:   */
+/*   err_allocate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/30 21:05:57 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/06 23:22:45 by mellie           ###   ########.fr       */
+/*   Created: 2020/12/08 17:08:29 by mellie            #+#    #+#             */
+/*   Updated: 2020/12/08 17:08:38 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "libft.h"
 
-int		kill(char *msg)
+void	err_allocate(void *p)
 {
-	ft_putstr_fd(msg, 2);
-	return (0);
-}
-
-int		main(int argc, char **argv)
-{
-	t_corewar	*corewar;
-
-	corewar = NULL;
-	if (argc > 1)
+	if (!p)
 	{
-		if (init_corewar(&corewar) && parse_args(argc, argv, &corewar))
-		{
-			start_vm(&corewar);
-		}
-		free_vm(&corewar);
+		write(2, "Error of allocation memory.", 28);
+		exit(1);
 	}
-	else
-		kill("Usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...");
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/06 23:05:01 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/07 00:17:33 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int			init_corewar(t_corewar **corewar)
 		return kill("Error on memory allocating");
 	(*corewar)->players = NULL;
 	(*corewar)->carrages = NULL;
+	(*corewar)->cw_args = NULL;
 	(*corewar)->cycles = 0;
 	(*corewar)->lives = 0;
 	(*corewar)->cycles_to_die = CYCLE_TO_DIE;

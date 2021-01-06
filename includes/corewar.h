@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/06 21:46:22 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/07 00:19:26 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 # define COREWAR_H
 
 # include "libft.h"
+# include "error.h"
 # include "op.h"
+
+typedef	struct			s_arg
+{
+	int					dump;
+	int					n_pl;
+}						t_arg;
+
 
 typedef struct			s_player
 {
-	size_t				id;
+	int					id;
+	int					ind;
 	char				*name;
 	char				*comment;
 	unsigned char		*code;
@@ -53,6 +62,7 @@ typedef struct			s_corewar
 	int					carrages_count;
 	t_player			*players;
 	t_carrage			*carrages;
+	t_arg				*cw_args;
 }						t_corewar;
 
 typedef struct			s_op
@@ -74,10 +84,9 @@ int						kill(char *msg);
 ** Player
 */
 
-t_player				*new_player(size_t id, char *name, char *comment);
-int						add_player(t_player **players, t_player *player);
+t_player				*new_player(int *ac, char **av, t_corewar **corewar, int ind);
+void					add_player(int *ac, char **av, t_corewar **corewar, int ind);
 void					free_players(t_player **players);
-
 /*
 ** VM
 */

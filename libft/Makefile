@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: mellie <mellie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 16:59:57 by lseema            #+#    #+#              #
-#    Updated: 2020/12/19 11:13:11 by jpasty           ###   ########.fr        #
+#    Updated: 2021/01/06 17:27:47 by mellie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,9 @@ SOURCES_LIST = ft_memset.c\
 	ft_lstiter.c\
 	ft_lstmap.c\
 	free_str_array.c\
-	get_next_line.c
+	get_next_line.c\
+	err_allocate.c\
+	terminate.c
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 OBJECTS_DIRECTORY = objects/
