@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 23:47:20 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/06 23:05:01 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void		start_vm(t_corewar **corewar)
 	intro_players(&(*corewar)->players);
 	while ((*corewar)->carrages_count)
 	{
-		do_cycle(corewar, operations);
+		(*corewar)->cycles++;
+		carrages_exec(corewar, operations);
 		if ((*corewar)->cycles_to_die <= 0 ||
 			((*corewar)->cycles % (*corewar)->cycles_to_die) == 0)
 			check(corewar);
@@ -47,11 +48,11 @@ void		start_vm(t_corewar **corewar)
 	//...
 }
 
-void		do_cycle(t_corewar **corewar, t_op *operations)
+void		carrages_exec(t_corewar **corewar, t_op *op)
 {
 	t_carrage		*carrage;
+	int				offset;
 
-	(*corewar)->cycles++;
 	carrage = (*corewar)->carrages;
 	while (carrage)
 	{
@@ -59,13 +60,23 @@ void		do_cycle(t_corewar **corewar, t_op *operations)
 		{
 			carrage->op_code = (*corewar)->arena[carrage->pc];
 			if (carrage->op_code >= 1 && carrage->op_code <= 16)
-				carrage->wait_cycles = operations[carrage->op_code - 1].cycles;
+				carrage->wait_cycles = op[carrage->op_code].cycles;
 		}
 		if (carrage->wait_cycles)
 			carrage->wait_cycles--;
 		if (!carrage->wait_cycles)
 		{
-			//exec_op();
+			if (carrage->op_code >= 1 && carrage->op_code <= 16)
+			{
+				if ((offset = (chk_arg_type(op[carrage->op_code], carrage, (*corewar)->arena))))
+					op[carrage->op_code].f(corewar, carrage);
+				else
+					offset = instruction_size(carrage, op[carrage->op_code]);
+			}
+			else
+				offset = 1;
+			if ((carrage->pc = (carrage->pc + offset)) >= MEM_SIZE)
+				carrage->pc = carrage->pc - MEM_SIZE;
 		}
 		carrage = carrage->next;
 	}

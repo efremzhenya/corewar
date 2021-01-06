@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/05 23:45:45 by lseema           ###   ########.fr        #
+#    Updated: 2021/01/06 21:49:34 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS		 := corewar.c\
 				operations2.c\
 				operations3.c\
 				operations4.c\
+				op_validation.c\
 				free.c
 
 OBJ			 := $(SRCS:.c=.o)

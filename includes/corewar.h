@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 23:46:51 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/06 21:46:22 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct			s_carrage
 	size_t				id;
 	int					carry;					//0 || 1
 	unsigned int		op_code;				//код текущей операции
+	unsigned int		op_args[3];				//коды аргументов текущей операции
 	unsigned int		pc;						//адрес следующей операции для выполнения
 	int					registers[REG_NUMBER];
 	unsigned int		wait_cycles;			//кол-во циклов ожидания до выполнения
@@ -84,9 +85,12 @@ void					free_players(t_player **players);
 int						init_corewar(t_corewar **corewar);
 void					start_vm(t_corewar **corewar);
 void					intro_players(t_player **players);
-void					do_cycle(t_corewar **corewar, t_op *operations);
+void					carrages_exec(t_corewar **corewar, t_op *operations);
 void					mock_generator(t_corewar **corewar);
 void					check(t_corewar **corewar);
+int						chk_arg_type(t_op op, t_carrage *carrage, unsigned char *arena);
+int						chk_regs(t_op op, t_carrage *carrage, unsigned char *arena);
+int						instruction_size(t_carrage *carrage, t_op op);
 
 /*
 ** Parse
