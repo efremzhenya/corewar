@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 19:06:11 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 21:44:00 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/06 22:25:19 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		init_arena(t_corewar **corewar)
 		offset = 0;
 		while (offset < player->size)
 		{
-			(*corewar)->arena[start_pos + offset] = (*corewar)->players->code[offset];
+			(*corewar)->arena[start_pos + offset] = player->code[offset];
 			offset++;
 		}
 		player = player->next;
