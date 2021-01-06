@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 19:56:29 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/06 21:59:00 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		init_carrages(t_corewar **corewar)
 		if (!(*corewar)->carrages)
 			(*corewar)->carrages = new_carrage(i, pc, player);
 		else
-			add_carrage(&(*corewar)->carrages, new_carrage(i, pc, player));
+			add_carrage(&(*corewar)->carrages, new_carrage(i, pc - 1, player));
 		pc += MEM_SIZE / (*corewar)->players_count;
 		player = player->next;
 		i++;
