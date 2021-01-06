@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/06 23:01:31 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/06 23:23:37 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,17 @@ void				add_player(int *ac, char **av, t_corewar **corewar, int ind)
 		tail->next = new_player(ac, av, corewar, ind);
 	}
 	(*ac)++;
+}
+void			free_players(t_player **players)
+{
+	t_player	*player;
+	t_player	*temp;
+
+	player = *players;
+	while (player)
+	{
+		temp = player;
+		player = player->next;
+		free(temp);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:05:57 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/06 18:40:46 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/06 23:22:45 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,11 @@ int		main(int argc, char **argv)
 	{
 		if (init_corewar(&corewar) && parse_args(argc, argv, &corewar))
 		{
-			exec_vm(&corewar);
+			start_vm(&corewar);
 		}
-		free(&corewar);
+		free_vm(&corewar);
 	}
 	else
-	{
-		kill(COREWAR_USAGE);
-	}
-
+		kill("Usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...");
 	return (0);
 }

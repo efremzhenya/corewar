@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   operations4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/02 15:15:05 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 19:57:26 by lseema           ###   ########.fr       */
+/*   Created: 2021/01/05 23:15:06 by lseema            #+#    #+#             */
+/*   Updated: 2021/01/05 23:29:11 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	free_vm(t_corewar **corewar)
+void	op_aff(t_corewar **corewar, t_carrage *carrage)
 {
-	if (*corewar)
-	{
-		if ((*corewar)->players_count)
-		{
-			free_players(&(*corewar)->players);
-			(*corewar)->players_count = 0;
-		}
-		if ((*corewar)->carrages_count)
-		{
-			free_carrages(&(*corewar)->carrages);
-			(*corewar)->carrages_count = 0;
-		}
-		free(*corewar);
-	}
+	if (corewar && carrage)
+	{}
+}
+
+void	op_nop(t_corewar **corewar, t_carrage *carrage)
+{
+	if (corewar && carrage)
+	{}
 }

@@ -6,7 +6,7 @@
 #    By: mellie <mellie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/06 17:29:51 by mellie           ###   ########.fr        #
+#    Updated: 2021/01/06 23:18:53 by mellie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,14 @@ SRCS		 := corewar.c\
 				player.c\
 				vm.c\
 				carrage.c\
+				arena.c\
+				op.c\
+				check.c\
+				messages.c\
+				operations1.c\
+				operations2.c\
+				operations3.c\
+				operations4.c\
 				free.c
 
 OBJ			 := $(SRCS:.c=.o)

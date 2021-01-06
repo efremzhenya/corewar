@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/06 22:42:42 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/06 23:22:03 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct			s_player
 	char				*name;
 	char				*comment;
 	unsigned char		*code;
-	size_t				size;
+	int					size;
 	struct s_player		*next;
 }						t_player;
 
@@ -40,24 +40,27 @@ typedef struct			s_carrage
 	size_t				id;
 	int					carry;					//0 || 1
 	unsigned int		op_code;				//код текущей операции
-	size_t				cycle;
 	unsigned int		pc;						//адрес следующей операции для выполнения
 	int					registers[REG_NUMBER];
+	unsigned int		wait_cycles;			//кол-во циклов ожидания до выполнения
+	size_t				last_live_cycle;		//цикл, в котором выполнялся последний live
+	t_player			*player;
 	struct s_carrage	*next;
 }						t_carrage;
 
 typedef struct			s_corewar
 {
-	unsigned char		*arena[MEM_SIZE];
-	size_t				*block_owner[MEM_SIZE];
+	unsigned char		arena[MEM_SIZE];
+	size_t				block_owner[MEM_SIZE];
 	size_t				cycles; 				//количество прошедших с начала игры циклов
-	size_t				winner;					//игрок, о котором в последний раз сказали, что он жив
-	size_t				curr_live;				//количество выполненных операций live за последний период, длинной в cycles_to_die
+	size_t				champion_id;			//игрок, о котором в последний раз сказали, что он жив
+	size_t				lives;					//количество выполненных операций live за последний период, длинной в cycles_to_die
 	size_t				cycles_to_die;			//длительность периода до проверки
-	size_t				checks_imp;				//количество проведенных проверок
-	struct s_player		*players;
-	struct s_carrage	*carrages;
-	struct s_op			*operations[17];
+	size_t				checks;					//количество проведенных проверок
+	int					players_count;
+	int					carrages_count;
+	t_player			*players;
+	t_carrage			*carrages;
 	t_arg				*cw_args;
 }						t_corewar;
 
@@ -67,10 +70,11 @@ typedef struct			s_op
 	int					n_arg;
 	int					args[3];
 	int					number;
-	int					cycles;
-	char				*description;
-	int					codage;
-	int					carry;
+	unsigned int		cycles;
+	char				*desc;
+	int					is_arg_code;			//имеет код типов аргумента?
+	int					is_half_size_dir;		//половинный размер t_dir(4 байта)?
+	void				(*f)(t_corewar **, t_carrage *);
 }						t_op;
 
 int						kill(char *msg);
@@ -81,12 +85,17 @@ int						kill(char *msg);
 
 t_player				*new_player(int *ac, char **av, t_corewar **corewar, int ind);
 void					add_player(int *ac, char **av, t_corewar **corewar, int ind);
+void					free_players(t_player **players);
 /*
 ** VM
 */
 
 int						init_corewar(t_corewar **corewar);
-void					exec_vm(t_corewar **corewar);
+void					start_vm(t_corewar **corewar);
+void					intro_players(t_player **players);
+void					do_cycle(t_corewar **corewar, t_op *operations);
+void					mock_generator(t_corewar **corewar);
+void					check(t_corewar **corewar);
 
 /*
 ** Parse
@@ -103,6 +112,40 @@ void					free_vm(t_corewar **corewar);
 /*
 ** Carrage
 */
-t_carrage				*new_carrage(size_t id);
+
+t_carrage				*new_carrage(size_t id, unsigned int pc, t_player *player);
+void					add_carrage(t_carrage **carrages, t_carrage *carrage);
+void					init_carrages(t_corewar **corewar);
+void					free_carrages(t_carrage **carrages);
+void					die_carrages(t_corewar **corewar, t_carrage *current, t_carrage *del, t_carrage *temp);
+
+/*
+** Arena
+*/
+
+void					init_arena(t_corewar **corewar);
+
+/*
+** Operations
+*/
+
+void					set_operations(t_op	*op);
+void					op_live(t_corewar **corewar, t_carrage *carrage);
+void					op_ld(t_corewar **corewar, t_carrage *carrage);
+void					op_st(t_corewar **corewar, t_carrage *carrage);
+void					op_add(t_corewar **corewar, t_carrage *carrage);
+void					op_sub(t_corewar **corewar, t_carrage *carrage);
+void					op_and(t_corewar **corewar, t_carrage *carrage);
+void					op_or(t_corewar **corewar, t_carrage *carrage);
+void					op_xor(t_corewar **corewar, t_carrage *carrage);
+void					op_zjmp(t_corewar **corewar, t_carrage *carrage);
+void					op_ldi(t_corewar **corewar, t_carrage *carrage);
+void					op_sti(t_corewar **corewar, t_carrage *carrage);
+void					op_fork(t_corewar **corewar, t_carrage *carrage);
+void					op_lld(t_corewar **corewar, t_carrage *carrage);
+void					op_lldi(t_corewar **corewar, t_carrage *carrage);
+void					op_lfork(t_corewar **corewar, t_carrage *carrage);
+void					op_aff(t_corewar **corewar, t_carrage *carrage);
+void					op_nop(t_corewar **corewar, t_carrage *carrage);
 
 #endif

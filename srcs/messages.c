@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   messages.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/02 15:15:05 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 19:57:26 by lseema           ###   ########.fr       */
+/*   Created: 2021/01/05 23:41:47 by lseema            #+#    #+#             */
+/*   Updated: 2021/01/05 23:46:06 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	free_vm(t_corewar **corewar)
+void		intro_players(t_player **players)
 {
-	if (*corewar)
+	t_player *player;
+
+	if (!players)
+		return;
+	ft_putendl("Introducing contestants...");
+	player = (*players);
+	while (player != NULL)
 	{
-		if ((*corewar)->players_count)
-		{
-			free_players(&(*corewar)->players);
-			(*corewar)->players_count = 0;
-		}
-		if ((*corewar)->carrages_count)
-		{
-			free_carrages(&(*corewar)->carrages);
-			(*corewar)->carrages_count = 0;
-		}
-		free(*corewar);
+		ft_putstr("* Player ");
+		ft_putnbr(player->id);
+		ft_putstr(", weighing ");
+		ft_putnbr(player->size);
+		ft_putstr(" bytes, \"");
+		ft_putstr(player->name);
+		ft_putstr("\" (\"");
+		ft_putstr(player->comment);
+		ft_putstr("\") !\n");
+		player = player->next;
 	}
 }
