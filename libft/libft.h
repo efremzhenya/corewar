@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:42:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 13:07:27 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/06 17:31:23 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 int					get_next_line(const int fd, char **line);
 int					ft_new_line(char **s, char **line, int fd, int offset);
 int					free_str_arr(char **temp);
+void				terminate(char *s);
+void				err_allocate(void *p);
 
 #endif

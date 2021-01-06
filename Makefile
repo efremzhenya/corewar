@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: mellie <mellie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/02 17:33:58 by lseema           ###   ########.fr        #
+#    Updated: 2021/01/06 17:29:51 by mellie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ DIR_INCLUDES := includes/
 DIR_BIN		 := bin/
 DIR_LFT		 := libft/
 LIBFT		 := libft.a
-HEADERS		 := corewar.h libft.h op.h
+HEADERS		 := corewar.h libft.h op.h error.h
 CC			 := gcc
 FLAGS		 := -Wall -Wextra -Werror -g
 RM			 := /bin/rm -rf

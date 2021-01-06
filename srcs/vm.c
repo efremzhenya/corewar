@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 17:12:20 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/04 21:13:02 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		init_corewar(t_corewar **corewar)
 		return kill("Error on memory allocating");
 	(*corewar)->players = NULL;
 	(*corewar)->carrages = NULL;
+	(*corewar)->cw_args = NULL;
 	//и тд
 	return (1);
 }

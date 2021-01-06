@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:05:57 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 17:25:27 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/06 18:40:46 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		main(int argc, char **argv)
 	}
 	else
 	{
-		kill("Arguments not set");
+		kill(COREWAR_USAGE);
 	}
 
 	return (0);

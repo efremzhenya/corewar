@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/02 17:36:12 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/06 22:42:42 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 # define COREWAR_H
 
 # include "libft.h"
+# include "error.h"
 # include "op.h"
+
+typedef	struct			s_arg
+{
+	int					dump;
+	int					n_pl;
+}						t_arg;
+
 
 typedef struct			s_player
 {
-	size_t				id;
+	int					id;
+	int					ind;
 	char				*name;
 	char				*comment;
 	unsigned char		*code;
@@ -49,6 +58,7 @@ typedef struct			s_corewar
 	struct s_player		*players;
 	struct s_carrage	*carrages;
 	struct s_op			*operations[17];
+	t_arg				*cw_args;
 }						t_corewar;
 
 typedef struct			s_op
@@ -69,9 +79,8 @@ int						kill(char *msg);
 ** Player
 */
 
-t_player				*new_player(size_t id, char *name, char *comment);
-int						add_player(t_player **players, t_player *player);
-
+t_player				*new_player(int *ac, char **av, t_corewar **corewar, int ind);
+void					add_player(int *ac, char **av, t_corewar **corewar, int ind);
 /*
 ** VM
 */
@@ -94,6 +103,6 @@ void					free_vm(t_corewar **corewar);
 /*
 ** Carrage
 */
-t_carrage				*new_carrage(size_t id, char *name, char *comment);
+t_carrage				*new_carrage(size_t id);
 
 #endif
