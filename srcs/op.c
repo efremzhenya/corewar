@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 19:05:14 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 23:59:33 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/07 19:59:39 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,16 @@ void		set_operations(t_op	*op)
 		14, 50, "long load index", 1, 1, op_lldi};
 	op[15] = (t_op){"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1, op_lfork};
 	op[16] = (t_op){"aff", 1, {T_REG}, 16, 2, "aff", 1, 0, op_aff};
+}
+
+int			get_arg_size(int is_half_sized_dir, int type)
+{
+	if (type == REG_CODE)
+		return (1);
+	else if (type == IND_CODE)
+		return (IND_SIZE);
+	else if (type == DIR_CODE)
+		return (is_half_sized_dir) ? 2 : DIR_SIZE;
+	else
+		return (0);
 }
