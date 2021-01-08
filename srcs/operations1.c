@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 22:51:17 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 00:10:23 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/08 20:38:40 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	op_ld(t_corewar **corewar, t_carrage *carrage)
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	if (corewar && carrage)
 	{
-		reg = read_byte((*corewar)->arena,
-			offset + get_arg_size(0, carrage->op_args[0]));
+		reg = read_byte((*corewar)->arena, offset +
+			get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]));
 		if (carrage->op_args[0] == IND_CODE)
 			offset = read_int16((*corewar)->arena, offset) % IDX_MOD;
 		carrage->registers[reg] = read_int32((*corewar)->arena,
@@ -58,12 +58,15 @@ void	op_st(t_corewar **corewar, t_carrage *carrage)
 	{
 		offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 		if (carrage->op_args[1] == REG_CODE)
-			value = carrage->registers[read_byte((*corewar)->arena,
-				offset + get_arg_size(0, carrage->op_args[0]))];
+		{
+			value = carrage->registers[read_byte((*corewar)->arena, offset +
+				get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]))];
+		}
 		else
 		{
-			pos = carrage->pc + (read_int16((*corewar)->arena,
-				offset + get_arg_size(0, carrage->op_args[0])) % IDX_MOD);
+			pos = carrage->pc + (read_int16((*corewar)->arena, offset +
+				get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]))
+				% IDX_MOD);
 			value = read_int32((*corewar)->arena, pos);
 		}
 		carrage->registers[
@@ -82,9 +85,9 @@ void	op_add(t_corewar **corewar, t_carrage *carrage)
 	{
 		offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 		reg1_value = carrage->registers[read_byte((*corewar)->arena, offset)];
-		offset += get_arg_size(0, carrage->op_args[0]);
+		offset += get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]);
 		reg2_value = carrage->registers[read_byte((*corewar)->arena, offset)];
-		offset += get_arg_size(0, carrage->op_args[0]);
+		offset += get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]);
 		reg3_index = read_byte((*corewar)->arena, offset);
 		carrage->registers[reg3_index] = reg1_value + reg2_value;
 		carrage->carry = !carrage->registers[reg3_index];
@@ -102,9 +105,9 @@ void	op_sub(t_corewar **corewar, t_carrage *carrage)
 	{
 		offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 		reg1_value = carrage->registers[read_byte((*corewar)->arena, offset)];
-		offset += get_arg_size(0, carrage->op_args[0]);
+		offset += get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]);
 		reg2_value = carrage->registers[read_byte((*corewar)->arena, offset)];
-		offset += get_arg_size(0, carrage->op_args[0]);
+		offset += get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]);
 		reg3_index = read_byte((*corewar)->arena, offset);
 		carrage->registers[reg3_index] = reg1_value - reg2_value;
 		carrage->carry = !carrage->registers[reg3_index];
