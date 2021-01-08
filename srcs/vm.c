@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 00:17:03 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/08 20:20:29 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			init_corewar(t_corewar **corewar)
 
 void		start_vm(t_corewar **corewar)
 {
-	t_op	operations[17];
+	t_op	operations[OP_COUNT];
 
 	mock_generator(corewar);
 	init_arena(corewar);
@@ -59,16 +59,17 @@ void		carrages_exec(t_corewar **corewar, t_op *op)
 	{
 		if (!carrage->wait_cycles)
 		{
-			carrage->op_code = (*corewar)->arena[carrage->pc];
-			if (carrage->op_code >= 1 && carrage->op_code <= 16)
+			carrage->op_code = read_byte((*corewar)->arena, carrage->pc);
+			if (carrage->op_code > 0 && carrage->op_code < OP_COUNT)
 				carrage->wait_cycles = op[carrage->op_code].cycles;
 		}
 		if (carrage->wait_cycles)
 			carrage->wait_cycles--;
 		if (!carrage->wait_cycles)
 		{
-			if (carrage->op_code >= 1 && carrage->op_code <= 16)
+			if (carrage->op_code > 0 && carrage->op_code < OP_COUNT)
 			{
+				carrage->is_half_size_dir = op[carrage->op_code].is_half_size_dir;
 				if ((offset = (chk_arg_type(op[carrage->op_code], carrage, (*corewar)->arena))))
 					op[carrage->op_code].f(corewar, carrage);
 				else

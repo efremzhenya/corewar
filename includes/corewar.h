@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 00:12:38 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/08 20:32:08 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft.h"
 # include "error.h"
 # include "op.h"
+
+# define OP_COUNT 17
 
 typedef	struct			s_arg
 {
@@ -40,6 +42,7 @@ typedef struct			s_carrage
 	int					carry;					//0 || 1
 	unsigned int		op_code;				//код текущей операции
 	unsigned int		op_args[3];				//коды аргументов текущей операции
+	int					is_half_size_dir;		//размер t_dir текущей операции
 	unsigned int		pc;						//адрес следующей операции для выполнения
 	int					registers[REG_NUMBER];
 	unsigned int		wait_cycles;			//кол-во циклов ожидания до выполнения

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/07 00:19:26 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/08 20:20:47 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_carrage		*new_carrage(size_t id, unsigned int pc, t_player *player)
 	carrage->wait_cycles = 0;
 	carrage->last_live_cycle = 0;
 	carrage->op_code = 0;
+	carrage->is_half_size_dir = 0;
 	carrage->pc = pc;
 	carrage->carry = 0;
 	carrage->player = player;
