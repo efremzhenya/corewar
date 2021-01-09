@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 23:38:59 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/09 15:32:01 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ t_player		*new_player(int *ac, char **av, t_corewar **corewar, int ind)
 	player->code = NULL;
 	player->size = 0;
 	player->next = NULL;
-	return (player); 
+	return (player);
 }
 
 void				add_player(int *ac, char **av, t_corewar **corewar, int ind)
 {
 	t_player	*tail;
-	
+
 	if (ind > MAX_PLAYERS)
 		terminate(ERR_1_MAX_PLAYERS);
 	if ((*corewar)->players == NULL)
@@ -138,4 +138,21 @@ void			free_players(t_player **players)
 		player = player->next;
 		free(temp);
 	}
+}
+
+t_player		*get_player_by_id(t_player **players, int id)
+{
+	t_player *player;
+
+	if (players)
+	{
+		player = *players;
+		while (player)
+		{
+			if (player->id == id)
+				return (player);
+			player = player->next;
+		}
+	}
+	return (NULL);
 }

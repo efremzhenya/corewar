@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2021/01/06 22:01:36 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/07 22:48:29 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 
 #define MAX_ARGS_NUMBER			4
-#define MAX_PLAYERS				4 
+#define MAX_PLAYERS				4
 #define MEM_SIZE				(4*1024)
 #define IDX_MOD					(MEM_SIZE / 8)
 #define CHAMP_MAX_SIZE			(MEM_SIZE / 6)

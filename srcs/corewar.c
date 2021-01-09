@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:05:57 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/06 23:22:45 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/08 20:16:26 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int		main(int argc, char **argv)
 		free_vm(&corewar);
 	}
 	else
-		kill("Usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...");
+		kill(COREWAR_USAGE);
 	return (0);
 }
