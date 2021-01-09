@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:40:04 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 23:16:31 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/09 20:33:41 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		parse_args(int argc, char **argv, t_corewar **corewar)
 				return kill(COREWAR_USAGE);
 		}
 		fill_player_id(corewar);
-		(*corewar)->players = sort_players(NULL, (*corewar)->players);
+		(*corewar)->players = sort_players((*corewar)->players);
 	}
 	return (1);
 }

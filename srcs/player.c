@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/09 15:32:01 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/09 21:14:27 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,50 +80,67 @@ void			fill_player_id(t_corewar **corewar)
 	}
 }
 
-t_player	*sort_players(t_player *tmp, t_player *head)
+void		init_links(t_link **l, t_player *head)
 {
- 	t_player *a = NULL;
- 	t_player *b = NULL; 
- 	t_player *c = NULL;
- 	t_player *e = NULL; 
+		(*l)->a = NULL;
+		(*l)->b = NULL;
+		(*l)->c = NULL;
+		(*l)->e = NULL;
+		(*l)->head = head;
+}
 
-	while (e != head->next)
+void		swap_links(t_link *l, t_player	*tmp)
+{
+	if (l->a->id > l->b->id)
 	{
-		a = head;
-		c = head;
-		b = a->next;
-		while (a != e)
+		if (l->a == l->head)
 		{
-			if (a->id > b->id)
-			{
-				if (a == head)
-				{
-					tmp = b -> next;
-					b->next = a;
-					a->next = tmp;
-					head = b;
-					c = b;
-				}
-				else
-				{
-					tmp = b->next;
-					b->next = a;
-					a->next = tmp;
-					c->next = b;
-					c = b;
-				}
-			}
-			else
-			{
-				c = a;
-				a = a->next;
-			}
-			b = a->next;
-			if (b == e)
-				e = a;
+			tmp = l->b->next;
+			l->b->next = l->a;
+			l->a->next = tmp;
+			l->head = l->b;
+			l->c = l->b;
+		}
+		else
+		{
+			tmp = l->b->next;
+			l->b->next = l->a;
+			l->a->next = tmp;
+			l->c->next = l->b;
+			l->c = l->b;
 		}
 	}
-	return (head);
+	else
+	{
+		l->c = l->a;
+		l->a = l->a->next;
+	}
+}
+
+t_player	*sort_players(t_player *head)
+{
+ 	t_link	l;
+
+	l.a = NULL;
+	l.b = NULL;
+	l.c = NULL;
+	l.e = NULL;
+	l.head = head;	
+//	init_links(&l, head);
+	while (l.e != l.head->next)
+	{
+		l.a = l.head;
+		l.c = l.head;
+		l.b = l.a->next;
+		while (l.a != l.e)
+		{
+			swap_links(&l, NULL);
+			l.b = l.a->next;
+			if (l.b == l.e)
+				l.e = l.a;
+		}
+	}
+	return (l.head);
 }
 
 void			free_players(t_player **players)

@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/09 15:32:19 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/09 21:07:32 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ typedef struct			s_player
 	int					size;
 	struct s_player		*next;
 }						t_player;
+
+typedef	struct			s_link
+{
+	t_player			*a;
+	t_player			*b;
+	t_player			*c;
+	t_player			*e;
+	t_player 			*head;
+}						t_link;
 
 typedef struct			s_carrage
 {
@@ -91,7 +100,9 @@ int						kill(char *msg);
 t_player				*new_player(int *ac, char **av, t_corewar **corewar, int ind);
 void					add_player(int *ac, char **av, t_corewar **corewar, int ind);
 void					fill_player_id(t_corewar **corewar);
-t_player				*sort_players(t_player *tmp, t_player *head);
+t_player				*sort_players(t_player *head);
+void					init_links(t_link **l, t_player *head);
+void					swap_links(t_link *l, t_player	*tmp);
 void					free_players(t_player **players);
 t_player				*get_player_by_id(t_player **players, int id);
 
