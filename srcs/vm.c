@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 20:20:29 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/09 11:27:10 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ void		carrages_exec(t_corewar **corewar, t_op *op)
 					offset = instruction_size(carrage, op[carrage->op_code]);
 			}
 			else
-				offset = 1;
-			if ((carrage->pc = (carrage->pc + offset)) >= MEM_SIZE)
-				carrage->pc = carrage->pc - MEM_SIZE;
+				offset = sizeof(t_op_type);
+			carrage->pc = (carrage->pc + offset) % MEM_SIZE;
 		}
 		carrage = carrage->next;
 	}

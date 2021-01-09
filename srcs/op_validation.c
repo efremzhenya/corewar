@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 21:14:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 20:24:46 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/09 11:17:55 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ int		chk_regs(t_op op, t_carrage *carrage, unsigned char *arena)
 		if (carrage->op_args[i] == REG_CODE &&
 			((reg = read_byte(arena, carrage->pc + ++offset)) < 1 || reg > REG_NUMBER))
 				return (0);
-		else if (carrage->op_args[i] == IND_CODE)
-			offset += IND_SIZE;
-		else if (carrage->op_args[i] == DIR_CODE)
-			offset += op.is_half_size_dir ? DIR_SIZE / 2 : DIR_SIZE;
-		i++;
+		offset += get_arg_size(op.is_half_size_dir, carrage->op_args[i++]);
 	}
 	return (offset);
 }
