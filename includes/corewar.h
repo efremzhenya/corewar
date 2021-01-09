@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 20:32:08 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/09 12:00:36 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void					mock_generator(t_corewar **corewar);
 void					check(t_corewar **corewar);
 int						chk_arg_type(t_op op, t_carrage *carrage, unsigned char *arena);
 int						chk_regs(t_op op, t_carrage *carrage, unsigned char *arena);
-int						instruction_size(t_carrage *carrage, t_op op);
 
 /*
 ** Parse
@@ -139,7 +138,6 @@ void					init_arena(t_corewar **corewar);
 */
 
 void					set_operations(t_op	*op);
-int						get_arg_size(int is_half_sized_dir, int type);
 void					op_live(t_corewar **corewar, t_carrage *carrage);
 void					op_ld(t_corewar **corewar, t_carrage *carrage);
 void					op_st(t_corewar **corewar, t_carrage *carrage);
@@ -175,5 +173,13 @@ void					write_int32(t_corewar **corewar, int pos, int value);
 void					intro_message(t_player **players);
 void					winner_message(t_corewar **corewar);
 void					alive_message(t_player *player);
+
+/*
+** Calculate size
+*/
+
+int						get_arg_size(int is_half_sized_dir, int type);
+int						get_reg_index_size();
+int						instruction_size(t_carrage *carrage, t_op op);
 
 #endif
