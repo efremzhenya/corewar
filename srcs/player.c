@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/09 21:14:27 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/09 21:18:15 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,6 @@ void			fill_player_id(t_corewar **corewar)
 	}
 }
 
-void		init_links(t_link **l, t_player *head)
-{
-		(*l)->a = NULL;
-		(*l)->b = NULL;
-		(*l)->c = NULL;
-		(*l)->e = NULL;
-		(*l)->head = head;
-}
-
 void		swap_links(t_link *l, t_player	*tmp)
 {
 	if (l->a->id > l->b->id)
@@ -126,7 +117,7 @@ t_player	*sort_players(t_player *head)
 	l.c = NULL;
 	l.e = NULL;
 	l.head = head;	
-//	init_links(&l, head);
+	
 	while (l.e != l.head->next)
 	{
 		l.a = l.head;
