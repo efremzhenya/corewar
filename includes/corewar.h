@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/07 00:19:26 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/08 23:15:51 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int						kill(char *msg);
 
 t_player				*new_player(int *ac, char **av, t_corewar **corewar, int ind);
 void					add_player(int *ac, char **av, t_corewar **corewar, int ind);
+void					fill_player_id(t_corewar **corewar);
+t_player				*sort_players(t_player *tmp, t_player *head);
 void					free_players(t_player **players);
 /*
 ** VM

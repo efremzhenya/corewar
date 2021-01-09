@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:40:04 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/06 22:43:02 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/08 23:16:31 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,15 @@ int		parse_args(int argc, char **argv, t_corewar **corewar)
 			else if (!ft_strcmp(argv[i],"-n"))
 				parse_flags(&i, argv, 'n', corewar);
 			else if (!is_file(argv[i], ".cor"))
-				add_player(&i, argv, corewar, ind++);
+			{
+				add_player(&i, argv, corewar, ++ind);
+				(*corewar)->players_count++;
+			}
 			else
 				return kill(COREWAR_USAGE);
 		}
+		fill_player_id(corewar);
+		(*corewar)->players = sort_players(NULL, (*corewar)->players);
 	}
 	return (1);
 }

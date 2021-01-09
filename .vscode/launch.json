@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["-dump", "2", "-n", "2", "ror.cor"],
+			"args": ["-dump", "2", "-n", "4", "tor.cor", "-n", "3", "mor.cor", "-n", "2", "ror.cor", "-n", "1", "cor.cor"],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
