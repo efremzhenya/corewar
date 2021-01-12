@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 22:01:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 00:11:53 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/10 19:28:40 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 unsigned char	read_byte(unsigned char *arena, unsigned int pos)
 {
-	while (pos >= MEM_SIZE)
-		pos = pos - MEM_SIZE;
-	// while (pos < 0)
-	// 	pos = MEM_SIZE + pos;
-	return arena[pos];
+	return arena[pos %= MEM_SIZE];
 }
 
 short			read_int16(unsigned char *arena, int pos)
@@ -51,9 +47,7 @@ int				read_int32(unsigned char *arena, int pos)
 
 void			write_byte(t_corewar **corewar, int pos, unsigned char byte)
 {
-	while (pos >= MEM_SIZE)
-		pos = pos - MEM_SIZE;
-	(*corewar)->arena[pos] = byte;
+	(*corewar)->arena[pos %= MEM_SIZE] = byte;
 }
 
 void			write_int32(t_corewar **corewar, int pos, int value)
