@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/09 11:27:10 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/12 22:02:07 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void		start_vm(t_corewar **corewar)
 void		carrages_exec(t_corewar **corewar, t_op *op)
 {
 	t_carrage		*carrage;
-	int				offset;
 
 	carrage = (*corewar)->carrages;
 	while (carrage)
@@ -66,21 +65,28 @@ void		carrages_exec(t_corewar **corewar, t_op *op)
 		if (carrage->wait_cycles)
 			carrage->wait_cycles--;
 		if (!carrage->wait_cycles)
-		{
-			if (carrage->op_code > 0 && carrage->op_code < OP_COUNT)
-			{
-				carrage->is_half_size_dir = op[carrage->op_code].is_half_size_dir;
-				if ((offset = (chk_arg_type(op[carrage->op_code], carrage, (*corewar)->arena))))
-					op[carrage->op_code].f(corewar, carrage);
-				else
-					offset = instruction_size(carrage, op[carrage->op_code]);
-			}
-			else
-				offset = sizeof(t_op_type);
-			carrage->pc = (carrage->pc + offset) % MEM_SIZE;
-		}
+			exec_operation(corewar, carrage, op);
 		carrage = carrage->next;
 	}
+}
+
+void		exec_operation(t_corewar **corewar, t_carrage *carrage, t_op *op)
+{
+	int				offset;
+
+	if (carrage->op_code > 0 && carrage->op_code < OP_COUNT)
+	{
+		carrage->is_half_size_dir = op[carrage->op_code].is_half_size_dir;
+		if ((offset = chk_arg_type(op[carrage->op_code], carrage,
+			(*corewar)->arena)))
+			op[carrage->op_code].f(corewar, carrage);
+		else
+			offset = instruction_size(carrage, op[carrage->op_code]);
+	}
+	else
+		offset = sizeof(t_op_type);
+	if (!carrage->carry || carrage->op_code != 0x09)
+		carrage->pc = (carrage->pc + offset) % MEM_SIZE;
 }
 
  void		mock_generator(t_corewar **corewar)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/09 21:18:20 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/12 20:57:08 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ t_player				*get_player_by_id(t_player **players, int id);
 int						init_corewar(t_corewar **corewar);
 void					start_vm(t_corewar **corewar);
 void					carrages_exec(t_corewar **corewar, t_op *operations);
+void					exec_operation(t_corewar **corewar, t_carrage *carrage, t_op *op);
 void					mock_generator(t_corewar **corewar);
 void					check(t_corewar **corewar);
 int						chk_arg_type(t_op op, t_carrage *carrage, unsigned char *arena);
