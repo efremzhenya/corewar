@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/09 21:18:20 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/12 17:39:03 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COREWAR_H
 
 # include "libft.h"
+# include <fcntl.h>
 # include "error.h"
 # include "op.h"
 
@@ -122,7 +123,7 @@ int						chk_regs(t_op op, t_carrage *carrage, unsigned char *arena);
 */
 
 int						parse_args(int argc, char **argv, t_corewar **corewar);
-
+void					parse_code(char *av, t_player **player);
 /*
 ** Free
 */
