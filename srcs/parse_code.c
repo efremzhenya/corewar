@@ -6,49 +6,77 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:19:16 by mellie            #+#    #+#             */
-/*   Updated: 2021/01/12 23:34:37 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/13 19:00:18 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int validate_magic(unsigned char *bytes)
-{
-    unsigned char   magic[4];
-    int             i;
-    if (bytes == NULL)
-        return (0);
-    i = 0;
-    while (i < 4)
-    {
-        magic[i] = COREWAR_EXEC_MAGIC >> ((3 - i) * 8) & 0b11111111;
-        if (magic[i] != *bytes)
-            return (0);
-        i++;
-        bytes++;
-    }
-    return (1);
-}
+// int validate_magic(unsigned char *bytes)
+// {
+//     unsigned char   magic[4];
+//     int             i;
+//     if (bytes == NULL)
+//         return (0);
+//     i = 0;
+//     while (i < 4)
+//     {
+//         magic[i] = COREWAR_EXEC_MAGIC >> ((3 - i) * 8) & 0b11111111;
+//         if (magic[i] != *bytes)
+//             return (0);
+//         i++;
+//         bytes++;
+//     }
+//     return (1);
+// }
 void	check_magic_header(unsigned char *p)
 {
 	int tmp;
+	unsigned char *m;
+	int i;
 
 	tmp = COREWAR_EXEC_MAGIC;
-	if (ft_memcmp(p, &tmp, 4))
-		terminate(ERR_3_READING_FAILED);
+	m = (unsigned char *)&tmp + 3;
+	i = 0;
+	while (i < 4)
+	{
+		if (*p == *m)
+		{
+			p++;
+			m--;
+			i++;
+		}
+		else
+			terminate(ERR_3_READING_FAILED);
+	}
 }
 
 void	check_null_octet(unsigned char *p)
 {
-	if (ft_memcmp(p, 0000, 4))
+	if (ft_memcmp(p, "\0\0\0\0", 4))
 		terminate(ERR_3_READING_FAILED);
 }
 
-void	check_code_size(unsigned char *p)
+unsigned int		check_code_size(unsigned char *p)
 {
-	int tmp;
+	unsigned int	tmp;
+	unsigned char	*dst;
+	int				i;
 	
-	ft_memcpy(&tmp, p, 4);
+	
+	tmp = 0;
+	dst = (unsigned char *)&tmp + 3;
+	i = 0;
+	while (i < 4)
+	{
+		*dst = *p;
+		p++;
+		dst--;
+		i++;
+	}
+	if (tmp > CHAMP_MAX_SIZE)
+		terminate(ERR_4_CODE_MAXSIZE);
+	return(tmp);
 }
 
 void	parse_code(char *av, t_player **player)
@@ -57,40 +85,44 @@ void	parse_code(char *av, t_player **player)
     + 4 bytes			magic header COREWAR_EXEC_MAGIC
     + PROG_NAME_LENGTH	champ name 128 bytes
 	+ 4 bytes			4 NULL octets
-	+ 4 bytes			code size CHAMP_MAX_SIZE
+	+ 4 bytes			code size CHAMP_MAX_SIZE 2867789673
 	+ COMMENT_LENGTH	Champion comment
-	+ 4 bytes			4 NULL octets
+	+ 4 bytes			4 NULL octets 
 	+ N bytes			code
     */
-    int fd;
-	int hsize;
-	int offset;
+  	t_cor f;
 	unsigned char header[17 + PROG_NAME_LENGTH + COMMENT_LENGTH];
 	unsigned char *p;
 
-    if ((fd = open(av, O_RDONLY,0)) <= 0)
+    if ((f.fd = open(av, O_RDONLY,0)) <= 0)
         terminate(ERR_3_READING_FAILED);
-    hsize = 16 + PROG_NAME_LENGTH + COMMENT_LENGTH;
-	if ((offset = read(fd, &header, hsize)) != hsize)
+    f.bsize = 16 + PROG_NAME_LENGTH + COMMENT_LENGTH;
+	if ((f.offset = read(f.fd, &header, f.bsize)) != f.bsize)
 		terminate(ERR_3_READING_FAILED);
-	header[offset] = '\0';
+	header[f.offset] = '\0';
 	p = header;
-	validate_magic(p);
-	//check_magic_header(p);
+	check_magic_header(p);
 	(*player)->name = (char *)malloc(sizeof(char) * (PROG_NAME_LENGTH + 1));
 	err_allocate((*player)->name);
 	p += 4;
 	(*player)->name[PROG_NAME_LENGTH] = '\0';
 	(*player)->name = ft_strncpy((*player)->name, (const char *)p, PROG_NAME_LENGTH);
-	check_null_octet((p + PROG_NAME_LENGTH));
-	check_code_size((p + 4));
+	check_null_octet((p += PROG_NAME_LENGTH));
+	(*player)->size = check_code_size((p += 4));
 	(*player)->comment = (char *)malloc(sizeof(char) * (COMMENT_LENGTH + 1));
 	err_allocate((*player)->comment);
 	p += 4;
 	(*player)->comment[COMMENT_LENGTH] = '\0';
 	(*player)->comment = ft_strncpy((*player)->comment, (const char *)p, COMMENT_LENGTH);
-	check_null_octet((p + COMMENT_LENGTH));
-	hsize = lseek(fd, 0L, SEEK_END);
-	hsize -= offset;
-	
+	check_null_octet((p += COMMENT_LENGTH));
+	f.bsize = lseek(f.fd, 0L, SEEK_END);
+	f.bsize -= f.offset;
+	if (f.bsize != (*player)->size)
+		terminate(ERR_5_INV_CODESIZE);
+	p = (unsigned char *)malloc(sizeof(char) * (f.bsize + 1));
+	err_allocate(p);
+	ft_bzero(p, f.bsize + 1);
+	f.offset = lseek(f.fd, -(long)(f.bsize), SEEK_END);
+	if ((f.offset = read(f.fd, p, f.bsize)) != f.bsize)
+		terminate(ERR_3_READING_FAILED);
 }
