@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/12 20:57:08 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/12 23:35:26 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef	struct			s_link
 
 typedef struct			s_carrage
 {
-	size_t				id;
 	int					carry;					//0 || 1
 	unsigned int		op_code;				//код текущей операции
 	unsigned int		op_args[3];				//коды аргументов текущей операции
@@ -134,7 +133,7 @@ void					free_vm(t_corewar **corewar);
 ** Carrage
 */
 
-t_carrage				*new_carrage(size_t id, unsigned int pc, t_player *player);
+t_carrage				*new_carrage(unsigned int pc, t_player *player);
 void					add_carrage(t_carrage **carrages, t_carrage *carrage);
 void					init_carrages(t_corewar **corewar);
 void					free_carrages(t_carrage **carrages);

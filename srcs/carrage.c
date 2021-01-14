@@ -6,20 +6,19 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/08 20:20:47 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/12 23:35:03 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_carrage		*new_carrage(size_t id, unsigned int pc, t_player *player)
+t_carrage		*new_carrage(unsigned int pc, t_player *player)
 {
 	t_carrage	*carrage;
 	int			i;
 
 	if (!(carrage = (t_carrage *)malloc(sizeof(t_carrage))))
 		return (NULL);
-	carrage->id = id;
 	carrage->wait_cycles = 0;
 	carrage->last_live_cycle = 0;
 	carrage->op_code = 0;
