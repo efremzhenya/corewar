@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/09 21:18:15 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/12 17:28:51 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ t_player		*new_player(int *ac, char **av, t_corewar **corewar, int ind)
 		player->id = (*corewar)->cw_args->n_pl;
 		(*corewar)->cw_args->n_pl = -1;
 	}
-	player->name = ft_strdup(av[*ac]);
-	player->comment = "comment";
-	player->code = NULL;
-	player->size = 0;
+	parse_code(av[*ac], &player);
 	player->next = NULL;
 	return (player);
 }

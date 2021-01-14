@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: mellie <mellie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/09 11:57:44 by lseema           ###   ########.fr        #
+#    Updated: 2021/01/10 18:54:54 by mellie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FLAGS		 := -Wall -Wextra -Werror -g
 RM			 := /bin/rm -rf
 SRCS		 := corewar.c\
 				parse.c\
+				parse_code.c\
 				player.c\
 				vm.c\
 				carrage.c\
