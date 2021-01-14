@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 00:39:19 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/15 00:52:04 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	op_lldi(t_corewar **corewar, t_carrage *carrage)
 	}
 	carrage->registers[arg[2]] =
 		read_int32((*corewar)->arena, carrage->pc + (arg[0] + arg[1]));
+	carrage->carry = !carrage->registers[arg[2]];
 }
 
 void	op_lfork(t_corewar **corewar, t_carrage *carrage)
