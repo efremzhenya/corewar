@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 19:05:14 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/09 11:55:54 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/15 01:05:42 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		set_operations(t_op	*op)
 {
-	op[0] = (t_op){0, 0, {0}, 0, 0, 0, 0, 0, op_nop};
+	op[0] = (t_op){"nop", 0, {0}, 0, 0, 0, 0, 0, op_nop};
 	op[1] = (t_op){"live", 1, {T_DIR}, 1, 10, "alive", 0, 0, op_live};
 	op[2] = (t_op){"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0, op_ld};
 	op[3] = (t_op){"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0, op_st};

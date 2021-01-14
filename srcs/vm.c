@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/12 22:02:07 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/15 01:08:32 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ void		carrages_exec(t_corewar **corewar, t_op *op)
 		if (!carrage->wait_cycles)
 		{
 			carrage->op_code = read_byte((*corewar)->arena, carrage->pc);
-			if (carrage->op_code > 0 && carrage->op_code < OP_COUNT)
-				carrage->wait_cycles = op[carrage->op_code].cycles;
+			if (!(carrage->op_code > 0 && carrage->op_code < OP_COUNT))
+				carrage->op_code = 0;
+			carrage->wait_cycles = op[carrage->op_code].cycles;
 		}
 		if (carrage->wait_cycles)
 			carrage->wait_cycles--;
@@ -74,17 +75,12 @@ void		exec_operation(t_corewar **corewar, t_carrage *carrage, t_op *op)
 {
 	int				offset;
 
-	if (carrage->op_code > 0 && carrage->op_code < OP_COUNT)
-	{
-		carrage->is_half_size_dir = op[carrage->op_code].is_half_size_dir;
-		if ((offset = chk_arg_type(op[carrage->op_code], carrage,
-			(*corewar)->arena)))
-			op[carrage->op_code].f(corewar, carrage);
-		else
-			offset = instruction_size(carrage, op[carrage->op_code]);
-	}
+	carrage->is_half_size_dir = op[carrage->op_code].is_half_size_dir;
+	if ((offset = chk_arg_type(op[carrage->op_code], carrage,
+		(*corewar)->arena)))
+		op[carrage->op_code].f(corewar, carrage);
 	else
-		offset = sizeof(t_op_type);
+		offset = instruction_size(carrage, op[carrage->op_code]);
 	if (!carrage->carry || carrage->op_code != 0x09)
 		carrage->pc = (carrage->pc + offset) % MEM_SIZE;
 }
