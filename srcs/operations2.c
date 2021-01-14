@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/12 23:20:03 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/14 22:12:12 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	op_ldi(t_corewar **corewar, t_carrage *carrage)
 	int i;
 
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
+	i = 0;
 	while (i < 3)
 	{
 		if (carrage->op_args[i] == REG_CODE)
