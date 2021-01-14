@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:19:16 by mellie            #+#    #+#             */
-/*   Updated: 2021/01/13 19:00:18 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/14 15:39:39 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,22 @@ unsigned int		check_code_size(unsigned char *p)
 	}
 	if (tmp > CHAMP_MAX_SIZE)
 		terminate(ERR_4_CODE_MAXSIZE);
-	return(tmp);
+	return (tmp);
+}
+
+void	read_code(unsigned char *p, t_cor *f, t_player **player)
+{
+	check_null_octet((p += COMMENT_LENGTH));
+	f->bsize = lseek(f->fd, 0L, SEEK_END);
+	f->bsize -= f->offset;
+	if (f->bsize != (*player)->size)
+		terminate(ERR_5_INV_CODESIZE);
+	(*player)->code = (unsigned char *)malloc(f->bsize + 1);
+	err_allocate((*player)->code);
+	ft_bzero((*player)->code, f->bsize + 1);
+	f->offset = lseek(f->fd, -(long)(f->bsize), SEEK_END);
+	if ((f->offset = read(f->fd, (*player)->code, f->bsize)) != f->bsize)
+		terminate(ERR_3_READING_FAILED);
 }
 
 void	parse_code(char *av, t_player **player)
@@ -102,27 +117,17 @@ void	parse_code(char *av, t_player **player)
 	header[f.offset] = '\0';
 	p = header;
 	check_magic_header(p);
-	(*player)->name = (char *)malloc(sizeof(char) * (PROG_NAME_LENGTH + 1));
+	(*player)->name = (char *)malloc(PROG_NAME_LENGTH + 1);
 	err_allocate((*player)->name);
 	p += 4;
 	(*player)->name[PROG_NAME_LENGTH] = '\0';
-	(*player)->name = ft_strncpy((*player)->name, (const char *)p, PROG_NAME_LENGTH);
+	(*player)->name = ft_memcpy((*player)->name, p, PROG_NAME_LENGTH);
 	check_null_octet((p += PROG_NAME_LENGTH));
 	(*player)->size = check_code_size((p += 4));
-	(*player)->comment = (char *)malloc(sizeof(char) * (COMMENT_LENGTH + 1));
+	(*player)->comment = (char *)malloc(COMMENT_LENGTH + 1);
 	err_allocate((*player)->comment);
 	p += 4;
 	(*player)->comment[COMMENT_LENGTH] = '\0';
-	(*player)->comment = ft_strncpy((*player)->comment, (const char *)p, COMMENT_LENGTH);
-	check_null_octet((p += COMMENT_LENGTH));
-	f.bsize = lseek(f.fd, 0L, SEEK_END);
-	f.bsize -= f.offset;
-	if (f.bsize != (*player)->size)
-		terminate(ERR_5_INV_CODESIZE);
-	p = (unsigned char *)malloc(sizeof(char) * (f.bsize + 1));
-	err_allocate(p);
-	ft_bzero(p, f.bsize + 1);
-	f.offset = lseek(f.fd, -(long)(f.bsize), SEEK_END);
-	if ((f.offset = read(f.fd, p, f.bsize)) != f.bsize)
-		terminate(ERR_3_READING_FAILED);
+	(*player)->comment = ft_memcpy((*player)->comment, p, COMMENT_LENGTH);
+	read_code(p, &f, player);
 }
