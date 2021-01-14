@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:19:16 by mellie            #+#    #+#             */
-/*   Updated: 2021/01/14 15:39:39 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/14 16:29:46 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,18 @@ void	read_code(unsigned char *p, t_cor *f, t_player **player)
 	f->offset = lseek(f->fd, -(long)(f->bsize), SEEK_END);
 	if ((f->offset = read(f->fd, (*player)->code, f->bsize)) != f->bsize)
 		terminate(ERR_3_READING_FAILED);
+	close(f->fd);
 }
 
 void	parse_code(char *av, t_player **player)
 {
-    /*
-    + 4 bytes			magic header COREWAR_EXEC_MAGIC
-    + PROG_NAME_LENGTH	champ name 128 bytes
-	+ 4 bytes			4 NULL octets
-	+ 4 bytes			code size CHAMP_MAX_SIZE 2867789673
-	+ COMMENT_LENGTH	Champion comment
-	+ 4 bytes			4 NULL octets 
-	+ N bytes			code
-    */
+    // + 4 bytes			magic header COREWAR_EXEC_MAGIC
+    // + PROG_NAME_LENGTH	champ name 128 bytes
+	// + 4 bytes			4 NULL octets
+	// + 4 bytes			code size CHAMP_MAX_SIZE 2867789673
+	// + COMMENT_LENGTH	Champion comment
+	// + 4 bytes			4 NULL octets 
+	// + N bytes			code
   	t_cor f;
 	unsigned char header[17 + PROG_NAME_LENGTH + COMMENT_LENGTH];
 	unsigned char *p;
