@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/14 21:48:33 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/15 22:21:46 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,5 +201,12 @@ void					alive_message(t_player *player);
 int						get_arg_size(int is_half_sized_dir, int type);
 int						get_reg_index_size();
 int						instruction_size(t_carrage *carrage, t_op op);
+
+/*
+** Dump
+*/
+
+void					dump(unsigned char *arena);
+char					*dec_to_hex(unsigned int n);
 
 #endif

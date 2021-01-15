@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mellie <mellie@student.42.fr>              +#+  +:+       +#+         #
+#    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/10 18:54:54 by mellie           ###   ########.fr        #
+#    Updated: 2021/01/15 22:04:48 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS		 := corewar.c\
 				op_validation.c\
 				memory_operations.c\
 				calc_size.c\
+				dump.c\
 				free.c
 
 OBJ			 := $(SRCS:.c=.o)
