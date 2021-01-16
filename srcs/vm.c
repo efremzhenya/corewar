@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 01:08:32 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/15 20:03:08 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		start_vm(t_corewar **corewar)
 {
 	t_op	operations[OP_COUNT];
 
-	mock_generator(corewar);
+	//mock_generator(corewar);
 	init_arena(corewar);
 	init_carrages(corewar);
 	set_operations(operations);
