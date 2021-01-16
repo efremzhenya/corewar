@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 22:00:38 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 22:05:28 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/16 16:39:36 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		dump(unsigned char *arena)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		if (!(i % 32))
+		if (!(i % 64))
 		{
 			ft_putstr(i ? "\n0x" : "0x");
 			len = ft_strlen((hex = dec_to_hex(i)));
@@ -29,13 +29,16 @@ void		dump(unsigned char *arena)
 				write(1, "0", 1);
 			ft_putstr(hex);
 			free(hex);
-			write(1, " :", 2);
+			write(1, " : ", 3);
 		}
-		write(1, " ", 1);
 		hex = dec_to_hex(read_byte(arena, i++));
-		write(1, !hex[1] ? "0" : &hex[1], 1);
+		if (!hex[1])
+			write(1, "0", 1);
 		write(1, &hex[0], 1);
+		if (hex[1])
+			write(1, &hex[1], 1);
 		free(hex);
+		write(1, " ", 1);
 	}
 	write(1, "\n", 1);
 	exit(0);
