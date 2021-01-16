@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/12 17:28:51 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/16 16:00:18 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			fill_player_id(t_corewar **corewar)
 			}
 			tmp->id = j;
 		}
-			tmp = tmp->next;
+		tmp = tmp->next;
 	}
 }
 
@@ -113,8 +113,7 @@ t_player	*sort_players(t_player *head)
 	l.b = NULL;
 	l.c = NULL;
 	l.e = NULL;
-	l.head = head;	
-	
+	l.head = head;
 	while (l.e != l.head->next)
 	{
 		l.a = l.head;

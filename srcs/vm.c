@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 22:19:10 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/16 15:13:42 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 int			init_corewar(t_corewar **corewar)
 {
-	if (!(*corewar = (t_corewar*)malloc(sizeof(t_corewar))))
-		return kill("Error on memory allocating");
+	*corewar = (t_corewar*)malloc(sizeof(t_corewar));
+	err_allocate(*corewar);
 	(*corewar)->players = NULL;
 	(*corewar)->carrages = NULL;
-	(*corewar)->cw_args = NULL;
 	(*corewar)->cycles = 0;
 	(*corewar)->lives = 0;
 	(*corewar)->cycles_to_die = CYCLE_TO_DIE;
 	(*corewar)->checks = 0;
 	(*corewar)->players_count = 0;
 	(*corewar)->carrages_count = 0;
+	(*corewar)->cw_args = (t_arg *)malloc(sizeof(t_arg));
+	err_allocate((*corewar)->cw_args);
+	(*corewar)->cw_args->dump = -1;
+	(*corewar)->cw_args->n_pl = -1;
 	return (1);
 }
 
