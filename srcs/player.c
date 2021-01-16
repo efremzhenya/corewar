@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:11:12 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/16 23:39:50 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			fill_player_id(t_corewar **corewar)
 			}
 			tmp->id = j;
 		}
-			tmp = tmp->next;
+		tmp = tmp->next;
 	}
 }
 
@@ -113,8 +113,7 @@ t_player	*sort_players(t_player *head)
 	l.b = NULL;
 	l.c = NULL;
 	l.e = NULL;
-	l.head = head;	
-	
+	l.head = head;
 	while (l.e != l.head->next)
 	{
 		l.a = l.head;

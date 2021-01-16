@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:35:07 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/16 23:39:34 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct			s_carrage
 	unsigned int		op_code;				//код текущей операции
 	unsigned int		op_args[3];				//коды аргументов текущей операции
 	int					is_half_size_dir;		//размер t_dir текущей операции
-	unsigned int		pc;						//адрес следующей операции для выполнения
+	int					pc;						//адрес следующей операции для выполнения
 	int					registers[REG_NUMBER];
 	unsigned int		wait_cycles;			//кол-во циклов ожидания до выполнения
 	size_t				last_live_cycle;		//цикл, в котором выполнялся последний live
@@ -180,7 +180,7 @@ void					op_nop(t_corewar **corewar, t_carrage *carrage);
 ** Memory operations
 */
 
-unsigned char			read_byte(unsigned char *arena, unsigned int pos);
+unsigned char			read_byte(unsigned char *arena, int pos);
 short					read_int16(unsigned char *arena, int pos);
 int						read_int32(unsigned char *arena, int pos);
 void					write_byte(t_corewar **corewar, int pos, unsigned char byte);
@@ -201,5 +201,12 @@ void					alive_message(t_player *player);
 int						get_arg_size(int is_half_sized_dir, int type);
 int						get_reg_index_size();
 int						instruction_size(t_carrage *carrage, t_op op);
+
+/*
+** Dump
+*/
+
+void					dump(unsigned char *arena);
+char					*dec_to_hex(unsigned int n);
 
 #endif

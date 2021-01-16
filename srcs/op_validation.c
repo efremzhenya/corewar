@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 21:14:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 20:44:02 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/16 23:39:47 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int		chk_regs(t_op op, t_carrage *carrage, unsigned char *arena)
 	unsigned char	reg;
 	int				i;
 
-	offset = sizeof(t_op_type) + op.is_arg_code ? sizeof(t_arg_type) : 0;
+	offset = sizeof(t_op_type) + (op.is_arg_code ? sizeof(t_arg_type) : 0);
 	i = 0;
 	while (i < op.n_arg)
 	{
 		if (carrage->op_args[i] == REG_CODE &&
-			((reg = read_byte(arena, carrage->pc + ++offset)) < 1 || reg > REG_NUMBER))
+			((reg = read_byte(arena, carrage->pc + offset)) < 1 || reg > REG_NUMBER))
 				return (0);
 		offset += get_arg_size(op.is_half_size_dir, carrage->op_args[i++]);
 	}

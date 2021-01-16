@@ -7,3 +7,4 @@ bin/*
 libft/objects/*
 corewar.dSYM/Contents/Info.plist
 .vscode/launch.json
+live_forever.cor

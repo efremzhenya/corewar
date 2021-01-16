@@ -6,7 +6,7 @@
 /*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:41:47 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:35:41 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/16 23:39:42 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		intro_message(t_player **players)
 		ft_putstr(player->name);
 		ft_putstr("\" (\"");
 		ft_putstr(player->comment);
-		ft_putstr("\") !\n");
+		ft_putendl("\") !");
 		player = player->next;
 	}
 }
@@ -57,7 +57,7 @@ void		winner_message(t_corewar **corewar)
 			ft_putnbr(player->id);
 			ft_putstr(" (");
 			ft_putstr(player->name);
-			ft_putstr(") won\n");
+			ft_putendl(") won");
 			break;
 		}
 		else

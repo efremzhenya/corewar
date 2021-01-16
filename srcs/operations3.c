@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 00:52:04 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/16 20:27:06 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	op_sti(t_corewar **corewar, t_carrage *carrage)
 	while (i < 3)
 	{
 		if (carrage->op_args[i] == REG_CODE)
-			arg[i] = read_byte((*corewar)->arena, offset);
+			arg[i] = carrage->registers[read_byte((*corewar)->arena, offset) - 1];
 		else if (carrage->op_args[i] == IND_CODE)
 			arg[i] = read_int32((*corewar)->arena, carrage->pc
 				+ (read_int16((*corewar)->arena, offset) % IDX_MOD));
@@ -34,8 +34,7 @@ void	op_sti(t_corewar **corewar, t_carrage *carrage)
 		offset += get_arg_size(carrage->is_half_size_dir, carrage->op_args[i++])
 			% MEM_SIZE;
 	}
-	write_int32(corewar, carrage->pc + (arg[1] + arg[2]) % IDX_MOD,
-		carrage->registers[arg[0]]);
+	write_int32(corewar, carrage->pc + (arg[1] + arg[2]) % IDX_MOD, arg[0]);
 }
 
 void	op_fork(t_corewar **corewar, t_carrage *carrage)
@@ -65,7 +64,7 @@ void	op_lld(t_corewar **corewar, t_carrage *carrage)
 
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	reg = read_byte((*corewar)->arena, offset +
-		get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]));
+		get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]) - 1);
 	value = read_int32((*corewar)->arena, (carrage->op_args[0] == IND_CODE) ?
 		carrage->pc + read_int16((*corewar)->arena, offset) : offset);
 	carrage->registers[reg] = value;
@@ -94,9 +93,9 @@ void	op_lldi(t_corewar **corewar, t_carrage *carrage)
 		offset += get_arg_size(carrage->is_half_size_dir,
 			carrage->op_args[i++]);
 	}
-	carrage->registers[arg[2]] =
+	carrage->registers[arg[2] - 1] =
 		read_int32((*corewar)->arena, carrage->pc + (arg[0] + arg[1]));
-	carrage->carry = !carrage->registers[arg[2]];
+	carrage->carry = !carrage->registers[arg[2] - 1];
 }
 
 void	op_lfork(t_corewar **corewar, t_carrage *carrage)
