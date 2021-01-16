@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 22:21:46 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/16 20:33:49 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct			s_carrage
 	unsigned int		op_code;				//код текущей операции
 	unsigned int		op_args[3];				//коды аргументов текущей операции
 	int					is_half_size_dir;		//размер t_dir текущей операции
-	unsigned int		pc;						//адрес следующей операции для выполнения
+	int					pc;						//адрес следующей операции для выполнения
 	int					registers[REG_NUMBER];
 	unsigned int		wait_cycles;			//кол-во циклов ожидания до выполнения
 	size_t				last_live_cycle;		//цикл, в котором выполнялся последний live
@@ -180,7 +180,7 @@ void					op_nop(t_corewar **corewar, t_carrage *carrage);
 ** Memory operations
 */
 
-unsigned char			read_byte(unsigned char *arena, unsigned int pos);
+unsigned char			read_byte(unsigned char *arena, int pos);
 short					read_int16(unsigned char *arena, int pos);
 int						read_int32(unsigned char *arena, int pos);
 void					write_byte(t_corewar **corewar, int pos, unsigned char byte);
