@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 00:37:15 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/16 17:55:45 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void	op_and(t_corewar **corewar, t_carrage *carrage)
 		offset += get_arg_size(carrage->is_half_size_dir,
 			carrage->op_args[i++]);
 	}
-	reg = read_byte((*corewar)->arena, offset);
-	carrage->carry = !(carrage->registers[reg] = arg[0] & arg[1]);
+	reg = read_byte((*corewar)->arena, offset) - 1;
+	carrage->registers[reg] =
+		carrage->registers[--arg[0]] & carrage->registers[--arg[1]];
+	carrage->carry = !(carrage->registers[reg]);
 }
 
 void	op_or(t_corewar **corewar, t_carrage *carrage)
@@ -58,8 +60,10 @@ void	op_or(t_corewar **corewar, t_carrage *carrage)
 		offset += get_arg_size(carrage->is_half_size_dir,
 			carrage->op_args[i++]);
 	}
-	reg = read_byte((*corewar)->arena, offset);
-	carrage->carry = !(carrage->registers[reg] = arg[0] | arg[1]);
+	reg = read_byte((*corewar)->arena, offset) - 1;
+	carrage->registers[reg] =
+		carrage->registers[--arg[0]] | carrage->registers[--arg[1]];
+	carrage->carry = !(carrage->registers[reg]);
 }
 void	op_xor(t_corewar **corewar, t_carrage *carrage)
 {
@@ -82,8 +86,10 @@ void	op_xor(t_corewar **corewar, t_carrage *carrage)
 		offset += get_arg_size(carrage->is_half_size_dir,
 			carrage->op_args[i++]);
 	}
-	reg = read_byte((*corewar)->arena, offset);
-	carrage->carry = !(carrage->registers[reg] = arg[0] ^ arg[1]);
+	reg = read_byte((*corewar)->arena, offset) - 1;
+		carrage->registers[reg] =
+		carrage->registers[--arg[0]] ^ carrage->registers[--arg[1]];
+	carrage->carry = !(carrage->registers[reg]);
 }
 
 void	op_zjmp(t_corewar **corewar, t_carrage *carrage)
@@ -118,6 +124,6 @@ void	op_ldi(t_corewar **corewar, t_carrage *carrage)
 		offset += get_arg_size(carrage->is_half_size_dir,
 			carrage->op_args[i++]);
 	}
-	carrage->registers[arg[2]] = read_int32((*corewar)->arena,
+	carrage->registers[arg[2] - 1] = read_int32((*corewar)->arena,
 		carrage->pc + (arg[0] + arg[1]) % IDX_MOD);
 }

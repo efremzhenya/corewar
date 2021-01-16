@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 22:01:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/10 19:28:40 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/16 19:05:41 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			write_int32(t_corewar **corewar, int pos, int value)
 	i = 0;
 	while (i < sizeof(int))
 	{
-		byte = value >> ((sizeof(int) - (i + 1) * 8)) | 0xff;
+		byte = (value >> (((sizeof(int) - (i + 1)) * 8))) & 0b11111111;
 		write_byte(corewar, pos + i++, byte);
 	}
 }
