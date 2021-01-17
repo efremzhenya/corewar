@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:39:34 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/17 14:43:14 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct			s_corewar
 	size_t				lives;					//количество выполненных операций live за последний период, длинной в cycles_to_die
 	size_t				cycles_to_die;			//длительность периода до проверки
 	size_t				checks;					//количество проведенных проверок
+	size_t				last_check_cycle;		//цикл в котором проводилась последняя проверка
 	int					players_count;
 	int					carrages_count;
 	t_player			*players;
