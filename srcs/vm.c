@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 15:13:42 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/17 14:19:09 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int			init_corewar(t_corewar **corewar)
 	(*corewar)->checks = 0;
 	(*corewar)->players_count = 0;
 	(*corewar)->carrages_count = 0;
+	(*corewar)->last_check_cycle = 0;
 	(*corewar)->cw_args = (t_arg *)malloc(sizeof(t_arg));
 	err_allocate((*corewar)->cw_args);
 	(*corewar)->cw_args->dump = -1;
@@ -47,7 +48,8 @@ void		start_vm(t_corewar **corewar)
 		(*corewar)->cycles++;
 		carrages_exec(corewar, operations);
 		if ((*corewar)->cycles_to_die <= 0 ||
-			((*corewar)->cycles % (*corewar)->cycles_to_die) == 0)
+			((*corewar)->cycles - (*corewar)->last_check_cycle)
+				== (*corewar)->cycles_to_die)
 			check(corewar);
 		if ((*corewar)->cw_args->dump > 0
 			&& (*corewar)->cycles == (size_t)(*corewar)->cw_args->dump)

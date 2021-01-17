@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:40:06 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/05 23:40:41 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/16 23:39:22 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		check(t_corewar **corewar)
 		(*corewar)->checks = 0;
 	}
 	(*corewar)->lives = 0;
+	(*corewar)->last_check_cycle = (*corewar)->cycles;
 }
 
 void		die_carrages(t_corewar **corewar, t_carrage *current,
