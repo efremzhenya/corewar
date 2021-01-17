@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 16:00:18 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/16 23:39:50 by mellie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_player		*new_player(int *ac, char **av, t_corewar **corewar, int ind)
 	err_allocate(player);
 	player->id = 0;
 	player->ind = ind;
-	if ((*corewar)->cw_args->n_pl != -1)
+	if ((*corewar)->cw_args && (*corewar)->cw_args->n_pl != -1)
 	{
 		player->id = (*corewar)->cw_args->n_pl;
 		(*corewar)->cw_args->n_pl = -1;
