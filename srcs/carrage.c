@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/14 22:11:40 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/20 21:48:33 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_carrage		*new_carrage(unsigned int pc, t_player *player)
 	i = 0;
 	while(i < REG_NUMBER)
 	{
-		carrage->registers[i] = (i == 0) ? -(player->id) : 0;
+		carrage->registers[i] = (i == 0 && player) ? -(player->id) : 0;
 		i++;
 	}
 	return (carrage);

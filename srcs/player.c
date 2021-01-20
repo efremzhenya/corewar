@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:39:50 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/20 21:19:29 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,12 @@ void			free_players(t_player **players)
 	player = *players;
 	while (player)
 	{
+		if (player->code)
+			free(player->code);
+		if (player->name)
+			free(player->name);
+		if (player->comment)
+			free(player->comment);
 		temp = player;
 		player = player->next;
 		free(temp);
