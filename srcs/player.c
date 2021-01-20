@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/20 21:19:29 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/20 23:01:28 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ t_player	*sort_players(t_player *head)
 {
  	t_link	l;
 
+	if (!head)
+		return (NULL);
 	l.a = NULL;
 	l.b = NULL;
 	l.c = NULL;

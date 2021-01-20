@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:40:04 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 16:21:17 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/20 23:12:18 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ int		parse_args(int argc, char **argv, t_corewar **corewar)
 		fill_player_id(corewar);
 		(*corewar)->players = sort_players((*corewar)->players);
 	}
-	return (1);
+	return (*corewar)->players_count ? 1 : kill(COREWAR_USAGE);
 }
