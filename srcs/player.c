@@ -6,13 +6,13 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/20 23:01:28 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:48:43 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_player		*new_player(int *ac, char **av, t_corewar **corewar, int ind)
+t_player	*new_player(int *ac, char **av, t_corewar **corewar, int ind)
 {
 	t_player	*player;
 
@@ -30,7 +30,7 @@ t_player		*new_player(int *ac, char **av, t_corewar **corewar, int ind)
 	return (player);
 }
 
-void				add_player(int *ac, char **av, t_corewar **corewar, int ind)
+void		add_player(int *ac, char **av, t_corewar **corewar, int ind)
 {
 	t_player	*tail;
 
@@ -48,36 +48,7 @@ void				add_player(int *ac, char **av, t_corewar **corewar, int ind)
 	(*ac)++;
 }
 
-void			fill_player_id(t_corewar **corewar)
-{
-	t_player	*tmp;
-	t_player	*tmp2;
-	int			j;
-
-	tmp = (*corewar)->players;
-	while (tmp)
-	{
-		if (tmp->id == 0)
-		{
-			j = tmp->ind;
-			tmp2 = (*corewar)->players;
-			while (tmp2 && j <= (*corewar)->players_count)
-			{
-				if (tmp2->id == j)
-				{
-					j++;
-					tmp2 = (*corewar)->players;
-				}
-				else
-					tmp2 = tmp2->next;
-			}
-			tmp->id = j;
-		}
-		tmp = tmp->next;
-	}
-}
-
-void		swap_links(t_link *l, t_player	*tmp)
+void		swap_links(t_link *l, t_player *tmp)
 {
 	if (l->a->id > l->b->id)
 	{
@@ -107,7 +78,7 @@ void		swap_links(t_link *l, t_player	*tmp)
 
 t_player	*sort_players(t_player *head)
 {
- 	t_link	l;
+	t_link	l;
 
 	if (!head)
 		return (NULL);
@@ -132,27 +103,7 @@ t_player	*sort_players(t_player *head)
 	return (l.head);
 }
 
-void			free_players(t_player **players)
-{
-	t_player	*player;
-	t_player	*temp;
-
-	player = *players;
-	while (player)
-	{
-		if (player->code)
-			free(player->code);
-		if (player->name)
-			free(player->name);
-		if (player->comment)
-			free(player->comment);
-		temp = player;
-		player = player->next;
-		free(temp);
-	}
-}
-
-t_player		*get_player_by_id(t_player **players, int id)
+t_player	*get_player_by_id(t_player **players, int id)
 {
 	t_player *player;
 

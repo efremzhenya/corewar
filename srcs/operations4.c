@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:15:06 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:37:25 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:50:46 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ void	op_aff(t_corewar **corewar, t_carrage *carrage)
 void	op_nop(t_corewar **corewar, t_carrage *carrage)
 {
 	if (corewar && carrage)
-	{}
+	{
+		return ;
+	}
 }

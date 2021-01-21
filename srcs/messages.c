@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   messages.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:41:47 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:39:42 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:28:12 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		intro_message(t_player **players)
 	t_player *player;
 
 	if (!players)
-		return;
+		return ;
 	ft_putendl("Introducing contestants...");
 	player = (*players);
 	while (player != NULL)
@@ -58,7 +58,7 @@ void		winner_message(t_corewar **corewar)
 			ft_putstr(" (");
 			ft_putstr(player->name);
 			ft_putendl(") won");
-			break;
+			break ;
 		}
 		else
 			player = player->next;

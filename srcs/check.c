@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:40:06 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:39:22 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:24:58 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void		die_carrages(t_corewar **corewar, t_carrage *current,
 {
 	while (current != NULL)
 	{
-		if ((*corewar)->cycles_to_die <= 0
-			|| ((*corewar)->cycles - current->last_live_cycle) >= (*corewar)->cycles_to_die)
+		if ((*corewar)->cycles_to_die <= 0 ||
+			((*corewar)->cycles - current->last_live_cycle)
+				>= (*corewar)->cycles_to_die)
 		{
 			del = current;
 			current = current->next;

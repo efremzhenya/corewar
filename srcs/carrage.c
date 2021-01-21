@@ -6,13 +6,13 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/20 21:48:33 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:48:28 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_carrage		*new_carrage(unsigned int pc, t_player *player)
+t_carrage	*new_carrage(unsigned int pc, t_player *player)
 {
 	t_carrage	*carrage;
 	int			i;
@@ -28,7 +28,7 @@ t_carrage		*new_carrage(unsigned int pc, t_player *player)
 	carrage->player = player;
 	carrage->next = NULL;
 	i = 0;
-	while(i < REG_NUMBER)
+	while (i < REG_NUMBER)
 	{
 		carrage->registers[i] = (i == 0 && player) ? -(player->id) : 0;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/17 16:46:23 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:33:53 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	op_zjmp(t_corewar **corewar, t_carrage *carrage)
 	offset = carrage->pc + sizeof(t_op_type);
 	if (carrage->carry)
 		carrage->pc = (carrage->pc + read_int16((*corewar)->arena, offset)
-			 % IDX_MOD) % MEM_SIZE;
+			% IDX_MOD) % MEM_SIZE;
 }
 
 void	op_ldi(t_corewar **corewar, t_carrage *carrage)
@@ -115,7 +115,8 @@ void	op_ldi(t_corewar **corewar, t_carrage *carrage)
 	while (i < 2)
 	{
 		if (carrage->op_args[i] == REG_CODE)
-			arg[i] = carrage->registers[read_byte((*corewar)->arena, offset) - 1];
+			arg[i] =
+				carrage->registers[read_byte((*corewar)->arena, offset) - 1];
 		else if (carrage->op_args[i] == IND_CODE)
 			arg[i] = read_int32((*corewar)->arena, carrage->pc
 				+ (read_int16((*corewar)->arena, offset) % IDX_MOD));

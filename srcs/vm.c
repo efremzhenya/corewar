@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/20 22:46:12 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:45:29 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		start_vm(t_corewar **corewar)
 	(*corewar)->winner = (*corewar)->carrages->player->id;
 	intro_message(&(*corewar)->players);
 	if (!(*corewar)->cw_args->dump)
-		 dump((*corewar)->arena);
+		dump((*corewar)->arena);
 	while ((*corewar)->carrages_count)
 	{
 		(*corewar)->cycles++;

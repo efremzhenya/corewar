@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/17 14:43:14 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:17:42 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef	struct			s_link
 	t_player			*b;
 	t_player			*c;
 	t_player			*e;
-	t_player 			*head;
+	t_player			*head;
 }						t_link;
 
 typedef	struct			s_cor
@@ -55,14 +55,14 @@ typedef	struct			s_cor
 
 typedef struct			s_carrage
 {
-	int					carry;					//0 || 1
-	unsigned int		op_code;				//код текущей операции
-	unsigned int		op_args[3];				//коды аргументов текущей операции
-	int					is_half_size_dir;		//размер t_dir текущей операции
-	int					pc;						//адрес следующей операции для выполнения
+	int					carry;
+	unsigned int		op_code;
+	unsigned int		op_args[3];
+	int					is_half_size_dir;
+	int					pc;
 	int					registers[REG_NUMBER];
-	unsigned int		wait_cycles;			//кол-во циклов ожидания до выполнения
-	size_t				last_live_cycle;		//цикл, в котором выполнялся последний live
+	unsigned int		wait_cycles;
+	size_t				last_live_cycle;
 	t_player			*player;
 	struct s_carrage	*next;
 }						t_carrage;
@@ -71,12 +71,12 @@ typedef struct			s_corewar
 {
 	unsigned char		arena[MEM_SIZE];
 	size_t				block_owner[MEM_SIZE];
-	size_t				cycles; 				//количество прошедших с начала игры циклов
-	int					winner;					//игрок, о котором в последний раз сказали, что он жив
-	size_t				lives;					//количество выполненных операций live за последний период, длинной в cycles_to_die
-	size_t				cycles_to_die;			//длительность периода до проверки
-	size_t				checks;					//количество проведенных проверок
-	size_t				last_check_cycle;		//цикл в котором проводилась последняя проверка
+	size_t				cycles;
+	int					winner;
+	size_t				lives;
+	size_t				cycles_to_die;
+	size_t				checks;
+	size_t				last_check_cycle;
 	int					players_count;
 	int					carrages_count;
 	t_player			*players;
@@ -94,8 +94,8 @@ typedef struct			s_op
 	int					op_type;
 	unsigned int		cycles;
 	char				*desc;
-	int					is_arg_code;			//имеет код типов аргумента?
-	int					is_half_size_dir;		//половинный размер t_dir(4 байта)?
+	int					is_arg_code;
+	int					is_half_size_dir;
 	void				(*f)(t_corewar **, t_carrage *);
 }						t_op;
 
@@ -105,8 +105,10 @@ int						kill(char *msg);
 ** Player
 */
 
-t_player				*new_player(int *ac, char **av, t_corewar **corewar, int ind);
-void					add_player(int *ac, char **av, t_corewar **corewar, int ind);
+t_player				*new_player(int *ac, char **av, t_corewar **corewar,
+	int ind);
+void					add_player(int *ac, char **av, t_corewar **corewar,
+	int ind);
 void					fill_player_id(t_corewar **corewar);
 t_player				*sort_players(t_player *head);
 void					swap_links(t_link *l, t_player	*tmp);
@@ -120,11 +122,14 @@ t_player				*get_player_by_id(t_player **players, int id);
 int						init_corewar(t_corewar **corewar);
 void					start_vm(t_corewar **corewar);
 void					carrages_exec(t_corewar **corewar, t_op *operations);
-void					exec_operation(t_corewar **corewar, t_carrage *carrage, t_op *op);
+void					exec_operation(t_corewar **corewar, t_carrage *carrage,
+	t_op *op);
 void					mock_generator(t_corewar **corewar);
 void					check(t_corewar **corewar);
-int						chk_arg_type(t_op op, t_carrage *carrage, unsigned char *arena);
-int						chk_regs(t_op op, t_carrage *carrage, unsigned char *arena);
+int						chk_arg_type(t_op op, t_carrage *carrage,
+	unsigned char *arena);
+int						chk_regs(t_op op, t_carrage *carrage,
+	unsigned char *arena);
 
 /*
 ** Parse
@@ -146,7 +151,8 @@ t_carrage				*new_carrage(unsigned int pc, t_player *player);
 void					add_carrage(t_carrage **carrages, t_carrage *carrage);
 void					init_carrages(t_corewar **corewar);
 void					free_carrages(t_carrage **carrages);
-void					die_carrages(t_corewar **corewar, t_carrage *current, t_carrage *del, t_carrage *temp);
+void					die_carrages(t_corewar **corewar, t_carrage *current,
+	t_carrage *del, t_carrage *temp);
 
 /*
 ** Arena
@@ -184,7 +190,8 @@ void					op_nop(t_corewar **corewar, t_carrage *carrage);
 unsigned char			read_byte(unsigned char *arena, int pos);
 short					read_int16(unsigned char *arena, int pos);
 int						read_int32(unsigned char *arena, int pos);
-void					write_byte(t_corewar **corewar, int pos, unsigned char byte);
+void					write_byte(t_corewar **corewar, int pos,
+	unsigned char byte);
 void					write_int32(t_corewar **corewar, int pos, int value);
 
 /*

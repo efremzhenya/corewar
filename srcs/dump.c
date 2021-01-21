@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 22:00:38 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 16:39:36 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:50:21 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		dump(unsigned char *arena)
 	exit(0);
 }
 
-static int		cap(unsigned int n)
+static int	cap(unsigned int n)
 {
 	unsigned int len;
 
@@ -54,7 +54,7 @@ static int		cap(unsigned int n)
 	return (len);
 }
 
-char			*dec_to_hex(unsigned int n)
+char		*dec_to_hex(unsigned int n)
 {
 	char			*str;
 	int				len;

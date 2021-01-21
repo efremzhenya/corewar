@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_validation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 21:14:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:39:47 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:31:44 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		chk_arg_type(t_op op, t_carrage *carrage, unsigned char *arena)
 			else
 				carrage->op_args[i] = IND_CODE;
 		}
-	return chk_regs(op, carrage, arena);
+	return (chk_regs(op, carrage, arena));
 }
 
 int		chk_regs(t_op op, t_carrage *carrage, unsigned char *arena)
@@ -51,9 +51,12 @@ int		chk_regs(t_op op, t_carrage *carrage, unsigned char *arena)
 	i = 0;
 	while (i < op.n_arg)
 	{
-		if (carrage->op_args[i] == REG_CODE &&
-			((reg = read_byte(arena, carrage->pc + offset)) < 1 || reg > REG_NUMBER))
+		if (carrage->op_args[i] == REG_CODE)
+		{
+			reg = read_byte(arena, carrage->pc + offset);
+			if (reg < 1 || reg > REG_NUMBER)
 				return (0);
+		}
 		offset += get_arg_size(op.is_half_size_dir, carrage->op_args[i++]);
 	}
 	return (offset);

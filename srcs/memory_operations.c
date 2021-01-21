@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 22:01:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 20:32:58 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:27:39 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned char	read_byte(unsigned char *arena, int pos)
 {
 	while (pos < 0)
 		pos += MEM_SIZE;
-	return arena[pos %= MEM_SIZE];
+	return (arena[pos %= MEM_SIZE]);
 }
 
 short			read_int16(unsigned char *arena, int pos)

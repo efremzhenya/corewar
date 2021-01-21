@@ -6,13 +6,13 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 19:05:14 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/15 01:05:42 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/21 21:32:23 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		set_operations(t_op	*op)
+void		set_operations(t_op *op)
 {
 	op[0] = (t_op){"nop", 0, {0}, 0, 0, 0, 0, 0, op_nop};
 	op[1] = (t_op){"live", 1, {T_DIR}, 1, 10, "alive", 0, 0, op_live};
