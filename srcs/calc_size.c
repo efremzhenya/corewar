@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 11:55:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:22:44 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/22 23:17:37 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			instruction_size(t_carrage *carrage, t_op op)
 	int i;
 
 	i = 0;
-	offset = sizeof(t_op_type) + op.is_arg_code ? sizeof(t_arg_type) : 0;
+	offset = sizeof(t_op_type) + (op.is_arg_code ? sizeof(t_arg_type) : 0);
 	while (i < op.n_arg)
 		offset += get_arg_size(op.is_half_size_dir, carrage->op_args[i++]);
 	return (offset);
