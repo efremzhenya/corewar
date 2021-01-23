@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/17 17:02:02 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/23 17:38:56 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	op_lld(t_corewar **corewar, t_carrage *carrage)
 
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	reg = read_byte((*corewar)->arena, offset +
-		get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]) - 1);
+		get_arg_size(carrage->is_half_size_dir, carrage->op_args[0])) - 1;
 	value = read_int32((*corewar)->arena, (carrage->op_args[0] == IND_CODE) ?
 		carrage->pc + read_int16((*corewar)->arena, offset) : offset);
 	carrage->registers[reg] = value;
