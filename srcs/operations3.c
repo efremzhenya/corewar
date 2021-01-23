@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/23 20:20:52 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/23 20:44:21 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	op_fork(t_corewar **corewar, t_carrage *carrage)
 	while (++i < REG_NUMBER)
 		cloned_carrage->registers[i] = carrage->registers[i];
 	add_carrage(&(*corewar)->carrages, cloned_carrage);
+	(*corewar)->carrages_count++;
 }
 
 void	op_lld(t_corewar **corewar, t_carrage *carrage)
@@ -118,4 +119,5 @@ void	op_lfork(t_corewar **corewar, t_carrage *carrage)
 	while (++i < REG_NUMBER)
 		cloned_carrage->registers[i] = carrage->registers[i];
 	add_carrage(&(*corewar)->carrages, cloned_carrage);
+	(*corewar)->carrages_count++;
 }
