@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:33:53 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/24 00:27:40 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	op_and(t_corewar **corewar, t_carrage *carrage)
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	while (i < 2)
 	{
-		if (carrage->op_args[i] == REG_CODE)
+		if (carrage->op_args[i] == T_REG)
 			arg[i] =
 				carrage->registers[read_byte((*corewar)->arena, offset) - 1];
-		else if (carrage->op_args[i] == IND_CODE)
+		else if (carrage->op_args[i] == T_IND)
 			arg[i] = read_int32((*corewar)->arena, carrage->pc
 				+ (read_int16((*corewar)->arena, offset) % IDX_MOD));
 		else
@@ -50,10 +50,10 @@ void	op_or(t_corewar **corewar, t_carrage *carrage)
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	while (i < 2)
 	{
-		if (carrage->op_args[i] == REG_CODE)
+		if (carrage->op_args[i] == T_REG)
 			arg[i] =
 				carrage->registers[read_byte((*corewar)->arena, offset) - 1];
-		else if (carrage->op_args[i] == IND_CODE)
+		else if (carrage->op_args[i] == T_IND)
 			arg[i] = read_int32((*corewar)->arena, carrage->pc
 				+ (read_int16((*corewar)->arena, offset) % IDX_MOD));
 		else
@@ -77,10 +77,10 @@ void	op_xor(t_corewar **corewar, t_carrage *carrage)
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	while (i < 2)
 	{
-		if (carrage->op_args[i] == REG_CODE)
+		if (carrage->op_args[i] == T_REG)
 			arg[i] =
 				carrage->registers[read_byte((*corewar)->arena, offset) - 1];
-		else if (carrage->op_args[i] == IND_CODE)
+		else if (carrage->op_args[i] == T_IND)
 			arg[i] = read_int32((*corewar)->arena, carrage->pc
 				+ (read_int16((*corewar)->arena, offset) % IDX_MOD));
 		else
@@ -114,10 +114,10 @@ void	op_ldi(t_corewar **corewar, t_carrage *carrage)
 	i = 0;
 	while (i < 2)
 	{
-		if (carrage->op_args[i] == REG_CODE)
+		if (carrage->op_args[i] == T_REG)
 			arg[i] =
 				carrage->registers[read_byte((*corewar)->arena, offset) - 1];
-		else if (carrage->op_args[i] == IND_CODE)
+		else if (carrage->op_args[i] == T_IND)
 			arg[i] = read_int32((*corewar)->arena, carrage->pc
 				+ (read_int16((*corewar)->arena, offset) % IDX_MOD));
 		else

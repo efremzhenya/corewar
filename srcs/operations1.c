@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 22:51:17 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 19:45:46 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/24 00:26:28 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	op_ld(t_corewar **corewar, t_carrage *carrage)
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	reg = read_byte((*corewar)->arena, offset +
 		get_arg_size(carrage->is_half_size_dir, carrage->op_args[0])) - 1;
-	value = read_int32((*corewar)->arena, (carrage->op_args[0] == IND_CODE) ?
+	value = read_int32((*corewar)->arena, (carrage->op_args[0] == T_IND) ?
 		carrage->pc + read_int16((*corewar)->arena, offset) % IDX_MOD : offset);
 	carrage->registers[reg] = value;
 	carrage->carry = !carrage->registers[reg];
@@ -51,7 +51,7 @@ void	op_st(t_corewar **corewar, t_carrage *carrage)
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	reg = read_byte((*corewar)->arena, offset) - 1;
 	offset += get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]);
-	if (carrage->op_args[1] == REG_CODE)
+	if (carrage->op_args[1] == T_REG)
 		carrage->registers[read_byte((*corewar)->arena, offset) - 1] =
 			carrage->registers[reg];
 	else

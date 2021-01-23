@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 11:55:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/22 23:17:37 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/24 00:22:00 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int			get_arg_size(int is_half_sized_dir, int type)
 {
-	if (type == REG_CODE)
+	if (type == T_REG)
 		return (get_reg_index_size());
-	else if (type == IND_CODE)
+	else if (type == T_IND)
 		return (IND_SIZE);
-	else if (type == DIR_CODE)
+	else if (type == T_DIR)
 		return (is_half_sized_dir) ? DIR_SIZE / 2 : DIR_SIZE;
 	else
 		return (0);
