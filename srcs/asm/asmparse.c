@@ -12,6 +12,8 @@
 
 #include "asm.h"
 
+//go
+
 int init_cor(t_asm *fc)
 {
     int i;
