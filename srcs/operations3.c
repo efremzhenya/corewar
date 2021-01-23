@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/23 17:38:56 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/23 20:20:52 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	op_fork(t_corewar **corewar, t_carrage *carrage)
 	int			i;
 	t_carrage	*cloned_carrage;
 
-	offset = (carrage->pc + sizeof(t_op_type)) % MEM_SIZE;
-	pos = (carrage->is_half_size_dir ? read_int16((*corewar)->arena, offset) :
-		read_int32((*corewar)->arena, offset)) % IDX_MOD;
+	offset = carrage->pc + sizeof(t_op_type);
+	pos = (carrage->pc + read_int16((*corewar)->arena, offset) % IDX_MOD)
+		% MEM_SIZE;
 	cloned_carrage = new_carrage(pos, NULL);
 	cloned_carrage->carry = carrage->carry;
 	cloned_carrage->last_live_cycle = carrage->last_live_cycle;
