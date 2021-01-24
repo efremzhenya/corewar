@@ -14,7 +14,11 @@
 # define asm_h
 
 # include <stdlib.h>
-# include "corewar.h"
+# include <fcntl.h>
+# include "libft.h"
+//# include "corewar.h"
+# include "op.h"
+# include "error.h"
 
 typedef struct		s_asms
 {
@@ -63,8 +67,41 @@ typedef struct	s_asm
 	t_bytecode	*code;
 }				t_asm;
 
+typedef struct			s_op
+{
+	char				*name;
+	int					n_arg;
+	int					args[3];
+	int					op_type;
+	unsigned int		cycles;
+	char				*desc;
+	int					is_arg_code;
+	int					is_half_size_dir;
+	void				(*f)(t_asm **);
+}						t_op;
+
 int	ft_read_sfile(t_asm *fc);
 int	ft_write_corfile(t_asm *fc);
 int	init_fc(t_asm *fc, const char *av);
 int asmparse(t_asm *fc);
+
+void					set_operations(t_op	*op);
+void					op_live(t_asm *fc);
+void					op_ld(t_asm *fc);
+void					op_st(t_asm *fc);
+void					op_add(t_asm *fc);
+void					op_sub(t_asm *fc);
+void					op_and(t_asm *fc);
+void					op_or(t_asm *fc);
+void					op_xor(t_asm *fc);
+void					op_zjmp(t_asm *fc);
+void					op_ldi(t_asm *fc);
+void					op_sti(t_asm *fc);
+void					op_fork(t_asm *fc);
+void					op_lld(t_asm *fc);
+void					op_lldi(t_asm *fc);
+void					op_lfork(t_asm *fc);
+void					op_aff(t_asm *fc);
+void					op_nop(t_asm *fc);
+
 #endif /* asm_h */
