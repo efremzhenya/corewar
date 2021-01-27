@@ -8,24 +8,24 @@
 
 #include "asm.h"
 
-void					op_and(t_asm *fc)
+void					op_and(t_asm **fc)
 {
 	
 }
-void					op_or(t_asm *fc)
+void					op_or(t_asm **fc)
 {
 	
 }
 
-void					op_xor(t_asm *fc)
+void					op_xor(t_asm **fc)
 {
 	
 }
-void					op_zjmp(t_asm *fc)
+void					op_zjmp(t_asm **fc)
 {
 	
 }
-void					op_ldi(t_asm *fc)
+void					op_ldi(t_asm **fc)
 {
 	
 }

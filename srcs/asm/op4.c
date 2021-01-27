@@ -8,11 +8,11 @@
 
 #include "asm.h"
 
-void					op_aff(t_asm *fc)
+void					op_aff(t_asm **fc)
 {
 	
 }
-void					op_nop(t_asm *fc)
+void					op_nop(t_asm **fc)
 {
 	
 }

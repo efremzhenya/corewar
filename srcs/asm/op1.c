@@ -8,24 +8,24 @@
 
 #include "asm.h"
 
-void					op_live(t_asm *fc)
+void					op_live(t_asm **fc)
 {
 	
 }
-void					op_ld(t_asm *fc)
+void					op_ld(t_asm **fc)
 {
 	
 }
 
-void					op_st(t_asm *fc)
+void					op_st(t_asm **fc)
 {
 	
 }
-void					op_add(t_asm *fc)
+void					op_add(t_asm **fc)
 {
 	
 }
-void					op_sub(t_asm *fc)
+void					op_sub(t_asm **fc)
 {
 	
 }

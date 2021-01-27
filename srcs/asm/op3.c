@@ -8,24 +8,24 @@
 
 #include "asm.h"
 
-void					op_sti(t_asm *fc)
+void					op_sti(t_asm **fc)
 {
 	
 }
-void					op_fork(t_asm *fc)
+void					op_fork(t_asm **fc)
 {
 	
 }
 
-void					op_lld(t_asm *fc)
+void					op_lld(t_asm **fc)
 {
 	
 }
-void					op_lldi(t_asm *fc)
+void					op_lldi(t_asm **fc)
 {
 	
 }
-void					op_lfork(t_asm *fc)
+void					op_lfork(t_asm **fc)
 {
 	
 }
