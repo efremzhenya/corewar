@@ -11,18 +11,18 @@
 int	ft_hex_to_dec(char *s)
 {
 	int	dec;
-	
+
 	dec = 0;
-	
+
 	return (dec);
 }
 
 char	*ft_dec_to_hex(int dec)
 {
 	char	*s;
-	
+
 	s = "";
-	
+
 	return (s);
 }
 
@@ -49,7 +49,7 @@ char    *ft_itoa_base(int value, int base)
     int           digit;
     unsigned int  num;
     int           minus;
-    
+
     sbase = "0123456789ABCDEF";
     digit = 1;
     minus = 1;
