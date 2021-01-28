@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/17 17:02:02 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/24 01:05:15 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	op_sti(t_corewar **corewar, t_carrage *carrage)
 	i = 0;
 	while (i < 3)
 	{
-		if (carrage->op_args[i] == REG_CODE)
+		if (carrage->op_args[i] == T_REG)
 			arg[i] =
 				carrage->registers[read_byte((*corewar)->arena, offset) - 1];
-		else if (carrage->op_args[i] == IND_CODE)
+		else if (carrage->op_args[i] == T_IND)
 			arg[i] = read_int32((*corewar)->arena, carrage->pc
 				+ (read_int16((*corewar)->arena, offset) % IDX_MOD));
 		else
@@ -45,9 +45,9 @@ void	op_fork(t_corewar **corewar, t_carrage *carrage)
 	int			i;
 	t_carrage	*cloned_carrage;
 
-	offset = (carrage->pc + sizeof(t_op_type)) % MEM_SIZE;
-	pos = (carrage->is_half_size_dir ? read_int16((*corewar)->arena, offset) :
-		read_int32((*corewar)->arena, offset)) % IDX_MOD;
+	offset = carrage->pc + sizeof(t_op_type);
+	pos = (carrage->pc + read_int16((*corewar)->arena, offset) % IDX_MOD)
+		% MEM_SIZE;
 	cloned_carrage = new_carrage(pos, NULL);
 	cloned_carrage->carry = carrage->carry;
 	cloned_carrage->last_live_cycle = carrage->last_live_cycle;
@@ -55,6 +55,7 @@ void	op_fork(t_corewar **corewar, t_carrage *carrage)
 	while (++i < REG_NUMBER)
 		cloned_carrage->registers[i] = carrage->registers[i];
 	add_carrage(&(*corewar)->carrages, cloned_carrage);
+	(*corewar)->carrages_count++;
 }
 
 void	op_lld(t_corewar **corewar, t_carrage *carrage)
@@ -62,12 +63,15 @@ void	op_lld(t_corewar **corewar, t_carrage *carrage)
 	int reg;
 	int offset;
 	int value;
+	int adr;
 
 	offset = carrage->pc + sizeof(t_op_type) + sizeof(t_arg_type);
 	reg = read_byte((*corewar)->arena, offset +
-		get_arg_size(carrage->is_half_size_dir, carrage->op_args[0]) - 1);
-	value = read_int32((*corewar)->arena, (carrage->op_args[0] == IND_CODE) ?
-		carrage->pc + read_int16((*corewar)->arena, offset) : offset);
+		get_arg_size(carrage->is_half_size_dir, carrage->op_args[0])) - 1;
+	adr = (carrage->op_args[0] == T_IND) ?
+		carrage->pc + read_int16((*corewar)->arena, offset) : offset;
+	value = (!carrage->is_half_size_dir) ?
+		read_int32((*corewar)->arena, adr) : read_int16((*corewar)->arena, adr);
 	carrage->registers[reg] = value;
 	carrage->carry = !carrage->registers[reg];
 }
@@ -83,9 +87,9 @@ void	op_lldi(t_corewar **corewar, t_carrage *carrage)
 	i = 0;
 	while (i < 2)
 	{
-		if (carrage->op_args[i] == REG_CODE)
+		if (carrage->op_args[i] == T_REG)
 			arg[i] = read_byte((*corewar)->arena, offset) - 1;
-		else if (carrage->op_args[i] == IND_CODE)
+		else if (carrage->op_args[i] == T_IND)
 			arg[i] = read_int32((*corewar)->arena, carrage->pc
 				+ (read_int16((*corewar)->arena, offset) % IDX_MOD));
 		else
@@ -118,4 +122,5 @@ void	op_lfork(t_corewar **corewar, t_carrage *carrage)
 	while (++i < REG_NUMBER)
 		cloned_carrage->registers[i] = carrage->registers[i];
 	add_carrage(&(*corewar)->carrages, cloned_carrage);
+	(*corewar)->carrages_count++;
 }

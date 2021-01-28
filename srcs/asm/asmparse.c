@@ -28,6 +28,9 @@ int init_header(t_asm *fc)
     i = 0;
     while (i <= COMMENT_LENGTH)
         fc->code->header.comment[i++] = 0;
+	fc->code->cpos = 0;
+	fc->code->code = (char *)malloc(sizeof(char) * 4);
+	int_to_bytecode(fc, COREWAR_EXEC_MAGIC, 4);
     return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 21:14:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:31:44 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/24 01:08:53 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,26 @@
 
 int		chk_arg_type(t_op op, t_carrage *carrage, unsigned char *arena)
 {
-	int		i;
-	int		arg_type;
+	int	i;
+	int	type;
 
 	i = -1;
 	if (op.is_arg_code)
 	{
-		arg_type = read_byte(arena, carrage->pc + sizeof(t_op_type));
-		carrage->op_args[0] = op.n_arg >= 1 ? (arg_type & 0b11000000) >> 6 : 0;
-		carrage->op_args[1] = op.n_arg >= 2 ? (arg_type & 0b00110000) >> 4 : 0;
-		carrage->op_args[2] = op.n_arg >= 3 ? (arg_type & 0b00001100) >> 2 : 0;
+		type = read_byte(arena, carrage->pc + sizeof(t_op_type));
+		carrage->op_args[0] =
+			((type & 0b11000000) >> 6 << 2) / 3 * (op.n_arg >= 1);
+		carrage->op_args[1] =
+			((type & 0b00110000) >> 4 << 2) / 3 * (op.n_arg >= 2);
+		carrage->op_args[2] =
+			((type & 0b00001100) >> 2 << 2) / 3 * (op.n_arg >= 3);
 		while (++i < op.n_arg)
 			if (!(op.args[i] & carrage->op_args[i]))
 				return (0);
 	}
 	else
 		while (++i < op.n_arg)
-		{
-			if (op.args[i] == T_REG)
-				carrage->op_args[i] = REG_CODE;
-			else if (op.args[i] == T_DIR)
-				carrage->op_args[i] = DIR_CODE;
-			else
-				carrage->op_args[i] = IND_CODE;
-		}
+			carrage->op_args[i] = op.args[i];
 	return (chk_regs(op, carrage, arena));
 }
 
@@ -51,7 +47,7 @@ int		chk_regs(t_op op, t_carrage *carrage, unsigned char *arena)
 	i = 0;
 	while (i < op.n_arg)
 	{
-		if (carrage->op_args[i] == REG_CODE)
+		if (carrage->op_args[i] == T_REG)
 		{
 			reg = read_byte(arena, carrage->pc + offset);
 			if (reg < 1 || reg > REG_NUMBER)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 20:50:42 by mellie            #+#    #+#             */
-/*   Updated: 2021/01/22 21:37:22 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/28 23:30:15 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_bytecode
 {
 	t_header		header;
 	char			*code;
+	int				cpos;
 }					t_bytecode;
 
 typedef struct	s_asm
@@ -90,6 +91,7 @@ int		asmparse(t_asm *fc);
 char	*ft_itoa_base(int value, int base);
 int		ft_hex_to_dec(char *s);
 char	*ft_dec_to_hex(int dec);
+void	int_to_bytecode(t_asm *fc, int value, int len);
 
 void					set_operations(t_op	*op);
 void					op_live(t_asm **fc);
