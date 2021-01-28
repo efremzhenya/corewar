@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <fcntl.h>
+# include <unistd.h>
 # include "libft.h"
 //# include "corewar.h"
 # include "op.h"
@@ -80,10 +81,15 @@ typedef struct			s_op
 	void				(*f)(t_asm **);
 }						t_op;
 
-int	ft_read_sfile(t_asm *fc);
-int	ft_write_corfile(t_asm *fc);
-int	init_fc(t_asm *fc, const char *av);
-int asmparse(t_asm *fc);
+int 	init_header(t_asm *fc);
+int		ft_read_sfile(t_asm *fc);
+int		ft_write_corfile(t_asm *fc);
+int		init_fc(t_asm *fc, const char *av);
+int		asmparse(t_asm *fc);
+
+char	*ft_itoa_base(int value, int base);
+int		ft_hex_to_dec(char *s);
+char	*ft_dec_to_hex(int dec);
 
 void					set_operations(t_op	*op);
 void					op_live(t_asm **fc);
