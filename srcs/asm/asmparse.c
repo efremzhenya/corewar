@@ -12,7 +12,9 @@
 
 #include "asm.h"
 
-int init_cor(t_asm *fc)
+//go
+
+int init_header(t_asm *fc)
 {
     int i;
     
@@ -35,7 +37,7 @@ int asmparse(t_asm *fc)
     
     err_count = 0;
     
-    if (!init_cor(fc))
+    if (!init_header(fc))
         terminate(ERR_3_READING_FAILED);
     
     return (err_count);
