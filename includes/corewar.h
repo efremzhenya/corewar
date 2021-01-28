@@ -99,7 +99,7 @@ typedef struct			s_op
 	void				(*f)(t_corewar **, t_carrage *);
 }						t_op;
 
-int						kill(char *msg);
+//int						kill(char *msg);
 
 /*
 ** Player
