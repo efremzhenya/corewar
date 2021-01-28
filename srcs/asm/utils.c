@@ -26,6 +26,22 @@ char	*ft_dec_to_hex(int dec)
 	return (s);
 }
 
+void	int_to_bytecode(t_asm *fc, int value, int len)
+{
+	int		i;
+	int		l;
+
+	i = 0;
+	l = len;
+	while (len)
+	{
+		fc->code->code[fc->code->cpos + len - 1] = (uint8_t)((value >> i) & 0xFF);
+		i += 8;
+		len--;
+	}
+	fc->code->cpos += l;
+}
+
 char    *ft_itoa_base(int value, int base)
 {
     char          *s;

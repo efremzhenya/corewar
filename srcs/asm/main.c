@@ -46,6 +46,15 @@ int	ft_write_corfile(t_asm *fc)
 		str_err = ft_strjoin("ERROR: Can't create file: ", fc->ex_file);
 		terminate(str_err);
 	}
+	if (ft_strstr(fc->first_s->str_str, NAME_CMD_STRING))
+	{
+		str_err = ft_strsub(fc->first_s->str_str, 7, 8);
+	}
+	ft_putstr_fd(str_err, fc->fw);
+	
+	ft_putstr_fd(fc->code->code, fc->fw);
+	write(fc->fw, fc->code->code, fc->code->cpos);
+	close(fc->fw);
 	return (1);
 }
 
@@ -69,7 +78,7 @@ int	init_fc(t_asm *fc, const char *av)
 		terminate(ERROR_WRONG_EXTENSION);
 	
 	fc->ex_file = ft_strjoin(s0, ".cor");
-
+	
 	return (1);
 }
 

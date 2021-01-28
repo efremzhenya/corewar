@@ -51,6 +51,7 @@ typedef struct		s_bytecode
 {
 	t_header		header;
 	char			*code;
+	int				cpos;
 }					t_bytecode;
 
 typedef struct	s_asm
@@ -90,6 +91,7 @@ int		asmparse(t_asm *fc);
 char	*ft_itoa_base(int value, int base);
 int		ft_hex_to_dec(char *s);
 char	*ft_dec_to_hex(int dec);
+void	int_to_bytecode(t_asm *fc, int value, int len);
 
 void					set_operations(t_op	*op);
 void					op_live(t_asm **fc);
