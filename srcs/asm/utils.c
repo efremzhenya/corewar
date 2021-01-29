@@ -29,17 +29,17 @@ char	*ft_dec_to_hex(int dec)
 void	int_to_bytecode(t_asm *fc, int value, int len)
 {
 	int		i;
-	int		l;
+	int		j;
 
 	i = 0;
-	l = len;
-	while (len)
+	j = len;
+	while (j)
 	{
-		fc->code->code[fc->code->cpos + len - 1] = (uint8_t)((value >> i) & 0xFF);
+		fc->code->code[fc->code->cpos + j - 1] = (uint8_t)((value >> i) & 0xFF);
 		i += 8;
-		len--;
+		j--;
 	}
-	fc->code->cpos += l;
+	fc->code->cpos += len;
 }
 
 char    *ft_itoa_base(int value, int base)
