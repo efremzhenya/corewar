@@ -26,6 +26,22 @@ char	*ft_dec_to_hex(int dec)
 	return (s);
 }
 
+char	*int_to_bytecode_ch(int value, int len)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = (char *)malloc(sizeof(char) * len + 1);
+	while (len)
+	{
+		str[len - 1] = (uint8_t)((value >> i) & 0xFF);
+		i += 8;
+		len--;
+	}
+	return (str);
+}
+
 void	int_to_bytecode(t_asm *fc, int value, int len)
 {
 	int		i;

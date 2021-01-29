@@ -10,7 +10,7 @@
 
 void					op_aff(t_asm **fc)
 {
-	
+	t_op        op=(t_op){"aff", 0x10, 1, 1, {T_REG, 0, 0}, 4};
 }
 void					op_nop(t_asm **fc)
 {

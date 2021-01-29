@@ -42,6 +42,8 @@ typedef struct			s_asmcor
 	char				*label;
 	int					start_byte;
 	int					len;
+	int					op_code;
+	int					args_type;
 	int					corstr_num;
 	char				*corstr_str;
 	struct s_asmcor		*next;
@@ -69,7 +71,7 @@ typedef struct	s_asm
 	t_bytecode	*code;
 }				t_asm;
 
-typedef struct			s_op
+typedef struct			s_op_o
 {
 	char				*name;
 	int					n_arg;
@@ -80,7 +82,17 @@ typedef struct			s_op
 	int					is_arg_code;
 	int					is_half_size_dir;
 	void				(*f)(t_asm **);
-}						t_op;
+}						t_op_o;
+
+typedef struct    s_op
+{
+    char        *name;
+    uint8_t        code;
+    uint8_t        args_num;
+    int        args_types_code;
+    uint8_t        args_types[3];
+    uint8_t        t_dir_size;
+}                t_op;
 
 int 	init_header(t_asm *fc);
 int		ft_read_sfile(t_asm *fc);
@@ -92,8 +104,9 @@ char	*ft_itoa_base(int value, int base);
 int		ft_hex_to_dec(char *s);
 char	*ft_dec_to_hex(int dec);
 void	int_to_bytecode(t_asm *fc, int value, int len);
+char	*int_to_bytecode_ch(int value, int len);
 
-void					set_operations(t_op	*op);
+void					set_operations(t_op_o	*op);
 void					op_live(t_asm **fc);
 void					op_ld(t_asm **fc);
 void					op_st(t_asm **fc);

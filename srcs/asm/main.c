@@ -40,7 +40,8 @@ int	ft_write_corfile(t_asm *fc)
 {
 	char	*str_err;
 	
-	fc->fw = open(fc->ex_file, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+	//fc->fw = open(fc->ex_file, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+	fc->fw = open(fc->ex_file, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (fc->fw == -1)
 	{
 		str_err = ft_strjoin("ERROR: Can't create file: ", fc->ex_file);
@@ -50,10 +51,14 @@ int	ft_write_corfile(t_asm *fc)
 	{
 		str_err = ft_strsub(fc->first_s->str_str, 7, 8);
 	}
-	ft_putstr_fd(str_err, fc->fw);
+	//ft_putstr_fd(str_err, fc->fw);
 	
-	ft_putstr_fd(fc->code->code, fc->fw);
+	//ft_putstr_fd(fc->code->code, fc->fw);
 	write(fc->fw, fc->code->code, fc->code->cpos);
+	ft_putstr_fd(str_err, fc->fw);
+	str_err = int_to_bytecode_ch(-14, 2);
+	write(fc->fw, "\0\0\0\0", 4);
+	write(fc->fw, str_err, ft_strlen(str_err));
 	close(fc->fw);
 	return (1);
 }
