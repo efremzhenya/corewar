@@ -6,11 +6,12 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 22:01:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:27:39 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/30 22:45:14 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "visual.h"
 
 unsigned char	read_byte(unsigned char *arena, int pos)
 {
@@ -54,15 +55,24 @@ void			write_byte(t_corewar **corewar, int pos, unsigned char byte)
 	(*corewar)->arena[pos %= MEM_SIZE] = byte;
 }
 
-void			write_int32(t_corewar **corewar, int pos, int value)
+void			write_int32(t_corewar **corewar, int pos, int value, int owner_id)
 {
 	unsigned long	i;
 	unsigned char	byte;
 
 	i = 0;
+	while (pos < 0)
+		pos += MEM_SIZE;
+	pos %= MEM_SIZE;
 	while (i < sizeof(int))
 	{
 		byte = (value >> (((sizeof(int) - (i + 1)) * 8))) & 0b11111111;
-		write_byte(corewar, pos + i++, byte);
+		write_byte(corewar, (pos + i) % MEM_SIZE, byte);
+		if ((*corewar)->cw_args->visual)
+		{
+			(*corewar)->visual->arena[(pos + i) % MEM_SIZE].code_owner = owner_id;
+			(*corewar)->visual->arena[(pos + i) % MEM_SIZE].update = 1;
+		}
+		i++;
 	}
 }

@@ -6,11 +6,12 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:40:06 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:24:58 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/31 01:23:04 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "visual.h"
 
 void		check(t_corewar **corewar)
 {
@@ -31,7 +32,7 @@ void		die_carrages(t_corewar **corewar, t_carrage *current,
 	while (current != NULL)
 	{
 		if ((*corewar)->cycles_to_die <= 0 ||
-			((*corewar)->cycles - current->last_live_cycle)
+			((ssize_t)((*corewar)->cycles - current->last_live_cycle))
 				>= (*corewar)->cycles_to_die)
 		{
 			del = current;
@@ -45,8 +46,15 @@ void		die_carrages(t_corewar **corewar, t_carrage *current,
 					temp = temp->next;
 				temp->next = temp->next->next;
 			}
+			if ((*corewar)->cw_args->visual)
+			{
+				remove_in_set(&(*corewar)->visual->arena[del->pc].set, del);
+				(*corewar)->visual->arena[del->pc].update = 1;
+			}
 			free(del);
 			(*corewar)->carrages_count--;
+			// if ((*corewar)->cw_args->visual)
+			// 	beep();
 		}
 		else
 			current = current->next;

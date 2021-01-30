@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:15:05 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:43:34 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/30 23:07:19 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_vm(t_corewar **corewar)
 		}
 		if ((*corewar)->cw_args)
 			free((*corewar)->cw_args);
+		if ((*corewar)->visual)
+			free((*corewar)->visual);
 		free(*corewar);
 	}
 }

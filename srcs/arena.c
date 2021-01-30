@@ -6,11 +6,12 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 19:06:11 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/17 17:28:54 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/30 22:43:31 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "visual.h"
 
 void				init_arena(t_corewar **corewar)
 {
@@ -30,6 +31,9 @@ void				init_arena(t_corewar **corewar)
 		while (offset < player->size)
 		{
 			(*corewar)->arena[start_pos + offset] = player->code[offset];
+			if ((*corewar)->cw_args->visual)
+				(*corewar)->visual->arena[start_pos + offset].code_owner =
+					player->id;
 			offset++;
 		}
 		player = player->next;

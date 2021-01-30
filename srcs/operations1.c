@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 22:51:17 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/24 00:26:28 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/31 01:29:36 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	op_live(t_corewar **corewar, t_carrage *carrage)
 		read_int32((*corewar)->arena, carrage->pc + sizeof(t_op_type)) * -1)))
 	{
 		(*corewar)->winner = player->id;
-		if ((*corewar)->cw_args->dump == -1)
+		if ((*corewar)->cw_args->dump == -1 && !(*corewar)->cw_args->visual)
 			alive_message(player);
 	}
 }
@@ -57,7 +57,7 @@ void	op_st(t_corewar **corewar, t_carrage *carrage)
 	else
 	{
 		pos = carrage->pc + read_int16((*corewar)->arena, offset) % IDX_MOD;
-		write_int32(corewar, pos, carrage->registers[reg]);
+		write_int32(corewar, pos, carrage->registers[reg], carrage->player->id);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/22 21:37:21 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/31 01:03:49 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef	struct			s_arg
 {
 	int					dump;
 	int					n_pl;
+	int					visual;
 }						t_arg;
 
 typedef struct			s_player
@@ -70,11 +71,10 @@ typedef struct			s_carrage
 typedef struct			s_corewar
 {
 	unsigned char		arena[MEM_SIZE];
-	size_t				block_owner[MEM_SIZE];
 	size_t				cycles;
 	int					winner;
 	size_t				lives;
-	size_t				cycles_to_die;
+	ssize_t				cycles_to_die;
 	size_t				checks;
 	size_t				last_check_cycle;
 	int					players_count;
@@ -82,6 +82,7 @@ typedef struct			s_corewar
 	t_player			*players;
 	t_carrage			*carrages;
 	t_arg				*cw_args;
+	struct s_visual		*visual;
 }						t_corewar;
 
 typedef unsigned char	t_op_type;
@@ -118,7 +119,7 @@ t_player				*get_player_by_id(t_player **players, int id);
 /*
 ** VM
 */
-
+void					init_vm(t_corewar **corewar);
 int						init_corewar(t_corewar **corewar);
 void					start_vm(t_corewar **corewar);
 void					carrages_exec(t_corewar **corewar, t_op *operations);
@@ -147,7 +148,8 @@ void					free_vm(t_corewar **corewar);
 ** Carrage
 */
 
-t_carrage				*new_carrage(unsigned int pc, t_player *player);
+t_carrage				*new_carrage(t_corewar **corewar, unsigned int pc,
+	t_player *player, int is_dup);
 void					add_carrage(t_carrage **carrages, t_carrage *carrage);
 void					init_carrages(t_corewar **corewar);
 void					free_carrages(t_carrage **carrages);
@@ -192,7 +194,8 @@ short					read_int16(unsigned char *arena, int pos);
 int						read_int32(unsigned char *arena, int pos);
 void					write_byte(t_corewar **corewar, int pos,
 	unsigned char byte);
-void					write_int32(t_corewar **corewar, int pos, int value);
+void					write_int32(t_corewar **corewar, int pos, int value,
+	int owner_id);
 
 /*
 ** Messages

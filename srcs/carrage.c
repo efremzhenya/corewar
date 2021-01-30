@@ -6,19 +6,20 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/22 21:50:28 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/30 22:43:07 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "visual.h"
 
-t_carrage	*new_carrage(unsigned int pc, t_player *player)
+t_carrage	*new_carrage(t_corewar **corewar, unsigned int pc, t_player *player,
+	int is_dup)
 {
 	t_carrage	*carrage;
-	int			i;
 
 	if (!(carrage = (t_carrage *)malloc(sizeof(t_carrage))))
-		return (NULL);
+		err_allocate(carrage);
 	carrage->wait_cycles = 0;
 	carrage->last_live_cycle = 0;
 	carrage->op_code = 0;
@@ -27,11 +28,14 @@ t_carrage	*new_carrage(unsigned int pc, t_player *player)
 	carrage->carry = 0;
 	carrage->player = player;
 	carrage->next = NULL;
-	i = 0;
-	while (i < REG_NUMBER)
+	ft_bzero(carrage->registers, sizeof(carrage->registers));
+	if (!is_dup)
+		carrage->registers[0] = -(player->id);
+	if ((*corewar)->cw_args->visual)
 	{
-		carrage->registers[i] = (i == 0 && player) ? -(player->id) : 0;
-		i++;
+		add_to_set(&(*corewar)->visual->arena[carrage->pc].set,
+			new_set_elem(carrage));
+		(*corewar)->visual->arena[pc].update = 1;
 	}
 	return (carrage);
 }
@@ -40,7 +44,8 @@ void		add_carrage(t_carrage **carrages, t_carrage *carrage)
 {
 	if (carrages && carrage)
 	{
-		carrage->next = *carrages;
+		if (*carrages)
+			carrage->next = *carrages;
 		*carrages = carrage;
 	}
 }
@@ -69,9 +74,9 @@ void		init_carrages(t_corewar **corewar)
 	while (player != NULL)
 	{
 		if (!(*corewar)->carrages)
-			(*corewar)->carrages = new_carrage(pc, player);
+			(*corewar)->carrages = new_carrage(corewar, pc, player, 0);
 		else
-			add_carrage(&(*corewar)->carrages, new_carrage(pc, player));
+			add_carrage(&(*corewar)->carrages, new_carrage(corewar, pc, player, 0));
 		pc += MEM_SIZE / (*corewar)->players_count;
 		player = player->next;
 	}

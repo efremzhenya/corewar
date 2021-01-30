@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/15 22:04:48 by lseema           ###   ########.fr        #
+#    Updated: 2021/01/30 22:20:49 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ DIR_INCLUDES := includes/
 DIR_BIN		 := bin/
 DIR_LFT		 := libft/
 LIBFT		 := libft.a
-HEADERS		 := corewar.h libft.h op.h error.h
+HEADERS		 := corewar.h libft.h op.h error.h visual.h
 CC			 := gcc
 FLAGS		 := -Wall -Wextra -Werror -g
 RM			 := /bin/rm -rf
@@ -39,11 +39,14 @@ SRCS		 := corewar.c\
 				memory_operations.c\
 				calc_size.c\
 				dump.c\
-				free.c
+				free.c\
+				visual.c\
+				set_manager.c
 
 OBJ			 := $(SRCS:.c=.o)
 LFT			 := $(addprefix $(DIR_LFT), $(LIBFT))
 MAKE_LFT	 := make -C $(DIR_LFT)
+NCURSES		 := -lncurses
 
 vpath %.c $(DIR_SRCS)
 vpath %.o $(DIR_BIN)
@@ -52,7 +55,7 @@ vpath %.h $(DIR_INCLUDES)
 all: make_lft $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(addprefix $(DIR_BIN), $(OBJ)) $(LFT) -o $@
+	$(CC) $(FLAGS) $(NCURSES) $(addprefix $(DIR_BIN), $(OBJ)) $(LFT) -o $@
 	@echo "corewar compiled"
 
 $(OBJ): %.o:%.c $(HEADERS) | $(DIR_BIN)
