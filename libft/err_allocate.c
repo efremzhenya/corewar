@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_allocate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:08:29 by mellie            #+#    #+#             */
-/*   Updated: 2020/12/08 17:08:38 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/31 18:15:51 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,5 @@
 void	err_allocate(void *p)
 {
 	if (!p)
-	{
-		write(2, "Error of allocation memory.", 28);
-		exit(1);
-	}
+		terminate("Error of allocation memory");
 }
