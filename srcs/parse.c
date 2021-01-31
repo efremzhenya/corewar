@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:40:04 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:47:30 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/31 17:38:05 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	parse_flags(int *ac, char **av, char flag, t_corewar **corewar)
 {
 	if (flag == 'd' && *ac == 1 && av[++(*ac)])
 		(*corewar)->cw_args->dump = ft_atoi(av[(*ac)]);
+	else if (flag == 'v' && *ac == 1)
+		(*corewar)->cw_args->visual = 1;
 	else if (flag == 'n' && (*corewar)->cw_args->n_pl == -1 && av[++(*ac)])
 	{
 		(*corewar)->cw_args->n_pl = ft_atoi(av[(*ac)]);
@@ -52,8 +54,8 @@ int		parse_args(int argc, char **argv, t_corewar **corewar)
 		{
 			if (!ft_strcmp(argv[i], "-dump"))
 				parse_flags(&i, argv, 'd', corewar);
-			else if (!ft_strcmp(argv[i], "-n"))
-				parse_flags(&i, argv, 'n', corewar);
+			else if (!ft_strcmp(argv[i], "-n") || !ft_strcmp(argv[i], "-v"))
+				parse_flags(&i, argv, argv[i][1], corewar);
 			else if (!is_file(argv[i], ".cor"))
 			{
 				add_player(&i, argv, corewar, ++ind);
