@@ -33,6 +33,7 @@ typedef struct		s_asmerr
 	int				str_num;
 	char			*str_str;
 	char			*str_err;
+	char			err_type; //Warning|Critical|Ignored
 	struct s_asmerr	*next;
 }					t_asmerr;
 
@@ -42,8 +43,8 @@ typedef struct			s_asmcor
 	char				*label;
 	int					start_byte;
 	int					len;
-	int					op_code;
-	int					args_type;
+	uint8_t				op_code;
+	char				*args_str;
 	int					corstr_num;
 	char				*corstr_str;
 	struct s_asmcor		*next;
@@ -52,6 +53,8 @@ typedef struct			s_asmcor
 typedef struct		s_bytecode
 {
 	t_header		header;
+	int				valid_name;
+	int				valid_comment;
 	char			*code;
 	int				cpos;
 }					t_bytecode;
@@ -66,6 +69,9 @@ typedef struct	s_asm
 	t_asms		*first_s;
 	t_asmerr	*s_err;
 	t_asmerr	*first_err;
+	int			warnings;
+	int			critical;
+	int			ignored;
 	t_asmcor	*cor;
 	t_asmcor	*first_cor;
 	t_bytecode	*code;
@@ -84,21 +90,36 @@ typedef struct			s_op_o
 	void				(*f)(t_asm **);
 }						t_op_o;
 
-typedef struct    s_op
+typedef struct			s_op_list
 {
-    char        *name;
-    uint8_t        code;
-    uint8_t        args_num;
-    int        args_types_code;
-    uint8_t        args_types[3];
-    uint8_t        t_dir_size;
-}                t_op;
+	char				*name;
+	void				(*f)(t_asm **);
+}						t_op_list;
+
+typedef struct	s_op
+{
+    char		*name;
+    uint8_t		code;
+    uint8_t		args_num;
+    int			args_types_code;
+    uint8_t		args_types[3];
+    uint8_t		t_dir_size;
+}				t_op;
 
 int 	init_header(t_asm *fc);
 int		ft_read_sfile(t_asm *fc);
 int		ft_write_corfile(t_asm *fc);
 int		init_fc(t_asm *fc, const char *av);
 int		asmparse(t_asm *fc);
+int		parse(t_asm *fc);
+int		init_ce(t_asm *fc);
+int		init_cor_next(t_asm *fc);
+int		init_err_next(t_asm *fc);
+int		init_err(t_asm *fc);
+t_asms	*new_s(void);
+t_asmcor	*new_cor(void);
+t_asmerr	*new_err(void);
+void	ignored_line(t_asm *fc);
 
 char	*ft_itoa_base(int value, int base);
 int		ft_hex_to_dec(char *s);
@@ -107,6 +128,7 @@ void	int_to_bytecode(t_asm *fc, int value, int len);
 char	*int_to_bytecode_ch(int value, int len);
 
 void					set_operations(t_op_o	*op);
+void					set_op_list(t_op_list *ol);
 void					op_live(t_asm **fc);
 void					op_ld(t_asm **fc);
 void					op_st(t_asm **fc);
@@ -124,5 +146,8 @@ void					op_lldi(t_asm **fc);
 void					op_lfork(t_asm **fc);
 void					op_aff(t_asm **fc);
 void					op_nop(t_asm **fc);
+void					op_name(t_asm **fc);
+void					op_comment(t_asm **fc);
+void					op_label(t_asm **fc);
 
 #endif /* asm_h */

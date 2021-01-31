@@ -22,4 +22,5 @@
 # define ASM_USAGE				"Usage: ./asm <sourcefile.s>."
 # define ERROR_WRONG_EXTENSION	"Expected *.s file."
 # define SYNTAX_ERROR			"Can't compile."
+# define SYNTAX_ERROR_N			"Syntax error - unexpected end of input (Perhaps you forgot to end with a newline ?)"
 #endif

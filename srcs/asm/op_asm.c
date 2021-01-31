@@ -40,8 +40,36 @@ void		set_operations(t_op_o *op)
 		14, 50, "long load index", 1, 1, op_lldi};
 	op[15] = (t_op_o){"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1, op_lfork};
 	op[16] = (t_op_o){"aff", 1, {T_REG}, 16, 2, "aff", 1, 0, op_aff};
+}
+
+void	set_op_list(t_op_list *ol)
+{
+	char *label;
 	
-//	static t_op		g_op[16] = {
+	label = (char *)malloc(sizeof(char) * 2);
+	label[0] = LABEL_CHAR;
+	label[1] = '\0';
+	ol[0] = (t_op_list){NAME_CMD_STRING, op_name};
+	ol[1] = (t_op_list){COMMENT_CMD_STRING, op_comment};
+	ol[2] = (t_op_list){"lfork", op_lfork};
+	ol[3] = (t_op_list){"fork", op_fork};
+	ol[4] = (t_op_list){"lldi", op_lldi};
+	ol[5] = (t_op_list){"ldi", op_ldi};
+	ol[6] = (t_op_list){"lld", op_lld};
+	ol[7] = (t_op_list){"ld", op_ld};
+	ol[8] = (t_op_list){"sti", op_sti};
+	ol[9] = (t_op_list){"st", op_st};
+	ol[10] = (t_op_list){"xor", op_xor};
+	ol[11] = (t_op_list){"or", op_or};
+	ol[12] = (t_op_list){"add", op_add};
+	ol[13] = (t_op_list){"sub", op_sub};
+	ol[14] = (t_op_list){"and", op_and};
+	ol[15] = (t_op_list){"zjmp", op_zjmp};
+	ol[16] = (t_op_list){"live", op_live};
+	ol[17] = (t_op_list){"nop", op_nop};
+	ol[18] = (t_op_list){"aff", op_aff};
+	ol[19] = (t_op_list){label, op_label};
+}
 //		{
 //			.name = "live",
 //			.code = 0x01,
@@ -171,5 +199,5 @@ void		set_operations(t_op_o *op)
 //			.t_dir_size = 4,
 //		}
 //	};
-// + сделать массив op[0] = {"кодовое слово", имяфункции};
-}
+// + сделать массив op[0] = {"кодовое слово", имя функции};
+
