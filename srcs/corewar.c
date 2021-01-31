@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mellie <mellie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:05:57 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/16 23:37:43 by mellie           ###   ########.fr       */
+/*   Updated: 2021/01/31 17:21:57 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		kill(char *msg)
 {
-	ft_putstr_fd(msg, 2);
+	ft_putendl_fd(msg, 2);
 	return (0);
 }
 
