@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/31 01:20:57 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/31 16:51:04 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			init_corewar(t_corewar **corewar)
 	(*corewar)->cw_args->visual = 0;
 	(*corewar)->visual = NULL;
 	ft_bzero((*corewar)->arena, sizeof((*corewar)->arena));
-	(*corewar)->cw_args->visual = 1;
+	(*corewar)->cw_args->visual = 0;
 	return (1);
 }
 

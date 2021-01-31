@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:25:19 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/31 01:14:21 by lseema           ###   ########.fr       */
+/*   Updated: 2021/01/31 17:16:08 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	init_visual(t_corewar **corewar)
 {
 	if (initscr() == NULL)
-		terminate("Not allocated memory for visual mode");
+		terminate(ERR_VISUAL_ON_ALLOC);
 	keypad(stdscr, true);
 	curs_set(false);
 	if (has_colors())
