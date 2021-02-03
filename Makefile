@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/01/30 22:20:49 by lseema           ###   ########.fr        #
+#    Updated: 2021/02/03 21:08:04 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,9 @@ SRCS		 := corewar.c\
 				dump.c\
 				free.c\
 				visual.c\
+				visual_events.c\
+				window_arena.c\
+				window_stats.c\
 				set_manager.c
 
 OBJ			 := $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/31 16:51:04 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/01 23:44:48 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,23 @@ void		start_vm(t_corewar **corewar)
 	set_operations(operations);
 	while ((*corewar)->carrages_count)
 	{
-		(*corewar)->cycles++;
-		carrages_exec(corewar, operations);
-		if ((*corewar)->cycles_to_die <= 0 ||
-			((ssize_t)((*corewar)->cycles - (*corewar)->last_check_cycle))
-				== (*corewar)->cycles_to_die)
-			check(corewar);
-		if ((*corewar)->cw_args->dump > 0
-			&& (*corewar)->cycles == (size_t)(*corewar)->cw_args->dump)
-			dump((*corewar)->arena);
+		if (!(*corewar)->cw_args->visual || (*corewar)->visual->status)
+		{
+			(*corewar)->cycles++;
+			carrages_exec(corewar, operations);
+			if ((*corewar)->cycles_to_die <= 0 ||
+				((ssize_t)((*corewar)->cycles - (*corewar)->last_check_cycle))
+					== (*corewar)->cycles_to_die)
+				check(corewar);
+			if ((*corewar)->cw_args->dump > 0
+				&& (*corewar)->cycles == (size_t)(*corewar)->cw_args->dump)
+				dump((*corewar)->arena);
+		}
 		if ((*corewar)->cw_args->visual)
 		{
 			draw_arena(corewar);
 			draw_info(corewar);
-			delay_output(100);
+			delay_cycle((*corewar)->visual);
 		}
 	}
 	if ((*corewar)->cw_args->visual)
@@ -122,6 +125,9 @@ void		init_vm(t_corewar **corewar)
 	{
 		(*corewar)->visual = (t_visual*)malloc(sizeof(t_visual));
 		err_allocate((*corewar)->visual);
+		(*corewar)->visual->speed = 100;
+		(*corewar)->visual->status = 1;
+		(*corewar)->visual->debug_mode = 0;
 		i = 0;
 		while (i < MEM_SIZE)
 		{
@@ -142,35 +148,4 @@ void		init_vm(t_corewar **corewar)
 		if (!(*corewar)->cw_args->dump)
 			dump((*corewar)->arena);
 	}
-}
-
-void		draw_info(t_corewar **corewar)
-{
-	int x;
-	int y;
-
-	y = 0;
-	x = 3;
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Status: %s", (*corewar)->carrages_count ? "play" : "stoped");
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Cycles: %i", (*corewar)->cycles);
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Carrages: %i", (*corewar)->carrages_count);
-	box((*corewar)->visual->windows.stats, 0, 0);
-	mvwprintw((*corewar)->visual->windows.stats, 0, 3, " INFO ");
-	wrefresh((*corewar)->visual->windows.stats);
-}
-
-void		end_visual(t_corewar **corewar)
-{
-	flushinp();
-	timeout(-1);
-	getch();
-	delwin((*corewar)->visual->windows.arena);
-	delwin((*corewar)->visual->windows.stats);
-	endwin();
 }

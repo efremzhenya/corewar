@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/31 01:03:49 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/03 21:10:11 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define COREWAR_H
 
 # include "libft.h"
-# include <fcntl.h>
 # include "error.h"
 # include "op.h"
 

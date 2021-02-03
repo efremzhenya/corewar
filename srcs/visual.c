@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:25:19 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/31 17:16:08 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/03 00:26:47 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ void	init_visual(t_corewar **corewar)
 	if (initscr() == NULL)
 		terminate(ERR_VISUAL_ON_ALLOC);
 	keypad(stdscr, true);
+	nodelay(stdscr, true);
 	curs_set(false);
+	cbreak();
+	noecho();
+	mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
+	write(1, "\033[?1003h", 9);
+	fflush(stdout);
 	if (has_colors())
 	{
 		use_default_colors();
@@ -51,61 +57,6 @@ void	init_windows(t_corewar **corewar)
 	}
 }
 
-void	draw_arena(t_corewar **corewar)
-{
-	int x;
-	int y;
-	int i;
-
-	y = 0;
-	x = 0;
-	i = 0;
-	if (!(*corewar)->visual->windows.arena)
-		return ;
-	while (i < MEM_SIZE)
-	{
-		if (!(i % 64))
-		{
-			y++;
-			x = 1;
-		}
-		if ((*corewar)->visual->arena[i].update > 0 || (*corewar)->cycles == 0)
-		{
-			draw_code(corewar, y, x, i);
-			(*corewar)->visual->arena[i].update = 0;
-		}
-		x += 3;
-		i++;
-	}
-	wrefresh((*corewar)->visual->windows.arena);
-}
-
-void	draw_code(t_corewar **corewar, int y, int x, int i)
-{
-	char	*hex;
-
-	color_on((*corewar)->visual->windows.arena, (*corewar)->visual->arena[i]);
-	if (!(hex = dec_to_hex(read_byte((*corewar)->arena, i)))[1])
-		mvwaddch((*corewar)->visual->windows.arena, y, x++, '0');
-	mvwaddch((*corewar)->visual->windows.arena, y, x++, hex[0]);
-	if (hex[1])
-		mvwaddch((*corewar)->visual->windows.arena, y, x++, hex[1]);
-	free(hex);
-}
-
-void	color_on(WINDOW *arena_window, t_arena_info arena)
-{
-	int	pair;
-
-	if (arena.code_owner == 0)
-		pair = arena.set == NULL ? STANDART : NOT_PLAYER_CARRAGE;
-	else if (arena.set == NULL)
-		pair = arena.code_owner;
-	else
-		pair = arena.code_owner + 6;
-	wattron(arena_window, COLOR_PAIR(pair));
-}
-
 void	init_players_colors(t_corewar **corewar)
 {
 	t_player	*player;
@@ -121,4 +72,16 @@ void	init_players_colors(t_corewar **corewar)
 	init_pair(PLAYER3_CARRAGE, LIGHT_YELLOW, GREY);
 	init_pair(PLAYER4_CARRAGE, LIGHT_BLUE, GREY);
 	init_pair(NOT_PLAYER_CARRAGE, COLOR_WHITE, GREY - 2);
+}
+
+void	end_visual(t_corewar **corewar)
+{
+	flushinp();
+	timeout(-1);
+	getch();
+	write(1, "\033[?1000h", 9);
+	fflush(stdout);
+	delwin((*corewar)->visual->windows.arena);
+	delwin((*corewar)->visual->windows.stats);
+	endwin();
 }

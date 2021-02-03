@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op1.h                                              :+:      :+:    :+:   */
+/*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 21:18:08 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:19:00 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/03 21:12:51 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 # define COMMENT_CHAR			'#'
 # define LABEL_CHAR				':'
-# define DIRECT_CHAR				'%'
+# define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','
 # define LABEL_CHARS			"abcdefghijklmnopqrstuvwxyz_0123456789"
 # define NAME_CMD_STRING		".name"

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:29:47 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/31 01:27:57 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/03 21:12:33 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@
 
 # define BYTE_PER_LINE 		64
 # define CODE_LENGTH		3
-# define ARENA_WIN_HEIGTH	MEM_SIZE / BYTE_PER_LINE + 2
-# define ARENA_WIN_WIDTH	BYTE_PER_LINE * CODE_LENGTH + 1
 # define ARENA_WIN_Y		0
 # define ARENA_WIN_X		0
+# define ARENA_WIN_HEIGTH	MEM_SIZE / BYTE_PER_LINE + 2
+# define ARENA_WIN_WIDTH	BYTE_PER_LINE * CODE_LENGTH + 1
 # define INFO_WIN_Y			0
 # define INFO_WIN_X			ARENA_WIN_WIDTH + 3
 # define INFO_WIN_HEIGTH	50
@@ -77,6 +77,9 @@ typedef struct				s_visual
 {
 	t_arena_info			arena[MEM_SIZE];
 	t_windows				windows;
+	unsigned short			speed;
+	unsigned int			status:1;
+	unsigned int			debug_mode:1;
 }							t_visual;
 
 /*
@@ -91,9 +94,22 @@ void						draw_arena(t_corewar **corewar);
 void						draw_info(t_corewar **corewar);
 void						draw_code(t_corewar **corewar, int y, int x, int i);
 void						end_visual(t_corewar **corewar);
+void						delay_cycle(t_visual *visual);
+int							draw_players(t_corewar **corewar, int y, int x);
+int							draw_comment(t_corewar **corewar, char *comment,
+	int y, int x);
 
 /*
-** Carrage sets
+** Visual events
+*/
+
+void						delay_cycle(t_visual *visual);
+void						key_handler(t_visual *visual);
+void						debug_keyboard(t_visual *visual, int ch,
+	MEVENT event);
+
+/*
+** Visual carrage sets
 */
 
 t_carrage_set				*new_set_elem(t_carrage *carrage);
