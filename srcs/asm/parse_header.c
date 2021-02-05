@@ -24,7 +24,7 @@ int	read_str(char *dest, int len, t_asms *s)
 		if (str[i] == '\0')
 		{
 			s = s->next;
-			ft_strdup(s->str_str);
+			str = ft_strdup(s->str_str);
 			i = 0;
 		}
 		dest[k] = str[i];
