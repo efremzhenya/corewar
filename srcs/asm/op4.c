@@ -21,7 +21,20 @@ void					op_nop(t_asm **fc)
 void					op_name(t_asm **fc)
 {
 	if((*fc)->code->valid_name == 0)
-	{}
+	{
+		//if (parse_name(fc))
+		if (read_str((*fc)->code->header.prog_name, PROG_NAME_LENGTH, (*fc)->s))
+			(*fc)->code->valid_name++;
+		else
+		{
+			init_err((*fc));
+			(*fc)->s_err->str_err = "Syntax error";
+			(*fc)->critical++;
+			(*fc)->s_err->err_type = 'C';
+			(*fc)->s_err->str_num = (*fc)->s->str_num;
+			(*fc)->s_err->str_str = (*fc)->s->str_str;
+		}
+	}
 	else
 	{
 		(*fc)->s_err->str_num = (*fc)->s->str_num;
@@ -37,7 +50,9 @@ void					op_name(t_asm **fc)
 void					op_comment(t_asm **fc)
 {
 	if((*fc)->code->valid_comment == 0)
-	{}
+	{
+		if (read_str((*fc)->code->header.comment, COMMENT_LENGTH, (*fc)->s))
+			(*fc)->code->valid_comment++;}
 	else
 	{
 		(*fc)->s_err->str_num = (*fc)->s->str_num;

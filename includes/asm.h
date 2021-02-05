@@ -120,6 +120,8 @@ t_asms	*new_s(void);
 t_asmcor	*new_cor(void);
 t_asmerr	*new_err(void);
 void	ignored_line(t_asm *fc);
+int	parse_name(t_asm **fc);
+int	read_str(char *dest, int len, t_asms *s);
 
 char	*ft_itoa_base(int value, int base);
 int		ft_hex_to_dec(char *s);
