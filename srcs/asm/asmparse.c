@@ -85,6 +85,7 @@ int init_header(t_asm *fc)
 	fc->code->valid_name = 0;
 	fc->code->valid_comment = 0;
 	fc->code->cpos = 0;
+	fc->code->exec_size = 0;
 	fc->code->code = (char *)malloc(sizeof(char) * 4);
 	int_to_bytecode(fc, COREWAR_EXEC_MAGIC, 4);
 	

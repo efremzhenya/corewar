@@ -56,6 +56,7 @@ typedef struct		s_bytecode
 	int				valid_name;
 	int				valid_comment;
 	char			*code;
+	int				exec_size;
 	int				cpos;
 }					t_bytecode;
 
@@ -116,12 +117,21 @@ int		init_ce(t_asm *fc);
 int		init_cor_next(t_asm *fc);
 int		init_err_next(t_asm *fc);
 int		init_err(t_asm *fc);
-t_asms	*new_s(void);
+
+t_asms		*new_s(void);
 t_asmcor	*new_cor(void);
 t_asmerr	*new_err(void);
-void	ignored_line(t_asm *fc);
-int	parse_name(t_asm **fc);
-int	read_str(char *dest, int len, t_asms *s);
+
+void	write_err(t_asm *fc, char *err_msg, char err_type);
+
+void	write_cerr(t_asm *fc, char *err_msg);
+void	write_werr(t_asm *fc, char *err_msg);
+void	write_ierr(t_asm *fc, char *err_msg);
+
+void		ignored_line(t_asm *fc);
+int			parse_name(t_asm **fc);
+//int			read_str(char *dest, int len, t_asms *s);
+t_asms	*read_str(char *dest, int len, t_asms *s);
 
 char	*ft_itoa_base(int value, int base);
 int		ft_hex_to_dec(char *s);
