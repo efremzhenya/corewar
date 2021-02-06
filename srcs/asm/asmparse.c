@@ -27,6 +27,24 @@ void	ignored_line(t_asm *fc)
 		write_err(fc, "Syntax error", 'C');
 }
 
+int	find_op(char *str)
+{
+	t_op_list	ol[20];
+	int			i;
+	
+	i = 0;
+	set_op_list(ol);
+	while (i < 20)
+	{
+		if (ft_strstr(str, ol[i].name) != NULL)
+		{
+			return (i);
+		}
+		i++;
+	}
+	return(i);
+}
+
 int	parse(t_asm *fc)
 {
 	t_op_list	ol[20];
@@ -37,17 +55,10 @@ int	parse(t_asm *fc)
 	fc->s = fc->first_s;
 	while (fc->s->next)
 	{
-		i = 0;
-		while (i < 20)
-		{
-			if (ft_strstr(fc->s->str_str, ol[i].name) != NULL)
-			{
-				ol[i].f(&fc);
-				break;
-			}
-			i++;
-		}
-		if (i == 20)
+		i = find_op(fc->s->str_str);
+		if ( i < 20)
+			ol[i].f(&fc);
+		else
 			ignored_line(fc);
 		fc->s = fc->s->next;
 	}

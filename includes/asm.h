@@ -122,11 +122,12 @@ t_asms		*new_s(void);
 t_asmcor	*new_cor(void);
 t_asmerr	*new_err(void);
 
-void	write_err(t_asm *fc, char *err_msg, char err_type);
+void		write_err(t_asm *fc, char *err_msg, char err_type);
 
 void		ignored_line(t_asm *fc);
 int			parse_name(t_asm **fc);
-t_asms	*read_str(char *dest, int len, t_asms *s);
+int			find_op(char *str);
+t_asms		*read_str(char *dest, int len, t_asms *s);
 
 char	*ft_itoa_base(int value, int base);
 int		ft_hex_to_dec(char *s);
