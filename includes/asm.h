@@ -17,7 +17,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft.h"
-//# include "corewar.h"
 # include "op.h"
 # include "error.h"
 
@@ -113,10 +112,11 @@ int		ft_write_corfile(t_asm *fc);
 int		init_fc(t_asm *fc, const char *av);
 int		asmparse(t_asm *fc);
 int		parse(t_asm *fc);
-int		init_ce(t_asm *fc);
-int		init_cor_next(t_asm *fc);
-int		init_err_next(t_asm *fc);
+int		init_cor(t_asm *fc);
 int		init_err(t_asm *fc);
+//int		init_ce(t_asm *fc);
+//int		init_cor_next(t_asm *fc);
+//int		init_err_next(t_asm *fc);
 
 t_asms		*new_s(void);
 t_asmcor	*new_cor(void);

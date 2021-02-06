@@ -37,9 +37,7 @@ int	find_op(char *str)
 	while (i < 20)
 	{
 		if (ft_strstr(str, ol[i].name) != NULL)
-		{
 			return (i);
-		}
 		i++;
 	}
 	return(i);
