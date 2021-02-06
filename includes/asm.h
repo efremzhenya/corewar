@@ -124,10 +124,6 @@ t_asmerr	*new_err(void);
 
 void	write_err(t_asm *fc, char *err_msg, char err_type);
 
-void	write_cerr(t_asm *fc, char *err_msg);
-void	write_werr(t_asm *fc, char *err_msg);
-void	write_ierr(t_asm *fc, char *err_msg);
-
 void		ignored_line(t_asm *fc);
 int			parse_name(t_asm **fc);
 //int			read_str(char *dest, int len, t_asms *s);
