@@ -16,27 +16,15 @@ void	ignored_line(t_asm *fc)
 {
 	int	i;
 	i = 0;
-	
-	init_err(fc);
 
 	while ((fc->s->str_str[i] == ' ') ||
 		(fc->s->str_str[i] == '\t'))
 		i++;
 	if (i == ft_strlen(fc->s->str_str) ||
 	(fc->s->str_str[i] == COMMENT_CHAR))
-	{
-		fc->s_err->str_err = "Ignored line";
-		fc->ignored++;
-		fc->s_err->err_type = 'I';
-	}
+		write_err(fc, "Ignored line", 'I');
 	else
-	{
-		fc->s_err->str_err = "Syntax error";
-		fc->critical++;
-		fc->s_err->err_type = 'C';
-	}
-	fc->s_err->str_num = fc->s->str_num;
-	fc->s_err->str_str = fc->s->str_str;
+		write_err(fc, "Syntax error", 'C');
 }
 
 int	parse(t_asm *fc)
@@ -63,8 +51,6 @@ int	parse(t_asm *fc)
 			ignored_line(fc);
 		fc->s = fc->s->next;
 	}
-	
-	
 	return (1);
 }
 
