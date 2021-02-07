@@ -12,6 +12,24 @@
 
 #include "asm.h"
 
+void	del_prev_labels(t_asm *fc)
+{
+	t_label	*tmp;
+	t_label *s;
+	
+	if (!fc->label)
+		return;
+	s = fc->label->next;
+	while ((fc->label != NULL) || (fc->label->start_byte > -1))
+	{
+		tmp = fc->label->prev;
+		free (fc->label);
+		fc->label = tmp;
+	}
+	if(fc->label)
+		fc->label->next = s;
+}
+
 void	ignored_line(t_asm *fc)
 {
 	int	i;
@@ -24,17 +42,20 @@ void	ignored_line(t_asm *fc)
 	(fc->s->str_str[i] == COMMENT_CHAR))
 		write_err(fc, "Ignored line", 'I');
 	else
+	{
+		del_prev_labels(fc);
 		write_err(fc, "Syntax error", 'C');
+	}
 }
 
 int	find_op(char *str)
 {
-	t_op_list	ol[20];
+	t_op_list	ol[NBR_OP];
 	int			i;
 	
 	i = 0;
 	set_op_list(ol);
-	while (i < 20)
+	while (i < NBR_OP)
 	{
 		if (ft_strstr(str, ol[i].name) != NULL)
 			return (i);
@@ -45,7 +66,7 @@ int	find_op(char *str)
 
 int	parse(t_asm *fc)
 {
-	t_op_list	ol[20];
+	t_op_list	ol[NBR_OP];
 	int			i;
 	
 	set_op_list(ol);
@@ -54,7 +75,12 @@ int	parse(t_asm *fc)
 	while (fc->s->next)
 	{
 		i = find_op(fc->s->str_str);
-		if ( i < 20)
+		if (i == NBR_OP - 1)
+		{
+			fc->s = op_label(&fc);
+			continue;
+		}
+		if ( i < NBR_OP - 1)
 			ol[i].f(&fc);
 		else
 			ignored_line(fc);

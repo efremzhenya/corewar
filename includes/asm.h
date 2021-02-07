@@ -12,6 +12,7 @@
 
 #ifndef asm_h
 # define asm_h
+# define NBR_OP		20
 
 # include <stdlib.h>
 # include <fcntl.h>
@@ -26,6 +27,14 @@ typedef struct		s_asms
 	char			*str_str;
 	struct s_asms	*next;
 }					t_asms;
+
+typedef struct		s_label
+{
+	char			*label;
+	int				start_byte;
+	struct s_label	*prev;
+	struct s_label	*next;
+}					t_label;
 
 typedef struct		s_asmerr
 {
@@ -74,6 +83,7 @@ typedef struct	s_asm
 	int			ignored;
 	t_asmcor	*cor;
 	t_asmcor	*first_cor;
+	t_label		*label;
 	t_bytecode	*code;
 }				t_asm;
 
@@ -114,13 +124,13 @@ int		asmparse(t_asm *fc);
 int		parse(t_asm *fc);
 int		init_cor(t_asm *fc);
 int		init_err(t_asm *fc);
-//int		init_ce(t_asm *fc);
-//int		init_cor_next(t_asm *fc);
-//int		init_err_next(t_asm *fc);
+int		init_label(t_asm *fc);
+void	del_prev_labels(t_asm *fc);
 
 t_asms		*new_s(void);
 t_asmcor	*new_cor(void);
 t_asmerr	*new_err(void);
+t_label		*new_label(void);
 
 void		write_err(t_asm *fc, char *err_msg, char err_type);
 
@@ -156,6 +166,7 @@ void					op_aff(t_asm **fc);
 void					op_nop(t_asm **fc);
 void					op_name(t_asm **fc);
 void					op_comment(t_asm **fc);
-void					op_label(t_asm **fc);
+//void					op_label(t_asm **fc);
+t_asms					*op_label(t_asm **fc);
 
 #endif /* asm_h */

@@ -119,6 +119,7 @@ int	init_fc(t_asm *fc, const char *av)
 	fc->ignored = 0;
 	fc->cor = NULL;
 	fc->first_cor = NULL;
+	fc->label = NULL;
 	
 	return (1);
 }

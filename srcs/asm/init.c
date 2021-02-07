@@ -56,41 +56,29 @@ int	init_err(t_asm *fc)
 	return (1);
 }
 
-//int	init_cor_next(t_asm *fc)
-//{
-//	fc->cor->next = (t_asmcor *)malloc(sizeof(t_asmcor));
-//	err_allocate(fc->cor->next);
-//	fc->cor = fc->cor->next;
-//	fc->cor->next = NULL;
-//
-//	return (1);
-//}
-//
-//int	init_err_next(t_asm *fc)
-//{
-//	fc->s_err->next = (t_asmerr *)malloc(sizeof(t_asmerr));
-//	err_allocate(fc->s_err->next);
-//	fc->s_err = fc->s_err->next;
-//	fc->s_err->str_err = "\0";
-//	fc->s_err->str_str = "\0";
-//	fc->s_err->next = NULL;
-//
-//	return (1);
-//}
-//
-//int	init_ce(t_asm *fc)
-//{
-//	fc->cor = (t_asmcor *)malloc(sizeof(t_asmcor));
-//	err_allocate(fc->cor);
-//	fc->cor->next = NULL;
-//	fc->first_cor = fc->cor;
-//
-//	fc->s_err = (t_asmerr *)malloc(sizeof(t_asmerr));
-//	err_allocate(fc->s_err);
-//	fc->s_err->str_err = "\0";
-//	fc->s_err->str_str = "\0";
-//	fc->s_err->next = NULL;
-//	fc->first_err = fc->s_err;
-//
-//	return (1);
-//}
+t_label	*new_label(void)
+{
+	t_label	*s;
+	s = (t_label *)malloc(sizeof(t_label));
+	err_allocate(s);
+	s->next = NULL;
+	s->start_byte = -1;
+	return (s);
+}
+
+int	init_label(t_asm *fc)
+{
+	if (fc->label == NULL)
+	{
+		fc->label = new_label();
+		fc->label->prev = NULL;
+	}
+	else
+	{
+		fc->label->next = new_label();
+		fc->label->next->prev = fc->label;
+		fc->label = fc->label->next;
+	}
+	return (1);
+}
+
