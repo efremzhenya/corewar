@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 18:42:42 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/03 21:07:49 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/04 00:07:27 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	key_handler(t_visual *visual)
 		if (ch == KEY_UP)
 			visual->speed += (visual->speed >= 500 ? 0 : 5);
 		else if (ch == KEY_DOWN)
-			visual->speed -= (visual->speed <= 10 ? 0 : 5);
+			visual->speed -= (visual->speed <= 0 ? 0 : 5);
 		if (ch == ' ')
 			visual->status = !visual->status;
+		if (ch == 's')
+			visual->sound.on = !visual->sound.on;
 		debug_keyboard(visual, ch, event);
 		wrefresh(visual->windows.stats);
 	}
@@ -92,4 +94,5 @@ void	delay_cycle(t_visual *visual)
 		}
 	}
 	key_handler(visual);
+	sound(visual);
 }

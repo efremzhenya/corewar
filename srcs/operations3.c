@@ -6,11 +6,12 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/29 20:41:57 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/03 23:09:29 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "visual.h"
 
 void	op_sti(t_corewar **corewar, t_carrage *carrage)
 {
@@ -59,6 +60,8 @@ void	op_fork(t_corewar **corewar, t_carrage *carrage)
 		cloned_carrage->registers[i] = carrage->registers[i];
 	add_carrage(&(*corewar)->carrages, cloned_carrage);
 	(*corewar)->carrages_count++;
+	if ((*corewar)->cw_args->visual)
+		(*corewar)->visual->sound.clone = 1;
 }
 
 void	op_lld(t_corewar **corewar, t_carrage *carrage)
@@ -128,4 +131,6 @@ void	op_lfork(t_corewar **corewar, t_carrage *carrage)
 		cloned_carrage->registers[i] = carrage->registers[i];
 	add_carrage(&(*corewar)->carrages, cloned_carrage);
 	(*corewar)->carrages_count++;
+	if ((*corewar)->cw_args->visual)
+		(*corewar)->visual->sound.clone = 1;
 }

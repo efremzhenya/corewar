@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 23:43:10 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/03 00:35:10 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/03 22:51:19 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int		draw_players(t_corewar **corewar, int y, int x)
 	stats_win = (*corewar)->visual->windows.stats;
 	player = (*corewar)->players;
 	res = !(*corewar)->carrages_count ? "WIN" : "LIVE";
+	if (!(*corewar)->carrages_count)
+		(*corewar)->visual->sound.win = 1;
 	while (player)
 	{
 		wattron(stats_win, COLOR_PAIR(player->id));

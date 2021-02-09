@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/01 23:44:48 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/04 00:28:53 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,24 +119,8 @@ void		exec_operation(t_corewar **corewar, t_carrage *carrage, t_op *op)
 
 void		init_vm(t_corewar **corewar)
 {
-	int i;
-
 	if ((*corewar)->cw_args->visual)
-	{
-		(*corewar)->visual = (t_visual*)malloc(sizeof(t_visual));
-		err_allocate((*corewar)->visual);
-		(*corewar)->visual->speed = 100;
-		(*corewar)->visual->status = 1;
-		(*corewar)->visual->debug_mode = 0;
-		i = 0;
-		while (i < MEM_SIZE)
-		{
-			(*corewar)->visual->arena[i].code_owner = 0;
-			(*corewar)->visual->arena[i].update = 0;
-			(*corewar)->visual->arena[i].set = NULL;
-			i++;
-		}
-	}
+		alloc_visual(corewar);
 	init_arena(corewar);
 	init_carrages(corewar);
 	(*corewar)->winner = (*corewar)->carrages->player->id;

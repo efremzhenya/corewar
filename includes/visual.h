@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:29:47 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/03 21:12:33 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/04 00:28:25 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,21 @@ typedef struct				s_windows
 	WINDOW					*stats;
 }							t_windows;
 
+typedef struct				s_sound
+{
+	unsigned int			on:1;
+	unsigned int			die:1;
+	unsigned int			jump:1;
+	unsigned int			clone:1;
+	unsigned int			win:1;
+}							t_sound;
+
+
 typedef struct				s_visual
 {
 	t_arena_info			arena[MEM_SIZE];
 	t_windows				windows;
+	t_sound					sound;
 	unsigned short			speed;
 	unsigned int			status:1;
 	unsigned int			debug_mode:1;
@@ -86,6 +97,7 @@ typedef struct				s_visual
 ** Visual
 */
 
+void						alloc_visual(t_corewar **corewar);
 void						init_visual(t_corewar **corewar);
 void						init_windows(t_corewar **corewar);
 void						init_players_colors(t_corewar **corewar);
@@ -107,6 +119,16 @@ void						delay_cycle(t_visual *visual);
 void						key_handler(t_visual *visual);
 void						debug_keyboard(t_visual *visual, int ch,
 	MEVENT event);
+
+/*
+** Sounds
+*/
+
+void						sound(t_visual *visual);
+void						sound_die();
+void						sound_win();
+void						sound_jump();
+void						sound_clone();
 
 /*
 ** Visual carrage sets

@@ -6,11 +6,12 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/24 00:27:40 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/03 23:10:05 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "visual.h"
 
 void	op_and(t_corewar **corewar, t_carrage *carrage)
 {
@@ -99,8 +100,12 @@ void	op_zjmp(t_corewar **corewar, t_carrage *carrage)
 
 	offset = carrage->pc + sizeof(t_op_type);
 	if (carrage->carry)
+	{
 		carrage->pc = (carrage->pc + read_int16((*corewar)->arena, offset)
 			% IDX_MOD) % MEM_SIZE;
+		if ((*corewar)->cw_args->visual)
+			(*corewar)->visual->sound.jump = 1;
+	}
 }
 
 void	op_ldi(t_corewar **corewar, t_carrage *carrage)
