@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/04 00:28:53 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/09 23:28:35 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ void		start_vm(t_corewar **corewar)
 			delay_cycle((*corewar)->visual);
 		}
 	}
-	if ((*corewar)->cw_args->visual)
-		end_visual(corewar);
-	winner_message(corewar);
 }
 
 void		carrages_exec(t_corewar **corewar, t_op *op)

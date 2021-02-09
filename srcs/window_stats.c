@@ -6,47 +6,65 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 23:43:10 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/03 22:51:19 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/09 22:56:47 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "visual.h"
 
-void		draw_info(t_corewar **corewar)
+void	draw_info(t_corewar **corewar)
 {
 	int x;
 	int y;
 
 	y = 0;
 	x = 3;
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Status: %s", (*corewar)->carrages_count ? "play" : "stoped");
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Carrages: %i", (*corewar)->carrages_count);
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Cycles: %d", (*corewar)->cycles);
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Cycles before check: %d/%d", (ssize_t)(*corewar)->cycles - (*corewar)->last_check_cycle ,(*corewar)->cycles_to_die);
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Lives current period: %d/%d", (*corewar)->lives, NBR_LIVE);
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
-	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Ineffective checks: %d/%d", (*corewar)->checks, MAX_CHECKS);
-	wmove((*corewar)->visual->windows.stats, y += 2, x);
+	y = draw_general_info((*corewar)->visual->windows.stats, y, x, corewar);
+	y = draw_additional_info((*corewar)->visual->windows.stats, y, x, corewar);
 	y = draw_players(&(*corewar), y, x);
 	wmove((*corewar)->visual->windows.stats, y += 2, x);
 	wclrtoeol((*corewar)->visual->windows.stats);
-	mvwprintw((*corewar)->visual->windows.stats, y, x, "Speed: %i", (*corewar)->visual->speed);
-
+	mvwprintw((*corewar)->visual->windows.stats, y, x, "Speed: %i",
+		(*corewar)->visual->speed);
 	box((*corewar)->visual->windows.stats, 0, 0);
 	mvwprintw((*corewar)->visual->windows.stats, 0, 3, " INFO ");
 	wrefresh((*corewar)->visual->windows.stats);
+}
+
+int		draw_general_info(WINDOW *stats_win, int y, int x, t_corewar **corewar)
+{
+	wmove(stats_win, y += 2, x);
+	wclrtoeol(stats_win);
+	mvwprintw(stats_win, y, x, "Status: %s",
+		(*corewar)->carrages_count ? "play" : "stoped");
+	wmove(stats_win, y += 2, x);
+	wclrtoeol(stats_win);
+	mvwprintw(stats_win, y, x, "Carrages: %i", (*corewar)->carrages_count);
+	wmove(stats_win, y += 2, x);
+	wclrtoeol(stats_win);
+	mvwprintw(stats_win, y, x, "Cycles: %d", (*corewar)->cycles);
+	return (y);
+}
+
+int		draw_additional_info(WINDOW *stats_win, int y, int x,
+	t_corewar **corewar)
+{
+	wmove(stats_win, y += 2, x);
+	wclrtoeol(stats_win);
+	mvwprintw(stats_win, y, x, "Cycles before check: %d/%d",
+		(ssize_t)(*corewar)->cycles - (*corewar)->last_check_cycle,
+		(*corewar)->cycles_to_die);
+	wmove(stats_win, y += 2, x);
+	wclrtoeol(stats_win);
+	mvwprintw(stats_win, y, x,
+		"Lives current period: %d/%d", (*corewar)->lives, NBR_LIVE);
+	wmove(stats_win, y += 2, x);
+	wclrtoeol(stats_win);
+	mvwprintw(stats_win, y, x,
+		"Ineffective checks: %d/%d", (*corewar)->checks, MAX_CHECKS);
+	wmove(stats_win, y += 2, x);
+	return (y);
 }
 
 int		draw_players(t_corewar **corewar, int y, int x)

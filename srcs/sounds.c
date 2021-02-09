@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 21:44:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/04 00:22:49 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/09 23:18:40 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,24 @@ void	sound(t_visual *visual)
 	}
 }
 
-void	sound_die()
+void	sound_die(void)
 {
 	system("pkill afplay");
 	system("afplay resources/crush.wav &> /dev/null &");
 }
 
-void	sound_win()
+void	sound_win(void)
 {
 	system("pkill afplay");
 	system("afplay resources/ta_da.wav &> /dev/null &");
 }
 
-void	sound_jump()
+void	sound_jump(void)
 {
 	system("afplay resources/jump.wav &> /dev/null &");
 }
 
-void	sound_clone()
+void	sound_clone(void)
 {
 	system("afplay resources/baby_chicken.wav &> /dev/null &");
 }

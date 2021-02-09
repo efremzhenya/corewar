@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 19:29:47 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/04 00:28:25 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/09 23:38:38 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct				s_sound
 	unsigned int			win:1;
 }							t_sound;
 
-
 typedef struct				s_visual
 {
 	t_arena_info			arena[MEM_SIZE];
@@ -110,6 +109,10 @@ void						delay_cycle(t_visual *visual);
 int							draw_players(t_corewar **corewar, int y, int x);
 int							draw_comment(t_corewar **corewar, char *comment,
 	int y, int x);
+int							draw_general_info(WINDOW *stats_win, int y, int x,
+	t_corewar **corewar);
+int							draw_additional_info(WINDOW *stats_win, int y,
+	int x, t_corewar **corewar);
 
 /*
 ** Visual events
@@ -117,8 +120,6 @@ int							draw_comment(t_corewar **corewar, char *comment,
 
 void						delay_cycle(t_visual *visual);
 void						key_handler(t_visual *visual);
-void						debug_keyboard(t_visual *visual, int ch,
-	MEVENT event);
 
 /*
 ** Sounds

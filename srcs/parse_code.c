@@ -6,29 +6,12 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:19:16 by mellie            #+#    #+#             */
-/*   Updated: 2021/01/21 21:49:23 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/09 23:59:04 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-// int validate_magic(unsigned char *bytes)
-// {
-//     unsigned char   magic[4];
-//     int             i;
-//     if (bytes == NULL)
-//         return (0);
-//     i = 0;
-//     while (i < 4)
-//     {
-//         magic[i] = COREWAR_EXEC_MAGIC >> ((3 - i) * 8) & 0b11111111;
-//         if (magic[i] != *bytes)
-//             return (0);
-//         i++;
-//         bytes++;
-//     }
-//     return (1);
-// }
 void			check_magic_header(unsigned char *p)
 {
 	int				tmp;
@@ -96,13 +79,6 @@ void			read_code(unsigned char *p, t_cor *f, t_player **player)
 
 void			parse_code(char *av, t_player **player)
 {
-	// + 4 bytes			magic header COREWAR_EXEC_MAGIC
-	// + PROG_NAME_LENGTH	champ name 128 bytes
-	// + 4 bytes			4 NULL octets
-	// + 4 bytes			code size CHAMP_MAX_SIZE 2867789673
-	// + COMMENT_LENGTH	Champion comment
-	// + 4 bytes			4 NULL octets
-	// + N bytes			code
 	t_cor			f;
 	unsigned char	header[17 + PROG_NAME_LENGTH + COMMENT_LENGTH];
 	unsigned char	*p;

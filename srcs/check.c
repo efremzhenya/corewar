@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:40:06 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/03 22:49:11 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/09 23:53:00 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ void		die_carrages(t_corewar **corewar, t_carrage *current,
 {
 	while (current != NULL)
 	{
-		if ((*corewar)->cycles_to_die <= 0 ||
-			((ssize_t)((*corewar)->cycles - current->last_live_cycle))
-				>= (*corewar)->cycles_to_die)
+		if ((*corewar)->cycles_to_die <= 0 || ((ssize_t)((*corewar)->cycles -
+			current->last_live_cycle)) >= (*corewar)->cycles_to_die)
 		{
 			del = current;
 			current = current->next;
@@ -51,11 +50,9 @@ void		die_carrages(t_corewar **corewar, t_carrage *current,
 					temp = temp->next;
 				temp->next = temp->next->next;
 			}
-			if ((*corewar)->cw_args->visual)
-			{
+			if ((*corewar)->cw_args->visual &&
+				((*corewar)->visual->arena[del->pc].update = 1))
 				remove_in_set(&(*corewar)->visual->arena[del->pc].set, del);
-				(*corewar)->visual->arena[del->pc].update = 1;
-			}
 			free(del);
 			(*corewar)->carrages_count--;
 		}
