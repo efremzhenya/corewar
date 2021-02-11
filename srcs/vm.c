@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/09 23:28:35 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/11 22:20:28 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		start_vm(t_corewar **corewar)
 				check(corewar);
 			if ((*corewar)->cw_args->dump > 0
 				&& (*corewar)->cycles == (size_t)(*corewar)->cw_args->dump)
-				dump((*corewar)->arena);
+				dump((*corewar)->arena, 0, 0, NULL);
 		}
 		if ((*corewar)->cw_args->visual)
 		{
@@ -127,6 +127,6 @@ void		init_vm(t_corewar **corewar)
 	{
 		intro_message(&(*corewar)->players);
 		if (!(*corewar)->cw_args->dump)
-			dump((*corewar)->arena);
+			dump((*corewar)->arena, 0, 0, NULL);
 	}
 }

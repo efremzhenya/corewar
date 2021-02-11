@@ -6,25 +6,21 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 22:00:38 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:50:21 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/11 22:18:12 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		dump(unsigned char *arena)
+void	dump(unsigned char *arena, int i, int len, char *hex)
 {
-	int		i;
-	int		len;
-	char	*hex;
-
-	i = 0;
 	while (i < MEM_SIZE)
 	{
 		if (!(i % 64))
 		{
 			ft_putstr(i ? "\n0x" : "0x");
-			len = ft_strlen((hex = dec_to_hex(i)));
+			hex = dec_to_hex(i);
+			len = ft_strlen(hex);
 			while (len++ < 4)
 				write(1, "0", 1);
 			ft_putstr(hex);
@@ -44,7 +40,7 @@ void		dump(unsigned char *arena)
 	exit(0);
 }
 
-static int	cap(unsigned int n)
+int		cap(unsigned int n)
 {
 	unsigned int len;
 
@@ -54,7 +50,7 @@ static int	cap(unsigned int n)
 	return (len);
 }
 
-char		*dec_to_hex(unsigned int n)
+char	*dec_to_hex(unsigned int n)
 {
 	char			*str;
 	int				len;

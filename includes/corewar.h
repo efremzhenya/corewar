@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/03 21:10:11 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/11 22:18:28 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,8 @@ int						instruction_size(t_carrage *carrage, t_op op);
 ** Dump
 */
 
-void					dump(unsigned char *arena);
+void					dump(unsigned char *arena, int i, int len, char *hex);
 char					*dec_to_hex(unsigned int n);
+int						cap(unsigned int n);
 
 #endif
