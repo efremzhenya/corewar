@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/11 22:18:28 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 01:10:05 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef	struct			s_arg
 typedef struct			s_player
 {
 	int					id;
-	int					ind;
 	char				*name;
 	char				*comment;
 	unsigned char		*code;
@@ -105,8 +104,7 @@ int						kill(char *msg);
 ** Player
 */
 
-t_player				*new_player(int *ac, char **av, t_corewar **corewar,
-	int ind);
+t_player				*new_player(int *ac, char **av, t_corewar **corewar);
 void					add_player(int *ac, char **av, t_corewar **corewar,
 	int ind);
 void					fill_player_id(t_corewar **corewar);
