@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:46:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/21 21:48:43 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/11 23:30:03 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_player	*new_player(int *ac, char **av, t_corewar **corewar, int ind)
 	player->ind = ind;
 	if ((*corewar)->cw_args && (*corewar)->cw_args->n_pl != -1)
 	{
+		if (get_player_by_id(&(*corewar)->players, (*corewar)->cw_args->n_pl))
+			terminate(ERR_2_DUP_ID_PLAYER);
 		player->id = (*corewar)->cw_args->n_pl;
 		(*corewar)->cw_args->n_pl = -1;
 	}
