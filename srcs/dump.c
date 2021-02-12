@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 22:00:38 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/11 22:18:12 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/12 23:44:00 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	dump(unsigned char *arena, int i, int len, char *hex)
 {
 	while (i < MEM_SIZE)
 	{
-		if (!(i % 64))
+		if (!(i % 32))
 		{
 			ft_putstr(i ? "\n0x" : "0x");
 			hex = dec_to_hex(i);
