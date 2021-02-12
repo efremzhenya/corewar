@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:40:04 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/12 22:04:26 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 01:16:31 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	fill_player_id(t_corewar **corewar)
 				if (get_player_by_id(&(*corewar)->players, j) == NULL)
 				{
 					tmp->id = j;
-					break;
+					break ;
 				}
 				else
 					j++;

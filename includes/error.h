@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:58:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/31 18:12:57 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 01:13:06 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,5 @@
 # define ERR_4_CODE_MAXSIZE		ER "The size of code is more than MaxSize."
 # define ERR_5_INV_CODESIZE		ER "The size of code != SIZE in the .cor file."
 # define ERR_VISUAL_ON_ALLOC	ER "Not allocated memory for visual mode."
-# define ASM_USAGE				"Usage: ./asm <sourcefile.s>."
-# define ERROR_WRONG_EXTENSION	"Expected *.s file."
-# define SYNTAX_ERROR			"Can't compile."
+
 #endif
