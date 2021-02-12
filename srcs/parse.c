@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:40:04 by lseema            #+#    #+#             */
-/*   Updated: 2021/01/31 17:38:05 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/12 22:04:26 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int		parse_args(int argc, char **argv, t_corewar **corewar)
 void	fill_player_id(t_corewar **corewar)
 {
 	t_player	*tmp;
-	t_player	*tmp2;
 	int			j;
 
 	tmp = (*corewar)->players;
@@ -81,19 +80,17 @@ void	fill_player_id(t_corewar **corewar)
 	{
 		if (tmp->id == 0)
 		{
-			j = tmp->ind;
-			tmp2 = (*corewar)->players;
-			while (tmp2 && j <= (*corewar)->players_count)
+			j = 1;
+			while (j <= MAX_PLAYERS)
 			{
-				if (tmp2->id == j)
+				if (get_player_by_id(&(*corewar)->players, j) == NULL)
 				{
-					j++;
-					tmp2 = (*corewar)->players;
+					tmp->id = j;
+					break;
 				}
 				else
-					tmp2 = tmp2->next;
+					j++;
 			}
-			tmp->id = j;
 		}
 		tmp = tmp->next;
 	}
