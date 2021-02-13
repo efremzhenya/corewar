@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 22:01:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/13 21:34:10 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 22:30:02 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int				read_int32(unsigned char *arena, int pos)
 
 void			write_byte(t_corewar **corewar, int pos, unsigned char byte)
 {
-	(*corewar)->arena[pos = normalize_pc(pos)] = byte;
+	pos = normalize_pc(pos);
+	(*corewar)->arena[pos] = byte;
 }
 
 void			write_int32(t_corewar **corewar, int pos, int value, int owner)
@@ -57,7 +58,6 @@ void			write_int32(t_corewar **corewar, int pos, int value, int owner)
 	unsigned char	byte;
 
 	i = 0;
-
 	pos = normalize_pc(pos);
 	while (i < sizeof(int))
 	{
