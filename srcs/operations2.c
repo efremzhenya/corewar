@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/03 23:10:05 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:50:45 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	op_zjmp(t_corewar **corewar, t_carrage *carrage)
 	offset = carrage->pc + sizeof(t_op_type);
 	if (carrage->carry)
 	{
-		carrage->pc = (carrage->pc + read_int16((*corewar)->arena, offset)
-			% IDX_MOD) % MEM_SIZE;
+		carrage->pc = normalize_pc(carrage->pc +
+			read_int16((*corewar)->arena, offset) % IDX_MOD);
 		if ((*corewar)->cw_args->visual)
 			(*corewar)->visual->sound.jump = 1;
 	}

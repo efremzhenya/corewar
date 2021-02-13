@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 17:27:32 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/09 23:16:10 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:53:59 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_carrage	*new_carrage(t_corewar **corewar, unsigned int pc, t_player *player,
 	carrage->last_live_cycle = 0;
 	carrage->op_code = 0;
 	carrage->is_half_size_dir = 0;
-	carrage->pc = pc;
+	carrage->pc = normalize_pc(pc);
 	carrage->carry = 0;
 	carrage->player = player;
 	carrage->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 23:04:29 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/03 23:09:29 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:59:36 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ void	op_fork(t_corewar **corewar, t_carrage *carrage)
 	t_carrage	*cloned_carrage;
 
 	offset = carrage->pc + sizeof(t_op_type);
-	pos = (carrage->pc + read_int16((*corewar)->arena, offset) % IDX_MOD)
-		% MEM_SIZE;
-	while (pos < 0)
-		pos += MEM_SIZE;
-	cloned_carrage = new_carrage(corewar, pos % MEM_SIZE, carrage->player, 1);
+	pos = normalize_pc(carrage->pc +
+		read_int16((*corewar)->arena, offset) % IDX_MOD);
+	cloned_carrage = new_carrage(corewar, pos, carrage->player, 1);
 	cloned_carrage->carry = carrage->carry;
 	cloned_carrage->last_live_cycle = carrage->last_live_cycle;
 	i = -1;
@@ -119,11 +117,10 @@ void	op_lfork(t_corewar **corewar, t_carrage *carrage)
 	t_carrage	*cloned_carrage;
 
 	offset = (carrage->pc + sizeof(t_op_type)) % MEM_SIZE;
-	pos = ((carrage->is_half_size_dir ? read_int16((*corewar)->arena, offset) :
-		read_int32((*corewar)->arena, offset)) + carrage->pc) % MEM_SIZE;
-	while (pos < 0)
-		pos += MEM_SIZE;
-	cloned_carrage = new_carrage(corewar, pos % MEM_SIZE, carrage->player, 1);
+	pos = normalize_pc((carrage->is_half_size_dir ?
+		read_int16((*corewar)->arena, offset) :
+		read_int32((*corewar)->arena, offset)) + carrage->pc);
+	cloned_carrage = new_carrage(corewar, pos, carrage->player, 1);
 	cloned_carrage->carry = carrage->carry;
 	cloned_carrage->last_live_cycle = carrage->last_live_cycle;
 	i = -1;

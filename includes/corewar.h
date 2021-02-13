@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 13:06:22 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/13 01:10:05 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:30:14 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ void					write_byte(t_corewar **corewar, int pos,
 	unsigned char byte);
 void					write_int32(t_corewar **corewar, int pos, int value,
 	int owner_id);
+int						normalize_pc(int pc);
 
 /*
 ** Messages

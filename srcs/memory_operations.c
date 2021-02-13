@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 22:01:20 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/09 23:18:08 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 21:34:10 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 unsigned char	read_byte(unsigned char *arena, int pos)
 {
-	while (pos < 0)
-		pos += MEM_SIZE;
-	return (arena[pos %= MEM_SIZE]);
+	return (arena[normalize_pc(pos)]);
 }
 
 short			read_int16(unsigned char *arena, int pos)
@@ -50,9 +48,7 @@ int				read_int32(unsigned char *arena, int pos)
 
 void			write_byte(t_corewar **corewar, int pos, unsigned char byte)
 {
-	while (pos < 0)
-		pos += MEM_SIZE;
-	(*corewar)->arena[pos %= MEM_SIZE] = byte;
+	(*corewar)->arena[pos = normalize_pc(pos)] = byte;
 }
 
 void			write_int32(t_corewar **corewar, int pos, int value, int owner)
@@ -61,17 +57,16 @@ void			write_int32(t_corewar **corewar, int pos, int value, int owner)
 	unsigned char	byte;
 
 	i = 0;
-	while (pos < 0)
-		pos += MEM_SIZE;
-	pos %= MEM_SIZE;
+
+	pos = normalize_pc(pos);
 	while (i < sizeof(int))
 	{
 		byte = (value >> (((sizeof(int) - (i + 1)) * 8))) & 0b11111111;
-		write_byte(corewar, (pos + i) % MEM_SIZE, byte);
+		write_byte(corewar, normalize_pc(pos + i), byte);
 		if ((*corewar)->cw_args->visual)
 		{
-			(*corewar)->visual->arena[(pos + i) % MEM_SIZE].code_owner = owner;
-			(*corewar)->visual->arena[(pos + i) % MEM_SIZE].update = 1;
+			(*corewar)->visual->arena[normalize_pc(pos + i)].code_owner = owner;
+			(*corewar)->visual->arena[normalize_pc(pos + i)].update = 1;
 		}
 		i++;
 	}

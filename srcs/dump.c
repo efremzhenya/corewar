@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 22:00:38 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/12 23:44:00 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 22:28:00 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,12 @@ char	*dec_to_hex(unsigned int n)
 		}
 	}
 	return (str);
+}
+
+int		normalize_pc(int pc)
+{
+	while (pc < 0)
+		pc += MEM_SIZE;
+	pc %= MEM_SIZE;
+	return (pc);
 }

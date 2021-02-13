@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 15:00:45 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/11 22:20:28 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/13 21:02:35 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int			init_corewar(t_corewar **corewar)
 	(*corewar)->cw_args->visual = 0;
 	(*corewar)->visual = NULL;
 	ft_bzero((*corewar)->arena, sizeof((*corewar)->arena));
-	(*corewar)->cw_args->visual = 0;
 	return (1);
 }
 
@@ -103,7 +102,7 @@ void		exec_operation(t_corewar **corewar, t_carrage *carrage, t_op *op)
 	else
 		offset = instruction_size(carrage, op[carrage->op_code]);
 	if (!carrage->carry || carrage->op_code != 0x09)
-		carrage->pc = (carrage->pc + offset) % MEM_SIZE;
+		carrage->pc = normalize_pc((carrage->pc + offset));
 	if ((*corewar)->cw_args->visual)
 	{
 		remove_in_set(&(*corewar)->visual->arena[old_pc].set, carrage);
