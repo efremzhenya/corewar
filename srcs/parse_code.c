@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:19:16 by mellie            #+#    #+#             */
-/*   Updated: 2021/02/09 23:59:04 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/14 11:55:44 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ unsigned int	check_code_size(unsigned char *p)
 
 void			read_code(unsigned char *p, t_cor *f, t_player **player)
 {
+	if (ft_strlen((*player)->name) == 0)
+		terminate(ERR_NO_NAME);
+	if (ft_strlen((*player)->comment) == 0)
+		terminate(ERR_NO_COMMENT);
 	check_null_octet((p += COMMENT_LENGTH));
 	f->bsize = lseek(f->fd, 0L, SEEK_END);
 	f->bsize -= f->offset;

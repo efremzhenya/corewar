@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:58:15 by lseema            #+#    #+#             */
-/*   Updated: 2021/02/13 01:13:06 by lseema           ###   ########.fr       */
+/*   Updated: 2021/02/14 11:56:56 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define ERR_3_READING_FAILED	ER "Reading is failed."
 # define ERR_4_CODE_MAXSIZE		ER "The size of code is more than MaxSize."
 # define ERR_5_INV_CODESIZE		ER "The size of code != SIZE in the .cor file."
+# define ERR_NO_NAME			ER "Player must have a name."
+# define ERR_NO_COMMENT			ER "Player must have a comment."
 # define ERR_VISUAL_ON_ALLOC	ER "Not allocated memory for visual mode."
 
 #endif
