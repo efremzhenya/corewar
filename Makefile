@@ -6,11 +6,11 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 13:17:58 by lseema            #+#    #+#              #
-#    Updated: 2021/02/03 21:53:51 by lseema           ###   ########.fr        #
+#    Updated: 2021/02/14 12:39:11 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		 := corewar
+COREWAR		 := corewar
 
 DIR_SRCS	 := srcs/
 DIR_INCLUDES := includes/
@@ -56,9 +56,9 @@ vpath %.c $(DIR_SRCS)
 vpath %.o $(DIR_BIN)
 vpath %.h $(DIR_INCLUDES)
 
-all: make_lft $(NAME)
+all: make_lft $(COREWAR)
 
-$(NAME): $(OBJ)
+$(COREWAR): $(OBJ)
 	$(CC) $(FLAGS) $(NCURSES) $(addprefix $(DIR_BIN), $(OBJ)) $(LFT) -o $@
 	@echo "corewar compiled"
 
@@ -76,10 +76,10 @@ clean:
 	$(MAKE_LFT) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(COREWAR)
 	$(MAKE_LFT) fclean
 
 re: fclean all
 
 .PHONY: clean fclean all re make_lft
-.SILENT: all clean fclean re make_lft $(NAME) $(OBJ) $(DIR_BIN)
+.SILENT: all clean fclean re make_lft $(COREWAR) $(OBJ) $(DIR_BIN)
